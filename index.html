@@ -18,9 +18,23 @@
     <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
     <title>#deadshot</title>
     <body>
-    <div id="overlay" class="overlay" onclick="removeOverlay();">
-        <p class="glitch" style="margin-top: 5px;">Click To Enter</p>
-    </div>
+<div id="overlay" class="overlay" onclick="playMusic(); removeOverlay();">
+    <p class="glitch" style="margin-top: 5px;">Click To Enter</p>
+</div>
+
+<audio id="audio-player" src="music.js" style="display: none;"></audio>
+
+<script>
+    function playMusic() {
+        const audio = document.getElementById("audio-player");
+        audio.play();
+    }
+
+    function removeOverlay() {
+        const overlay = document.getElementById("overlay");
+        overlay.style.display = "none";
+    }
+</script>
     <style>
       * {
         margin: 0;
@@ -86,8 +100,7 @@
       <a href="mailto:im@trolli.ng">im@trolli.ng</a>
     </p>
 
-    <script src="music.js"></script> 
-    <script>
+
       const nextParticle = new NextParticle({
         image: document.getElementById("logo"),
         width: window.innerWidth,
