@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/gif" sizes="64x64" href="monopoly3.gif">
@@ -64,29 +64,42 @@
         margin-top: -10px;
         text-shadow: 2px 2px #c0c0c0;
       }
-       </style>
+
+      @keyframes flicker {
+          0%, 100% {
+              opacity: 1;
+          }
+          50% {
+              opacity: 0;
+          }
+      }
+
+      .flicker-text {
+          animation: flicker 1s infinite;
+      }
+    </style>
     <script>
-  // Array of titles to switch between
-  const titles = ['#', '#d', '#de', '#dea', '#dead', '#deads', '#deadsh', '#deadsho', '#deadshot', '#deadshot', '#deadsho', '#deadsh', '#deads', '#dead', '#dea', '#de', '#d', '#'];
-  let index = 0;
+      
+      const titles = ['#', '#d', '#de', '#dea', '#dead', '#deads', '#deadsh', '#deadsho', '#deadshot', '#deadshot', '#deadsho', '#deadsh', '#deads', '#dead', '#dea', '#de', '#d', '#'];
+      let index = 0;
 
-  // Recursive function to change the document title every 200ms
-  function changeTitle() {
-      document.title = titles[index];
-      index = (index + 1) % titles.length;
-      setTimeout(changeTitle, 200); // Change the title again after 200ms
-  }
+      
+      function changeTitle() {
+          document.title = titles[index];
+          index = (index + 1) % titles.length;
+          setTimeout(changeTitle, 200); 
+      }
 
-  // Start the title animation loop
-  changeTitle();
-</script>
-  </head>
-  <body>
+      // Start the title animation loop
+      changeTitle();
+    </script>
+</head>
+<body>
     <div class="next-particle">
       <img src="monopoly.png" id="logo" alt="Logo" width="500" height="500" />
     </div>
 
-    <p class="meow">monopoly :O</p>
+    <p class="meow"><span class="flicker-text">monopoly :O</span></p>
 
     <p>
       <a href="https://t.me/deadzhot" target="_blank">t.me/deadzhot</a> -
@@ -126,7 +139,7 @@
       resizeParticle(); 
     </script>
 
-    <!-- music.js script with async or defer -->
+    
     <script src="music.js" defer></script>
-  </body>
+</body>
 </html>
