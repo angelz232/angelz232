@@ -66,19 +66,20 @@
       }
        </style>
     <script>
-      // Array of titles to switch between
-      const titles = ['#', '#d', '#de', '#dea', '#dead', '#deads', '#deadsh', '#deadsho', '#deadshot', '#deadshot', '#deadsho', '#deadsh', '#deads', '#dead', '#dea', '#de', '#d', '#'];
-      let index = 0;
+  // Array of titles to switch between
+  const titles = ['#', '#d', '#de', '#dea', '#dead', '#deads', '#deadsh', '#deadsho', '#deadshot', '#deadshot', '#deadsho', '#deadsh', '#deads', '#dead', '#dea', '#de', '#d', '#'];
+  let index = 0;
 
-      // Function to change the document title
-      function changeTitle() {
-          document.title = titles[index];
-          index = (index + 1) % titles.length; // Loop back to the first title
-      }
+  // Recursive function to change the document title every 200ms
+  function changeTitle() {
+      document.title = titles[index];
+      index = (index + 1) % titles.length;
+      setTimeout(changeTitle, 200); // Change the title again after 200ms
+  }
 
-      // Set interval to change the title every 0.5 seconds (500 milliseconds)
-      setInterval(changeTitle, 200);
-    </script>
+  // Start the title animation loop
+  changeTitle();
+</script>
   </head>
   <body>
     <div class="next-particle">
