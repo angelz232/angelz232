@@ -23,8 +23,3 @@ function playMusicOnce() {
         document.body.removeEventListener("click", playMusicOnce);
         document.body.removeEventListener("touchstart", playMusicOnce);
     }
-}
-
-// Add click and touchstart listeners for initial play
-document.body.addEventListener("click", playMusicOnce);
-document.body.addEventListener("touchstart", playMusicOnce);
