@@ -8,5 +8,5 @@
 }
 
 .flicker-text1, .flicker-text2 {
-    animation: flicker 1s infinite;
+    animation: flicker 0.1s infinite;
 }
