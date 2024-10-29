@@ -17,24 +17,6 @@
     <script src="https://nextparticle.nextco.de/nextparticle.min.js"></script>
     <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
     <title>#deadshot</title>
-    <body>
-<div id="overlay" class="overlay" onclick="playMusic(); removeOverlay();">
-    <p class="glitch" style="margin-top: 5px;">Click To Enter</p>
-</div>
-
-<audio id="audio-player" src="music.js" style="display: none;"></audio>
-
-<script>
-    function playMusic() {
-        const audio = document.getElementById("audio-player");
-        audio.play();
-    }
-
-    function removeOverlay() {
-        const overlay = document.getElementById("overlay");
-        overlay.style.display = "none";
-    }
-</script>
     <style>
       * {
         margin: 0;
@@ -92,15 +74,16 @@
 
     <p>
 <a href="https://t.me/a22cw" target="_blank">@deadzhot</a> -
-<a href="https://doxbin.org/user/obey" target="_blank">u/obey</a> -
-<a href="https://discord.com/users/1253384417813205013" target="_blank">Discord</a>
+<a href="https://doxbin.org/user/obey" target="_blank">/user/obey</a> -
+<a href="https://discord.com/users/1253384417813205013" target="_blank">@x_zz_q</a>
     </p>
 
     <p>
       <a href="mailto:im@trolli.ng">im@trolli.ng</a>
     </p>
 
-
+    <script src="music.js"></script> 
+    <script>
       const nextParticle = new NextParticle({
         image: document.getElementById("logo"),
         width: window.innerWidth,
