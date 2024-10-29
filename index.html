@@ -1,111 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:title" content="#deadshot" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="https://obey.sh" />
-    <meta property="og:image" content="" />
-    <meta property="og:type" content="website" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://nextparticle.nextco.de/nextparticle.min.js"></script>
-    <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
-    <title>#deadshot</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
 
-      body {
-        display: flex;
-        font-family: "Pirata One", system-ui;
-        flex-direction: column;
-        align-items: center;
-        background-color: #000000;
-      }
+<head>
+    <meta charset="UTF-8">
+    <title>[IV]・Within Reach</title>
+    <link rel="stylesheet" href="style/stylesss.css">
+    <meta property="og:title" content="deadshot">
+    <meta property="og:description" content="">
+    <meta name="theme-color" content="#f4b6e5" data-react-helmet="true">
+</head>
 
-      .next-particle {
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-        justify-content: center;
-        min-height: 70vh;
-      }
-
-      img {
-        display: none;
-      }
-
-      p {
-        color: #FFFFFF;
-      }
-
-      a {
-        color: #FFFFFF;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-
-      .meow {
-        color: #FFFFFF;
-        font-size: 19px;
-        text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.7);
-        margin-top: -10px;
-        text-shadow: 2px 2px #FFFFFF;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="next-particle">
-      <img src="angel1.png" id="logo" alt="Logo" width="500" height="500" />
+<body>
+    <div id="overlay" class="overlay" onclick="removeOverlay();">
+        <p class="glitch" style="margin-top: 5px;">Click To Enter</p>
     </div>
+    <script src="membersss.js"></script>
+    <pre style="margin-bottom: -16px;">
+    <div class="blink">
+<img src="angel1.png" alt="deadshot" style="height: 21%; margin: center;" draggable="false">
+    </div>
+</pre>
 
-    <p class="deadshot">#deadshot</p>
+    <div id="content">
+        <span>
+            <p class="grey">
+                0----
+                <span class="grey">
+                    <span class="grey flicker-text2">XXX</span>
+                </span>
+                <span class="grey">
+                    --------------------------<span class="grey flicker-text1">I</span><span class="flicker-text1"><span class="grey">V</span></span>--------------------------------------
+                </span>
+            </p>
+        </span>
 
-    <p>
-<a href="https://t.me/a22cw" target="_blank">t.me/deadzhot</a> -
-<a href="https://doxbin.org/user/obey" target="_blank">/user/obey</a> -
-<a href="https://discord.com/users/1253384417813205013" target="_blank">@x_zz_q</a>
-    </p>
+        <div id="text">
+            <p>
+                <span class="yellow">::</span>
+                The <span class="blink2">End</span>
+                <br>
 
-    <p>
-      <a href="mailto:im@trolli.ng">im@trolli.ng</a>
-    </p>
 
-    <script src="music.js"></script> 
-    <script>
-      const nextParticle = new NextParticle({
-        image: document.getElementById("logo"),
-        width: window.innerWidth,
-        height: window.innerHeight * 0.8,
-        maxWidth: Math.min(window.innerWidth * 0.8, 400),
-        particleGap: 4,
-        velocity: 0.5,
-        proximity: 100,
-        mouseForce: 300,
-        color: "#FFFFFF",
-      });
+    <audio id="audio-player" style="display: none;"></audio>
 
-      function resizeParticle() {
-        nextParticle.width = window.innerWidth;
-        nextParticle.height = window.innerHeight * 0.8;
-        nextParticle.maxWidth = Math.min(window.innerWidth * 0.8, 400);
-        nextParticle.start();
-      }
+        <div id="member-info" style="text-align: center; margin-top: 35px;"></div>
+    </div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3290158283875655"
+     crossorigin="anonymous"></script>        // Credits to alo.ne for the original code structure & layout
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"8da13c019df6b97e","version":"2024.10.4","r":1,"token":"821756773e4f4f7c889958167da653d0","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+</body>
 
-      window.onresize = resizeParticle;
-
-      resizeParticle();
-    </script>
-  </body>
 </html>
