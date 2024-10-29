@@ -1,0 +1,12 @@
+@keyframes flicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.flicker-text1, .flicker-text2 {
+    animation: flicker 1s infinite;
+}
