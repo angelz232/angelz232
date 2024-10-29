@@ -1,48 +1,25 @@
 const audioFiles = [
-//    { src: "https://files.catbox.moe/fo805m.mp3", artist: "Ken Karson, Destroy Lonely", song: "Murda Musik" }, 
-//    { src: "https://files.catbox.moe/vlohr2.mp3", artist: "22Gz", song: "Twirlanta" },
-//    { src: "https://files.catbox.moe/ebvch3.mp3", artist: "Jdot Breezy", song: "Tweak Shit, Pt. 2" },
-//    { src: "https://files.catbox.moe/xo4vuv.mp3", artist: "Jdot Breezy", song: "Shoot It Out" }, 
-    { src: "https://files.catbox.moe/cqawfd.mp3", artist: "Shoreline Mafia", song: "Bands" },
+    { src: "https://files.catbox.moe/cqawfd.mp3" },
 ];
 
-let currentTrack = Math.floor(Math.random() * audioFiles.length);
+let currentTrack = 0;
 const music = new Audio(audioFiles[currentTrack].src);
-music.muted = false;  
-music.preload = "auto";  
+music.muted = false;
+music.preload = "auto";
 
-function toggleMusic() {
-    if (music.paused) {
-        music.play()
-            .then(() => {
-                console.log(`Now playing: ${audioFiles[currentTrack].artist} - ${audioFiles[currentTrack].song}`);
-            })
-            .catch(error => console.error("Playback failed:", error));
-    } else {
-        music.pause();
-    }
-}
-
-document.body.addEventListener("click", (e) => {
-    e.preventDefault();
-    toggleMusic();
-});
-document.body.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    toggleMusic();
-});
-
-music.addEventListener("ended", () => {
-    let nextTrack;
-    do {
-        nextTrack = Math.floor(Math.random() * audioFiles.length);
-    } while (nextTrack === currentTrack);
-
-    currentTrack = nextTrack;
-    music.src = audioFiles[currentTrack].src;
+// Play music on first screen press and remove event listeners
+function playMusicOnce() {
     music.play()
         .then(() => {
-            console.log(`Now playing: ${audioFiles[currentTrack].artist} - ${audioFiles[currentTrack].song}`);
+            console.log("Now playing:", audioFiles[currentTrack].src);
         })
         .catch(error => console.error("Playback failed:", error));
-});
+
+    // Remove event listeners after first play
+    document.body.removeEventListener("click", playMusicOnce);
+    document.body.removeEventListener("touchstart", playMusicOnce);
+}
+
+// Add click and touchstart listeners for initial play
+document.body.addEventListener("click", playMusicOnce);
+document.body.addEventListener("touchstart", playMusicOnce);
