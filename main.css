@@ -33,10 +33,9 @@ body {
 }
 
 .glitch {
-    font-size: 2em;
-    color: #a3d4f4;
-    text-transform: uppercase;
-    animation: glitch 1s infinite;
+    font-size: 1em;
+    color: #FFFFFF;
+    animation: glitch 0.1s infinite;
     font-family: 'Courier New', monospace;
 }
 
