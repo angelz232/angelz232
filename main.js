@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (AudioPlayer) {
         AudioPlayer.volume = Volume;
-        AudioPlayer.src = 'track.mp3', 'track1.mp3'; 
+        AudioPlayer.src tracks = ['track.mp3', 'track1.mp3']; 
+        const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+        AudioPlayer.src = randomTrack;
     }
 
-    // Entry overlay function
+    
     window.enterSite = function() {
         const overlay = document.getElementById('enter-overlay');
         if (overlay) {
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Title Animation
+    
     const titles = ['#', '#d', '#de', '#dea', '#dead', '#deads', '#deadsh', '#deadsho', '#deadshot', '#deadshot', '#deadsho', '#deadsh', '#deads', '#dead', '#dea', '#de', '#d', '#'];
     let index = 0;
 
@@ -33,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     changeTitle();
 
-    // NextParticle Initialization
+    
     const nextParticle = new NextParticle({
         image: document.getElementById("logo"),
         width: window.innerWidth,
