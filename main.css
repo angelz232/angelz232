@@ -9,7 +9,7 @@
 body {
     font-family: 'Pirata One', sans-serif;
     background-color: #0d0d0d;
-    color: red
+    color: red;
     display: flex;
     flex-direction: column;
     align-items: center;
