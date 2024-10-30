@@ -40,14 +40,14 @@ body {
 }
 
 /* Glitchy Text Movement */
-/*@keyframes glitch-shift {
+@keyframes glitch-shift {
     0% { text-shadow: 2px 0 #d9d9d9, -2px 0 #d9d9d9; }
     50% { text-shadow: -2px -2px #d9d9d9, 2px 2px #ffffff; }
     100% { text-shadow: 2px -2px #d9d9d9, -2px 2px #ffffff; }
 }
 
 /* Flickering Effect */
-@keyframes flicker-opacity {
+/* @keyframes flicker-opacity { 
     0%, 50%, 100% {
         opacity: 1;
     }
@@ -55,10 +55,10 @@ body {
         opacity: 0.5;
     }
 }
-
+*/
 .meow {
-    color: #FF0000;
+    color: #ffffff;
     font-size: 19px;
-    text-shadow: 2px 2px #FF0000;
+    text-shadow: 2px 2px #ffffff;
     margin-top: -10px;
 }
