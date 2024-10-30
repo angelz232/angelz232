@@ -63,20 +63,6 @@
         text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.7);
         margin-top: -10px;
         text-shadow: 2px 2px #c0c0c0;
-      }
-
-      @keyframes flicker {
-          0%, 100% {
-              opacity: 1;
-          }
-          50% {
-              opacity: 0;
-          }
-      }
-
-      .flicker-text {
-          animation: flicker 0.25s infinite;
-      }
     </style>
     <script>
       
@@ -95,6 +81,12 @@
     </script>
 </head>
 <body>
+        <div id="enter-overlay" class="overlay" onclick="enterSite();">
+        <p class="glitch" style="margin-top: 5px;">Tap to Enter</p>
+    </div>
+
+    <script src="main.js"></script>
+    
     <div class="next-particle">
       <img src="monopoly.png" id="logo" alt="Logo" width="500" height="500" />
     </div>
@@ -138,8 +130,5 @@
 
       resizeParticle(); 
     </script>
-
-    
-    <script src="music.js" defer></script>
 </body>
 </html>
