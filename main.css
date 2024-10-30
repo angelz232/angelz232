@@ -42,8 +42,8 @@ body {
 /* Glitchy Text Movement */
 @keyframes glitch-shift {
     0% { text-shadow: 2px 0 #d9d9d9, -2px 0 #d9d9d9; }
-    50% { text-shadow: -2px -2px #d9d9d9, 2px 2px #ffffff; }
-    100% { text-shadow: 2px -2px #d9d9d9, -2px 2px #ffffff; }
+    50% { text-shadow: 2px 0 #d9d9d9, -2px 0 #ffffff; }
+    100% { text-shadow: 2px 0 #d9d9d9, -2px 0 #ffffff; }
 }
 
 /* Flickering Effect */
