@@ -35,16 +35,27 @@ body {
 .glitch {
     font-size: 1em;
     color: #FFFFFF;
-    animation: glitch 0.50s infinite;
     font-family: 'Courier New', monospace;
+    animation: glitch-shift 0.5s infinite alternate, flicker-opacity 1.5s infinite alternate;
 }
 
-/* Glitch effect */
-@keyframes glitch {
-@keyframes glitch {
+/* Glitchy Text Movement */
+@keyframes glitch-shift {
     0% { text-shadow: 2px 0 #d9d9d9, -2px 0 #d9d9d9; }
-    50% { text-shadow: -2px 0 #d9d9d9, 2px 0 #ffffff; }
+    25% { text-shadow: -2px -2px #d9d9d9, 2px 2px #ffffff; }
+    50% { text-shadow: 2px -2px #d9d9d9, -2px 2px #ffffff; }
+    75% { text-shadow: -2px 2px #d9d9d9, 2px -2px #d9d9d9; }
     100% { text-shadow: 2px 0 #d9d9d9, -2px 0 #d9d9d9; }
+}
+
+/* Flickering Effect */
+@keyframes flicker-opacity {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0.5;
+    }
 }
 
 .meow {
