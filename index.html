@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/gif" sizes="64x64" href="monopoly3.gif">
     <meta property="og:title" content="deadshot" />
@@ -64,8 +64,6 @@
         text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.7);
         margin-top: -10px;
         text-shadow: 2px 2px #c0c0c0;
-    </style>
-    <script>
       
       const titles = ['#', '#d', '#de', '#dea', '#dead', '#deads', '#deadsh', '#deadsho', '#deadshot', '#deadshot', '#deadsho', '#deadsh', '#deads', '#dead', '#dea', '#de', '#d', '#'];
       let index = 0;
@@ -81,6 +79,7 @@
       changeTitle();
     </script>
 </head>
+          
 <body>
         <div id="enter-overlay" class="overlay" onclick="enterSite();">
         <p class="glitch" style="margin-top: 5px;">Tap to Enter</p>
@@ -131,5 +130,9 @@
 
       resizeParticle(); 
     </script>
+
+        <audio id="music-player" style="display: none;"></audio>
+        <div id="info-container" style="text-align: center; margin-top: 35px;"></div>
+    </div>          
 </body>
 </html>
