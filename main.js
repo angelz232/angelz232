@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.display = 'none';
             if (AudioPlayer) {
                 AudioPlayer.play()
-                    .then(() => console.log('Playing track: track1.mp3'))
+                    .then(() => console.log('Playing track: track.mp3'))
                     .catch(err => {
                         console.warn('Audio playback issue:', err);
                         console.warn("If using Chrome, ensure you've interacted with the page to allow autoplay.");
