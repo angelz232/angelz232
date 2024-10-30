@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const AudioPlayer = document.getElementById('music-player');
     const Volume = 0.25;
+    const tracks = ['track.mp3', 'track1.mp3']; 
 
     if (AudioPlayer) {
         AudioPlayer.volume = Volume;
-        AudioPlayer.src tracks = ['track.mp3', 'track1.mp3']; 
+        
         const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
         AudioPlayer.src = randomTrack;
     }
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.display = 'none';
             if (AudioPlayer) {
                 AudioPlayer.play()
-                    .then(() => console.log('Playing track: track.mp3, track1.mp3'))
+                    .then(() => console.log('Playing track:', AudioPlayer.src))
                     .catch(err => {
                         console.warn('Audio playback issue:', err);
                     });
