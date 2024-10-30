@@ -39,6 +39,14 @@ body {
     animation: glitch-shift 0.01s infinite alternate, flicker-opacity 0.01s infinite alternate;
 }
 
+}
+
+.status-glitch {
+    color: #f4a6b5;
+    animation: flicker 1s infinite alternate;
+}
+
+
 /* Glitchy Text Movement */
 @keyframes glitch-shift {
    /* 0% { text-shadow: 2px 0 #ffffff, 2px 0 #ffffff; }
