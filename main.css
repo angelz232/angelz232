@@ -34,7 +34,7 @@ body {
 
 .glitch {
     font-size: 1em;
-    color: #FF0000;
+    color: #ffffff;
     font-family: 'Courier New', monospace;
     animation: glitch-shift 0.5s infinite alternate, flicker-opacity 0.5s infinite alternate;
 }
