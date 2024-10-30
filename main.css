@@ -36,14 +36,14 @@ body {
     font-size: 1em;
     color: #ffffff;
     font-family: 'Courier New', monospace;
-    animation: glitch-shift 0.1s infinite alternate, flicker-opacity 0.1s infinite alternate;
+    animation: glitch-shift 0.01s infinite alternate, flicker-opacity 0.01s infinite alternate;
 }
 
 /* Glitchy Text Movement */
 @keyframes glitch-shift {
    /* 0% { text-shadow: 2px 0 #ffffff, 2px 0 #ffffff; }
     50% { text-shadow: 2px 0 #ffffff, 2px 0 #ffffff; } */
-    100% { text-shadow: 1px 0 #ffffff, 1px 0 #FFFAFA; }
+    100% { text-shadow: 1px #ffffff, 1px #FFFAFA; }
 }
 
 /* Flickering Effect */
