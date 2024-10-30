@@ -41,9 +41,10 @@ body {
 
 /* Glitch effect */
 @keyframes glitch {
-    0% { text-shadow: 2px 0 red, -2px 0 cyan; }
-    50% { text-shadow: -2px 0 red, 2px 0 cyan; }
-    100% { text-shadow: 2px 0 red, -2px 0 cyan; }
+@keyframes glitch {
+    0% { text-shadow: 2px 0 #d9d9d9, -2px 0 #d9d9d9; }
+    50% { text-shadow: -2px 0 #d9d9d9, 2px 0 #d9d9d9; }
+    100% { text-shadow: 2px 0 #d9d9d9, -2px 0 #d9d9d9; }
 }
 
 .meow {
