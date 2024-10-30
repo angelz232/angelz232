@@ -36,7 +36,7 @@ body {
     font-size: 1em;
     color: #FFFFFF;
     font-family: 'Courier New', monospace;
-    animation: glitch-shift 0.5s infinite alternate, flicker-opacity 1.5s infinite alternate;
+    animation: glitch-shift 0.5s infinite alternate, flicker-opacity 0.5s infinite alternate;
 }
 
 /* Glitchy Text Movement */
