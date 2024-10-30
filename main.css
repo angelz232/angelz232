@@ -41,8 +41,8 @@ body {
 
 /* Glitchy Text Movement */
 @keyframes glitch-shift {
-    0% { text-shadow: 2px 0 #ffffff, 2px 0 #ffffff; }
-    50% { text-shadow: 2px 0 #ffffff, 2px 0 #ffffff; }
+   /* 0% { text-shadow: 2px 0 #ffffff, 2px 0 #ffffff; }
+    50% { text-shadow: 2px 0 #ffffff, 2px 0 #ffffff; } */
     100% { text-shadow: 2px 0 #ffffff, 2px 0 #ffffff; }
 }
 
