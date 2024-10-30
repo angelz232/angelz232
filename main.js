@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (AudioPlayer) {
         AudioPlayer.volume = Volume;
-        AudioPlayer.src = 'assets/track1.mp3'; 
+        AudioPlayer.src = 'track1.mp3'; 
     }
 
     function EnterSite() {
