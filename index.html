@@ -5,125 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/gif" sizes="64x64" href="monopoly3.gif">
     <meta property="og:title" content="deadshot" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="https://deadshot.org" />
-    <meta property="og:image" content="" />
-    <meta property="og:type" content="website" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>#deadshot</title>
+    <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
     <script src="https://nextparticle.nextco.de/nextparticle.min.js"></script>
-    <title>#deadshot</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        display: flex;
-        font-family: "Pirata One", system-ui;
-        flex-direction: column;
-        align-items: center;
-        background-color: #000000;
-      }
-
-      .next-particle {
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-        justify-content: center;
-        min-height: 70vh;
-      }
-
-      img {
-        display: none;
-      }
-
-      p {
-        color: #c0c0c0;
-      }
-
-      a {
-        color: #c0c0c0;
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      .meow {
-        color: #ffffff;
-        font-size: 19px;
-        text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.7);
-        margin-top: -10px;
-        text-shadow: 2px 2px #c0c0c0;
-      }
-    </style>
 </head>
 <body>
-    
+    <!-- Overlay for Entry -->
+    <div id="enter-overlay" onclick="enterSite()">
+        <div class="glitch">Enter Site</div>
+    </div>
+
+    <!-- Particle Animation Area -->
     <div class="next-particle">
       <img src="monopoly.png" id="logo" alt="Logo" width="500" height="500" />
     </div>
 
+    <!-- Content with Links -->
     <p class="meow"><span class="status-glitch">monopoly :O</span></p>
-
     <p>
       <a href="https://t.me/deadzhot" target="_blank">t.me/deadzhot</a> -
       <a href="xmpp:deadshot@anoxinon.me" target="_blank">xmpp:deadshot@anoxinon.me</a> -
       <a href="https://discord.com/users/1253384417813205013" target="_blank">@x_zz_q</a>
     </p>
-
-    <p>
-      <a href="mailto:im@trolli.ng" target="_blank">im@trolli.ng</a> /
-      <a href="/pgp.txt" target="_blank">pgp</a>
-    </p>
-
+    <p><a href="mailto:im@trolli.ng" target="_blank">im@trolli.ng</a> / <a href="/pgp.txt" target="_blank">pgp</a></p>
     <p><a href="https://doxbin.org/user/obey" target="_blank">doxbin:obey</a></p>
 
-    <script> 
-      // Title Animation
-      const titles = ['#', '#d', '#de', '#dea', '#dead', '#deads', '#deadsh', '#deadsho', '#deadshot', '#deadshot', '#deadsho', '#deadsh', '#deads', '#dead', '#dea', '#de', '#d', '#'];
-      let index = 0;
+    <!-- Audio Player -->
+    <audio id="music-player"></audio>
 
-      function changeTitle() {
-          document.title = titles[index];
-          index = (index + 1) % titles.length;
-          setTimeout(changeTitle, 200); 
-      }
-
-      // Start the title animation loop
-      changeTitle();
-
-      // NextParticle Initialization
-      window.onload = function() {
-        const nextParticle = new NextParticle({
-          image: document.getElementById("logo"),
-          width: window.innerWidth,
-          height: window.innerHeight * 0.8,
-          maxWidth: Math.min(window.innerWidth * 0.8, 400),
-          particleGap: 4,
-          velocity: 0.5,
-          proximity: 100,
-          mouseForce: 300,
-          color: "#c0c0c0",
-        });
-
-        function resizeParticle() {
-          nextParticle.width = window.innerWidth;
-          nextParticle.height = window.innerHeight * 0.8;
-          nextParticle.maxWidth = Math.min(window.innerWidth * 0.8, 400);
-          nextParticle.start();
-        }
-
-        window.onresize = resizeParticle;
-
-        resizeParticle();
-      }
-    </script>
+    <!-- Scripts -->
+    <script src="main.js"></script>
 </body>
 </html>
