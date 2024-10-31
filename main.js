@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         velocity: 0.5,
         proximity: 100,
         mouseForce: 300,
-        color: "red", 
+        color: "#FF0000", 
     });
 
     function resizeParticle() {
