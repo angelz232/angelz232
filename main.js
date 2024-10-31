@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const AudioPlayer = document.getElementById('music-player');
-    const Volume = 0.25;
+    const Volume = 1;
     const tracks = ['track.mp3', 'track1.mp3', 'track2.mp3', 'track3.mp3']; 
 
     if (AudioPlayer) {
