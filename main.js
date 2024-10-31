@@ -2,16 +2,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const AudioPlayer = document.getElementById('music-player');
     const Volume = 1;
     const tracks = ['track.mp3', 'track1.mp3', 'track2.mp3', 'track3.mp3', 'track4.mp3'];
-    let currentTrackIndex = 0; 
+    
+    let currentTrackIndex = Math.floor(Math.random() * tracks.length); 
 
     if (AudioPlayer) {
         AudioPlayer.volume = Volume;
-        AudioPlayer.src = tracks[currentTrackIndex]; 
+        AudioPlayer.src = tracks[currentTrackIndex];
     }
 
-    
     function playNextTrack() {
-        currentTrackIndex = (currentTrackIndex + 1) % tracks.length; 
+        
+        let nextTrackIndex;
+        do {
+            nextTrackIndex = Math.floor(Math.random() * tracks.length);
+        } while (nextTrackIndex === currentTrackIndex);
+
+        currentTrackIndex = nextTrackIndex;
         AudioPlayer.src = tracks[currentTrackIndex]; 
         AudioPlayer.play()
             .then(() => console.log('Playing track:', AudioPlayer.src))
@@ -20,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-   
     window.enterSite = function() {
         const overlay = document.getElementById('enter-overlay');
         if (overlay) {
@@ -35,12 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    
     if (AudioPlayer) {
         AudioPlayer.addEventListener('ended', playNextTrack);
     }
 
-    
     const titles = ['#', '#D', '#DE', '#DEA', '#DEAD', '#DEAD$', '#DEAD$H', '#DEAD$HO', '#DEAD$HOT', '#DEAD$HOT', '#DEAD$HO', '#DEAD$H', '#DEAD$', '#DEAD', '#DEA', '#DE', '#D', '#'];
     let index = 0;
 
@@ -51,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     changeTitle();
 
-    
     const nextParticle = new NextParticle({
         image: document.getElementById("logo"),
         width: window.innerWidth,
