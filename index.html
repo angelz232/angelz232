@@ -12,29 +12,6 @@
     <script src="https://nextparticle.nextco.de/nextparticle.min.js"></script>
     <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
     <style>
-        a {
-            color: "#ffffff" 
-            text-decoration: none; 
-        }
-        
-        a:hover {
-            color: "#c0c0c0" 
-        }
-
-        @keyframes flicker1 {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                opacity: 1;
-            }
-            20%, 24%, 55% {
-                opacity: 0;
-            }
-        }
-
-        .flicker-text1 {
-            color: #c3c3c3; 
-            animation: flicker1 2s infinite; 
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -44,12 +21,10 @@
         body {
             font-family: 'Pirata One', sans-serif;
             background-color: #0d0d0d;
-            color: red;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            color: white;
             height: 100vh;
             overflow: hidden;
+            display: flex;
         }
 
         #enter-overlay {
@@ -69,8 +44,13 @@
         .glitch {
             font-size: 1em;
             color: #ffffff;
-            position: relative; 
-            animation: glitch 0.05s infinite, flicker 2s infinite; 
+            position: relative;
+            animation: glitch 0.05s infinite, flicker 2s infinite;
+        }
+
+        .flicker-text1 {
+            color: #c3c3c3;
+            animation: flicker1 2s infinite;
         }
 
         @keyframes glitch {
@@ -115,6 +95,39 @@
             }
         }
 
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .left-half, .right-half {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .left-half {
+            background-color: #0d0d0d;
+        }
+
+        .right-half {
+            background-color: #1a1a1a;
+        }
+
+        .interactive-section {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+        }
+
         .meow {
             color: #ffffff;
             font-size: 19px;
@@ -122,12 +135,16 @@
         }
 
         a {
-            color: red; 
-            text-decoration: none; 
+            color: red;
+            text-decoration: none;
         }
 
         a:hover {
-            color: white; 
+            color: white;
+        }
+
+        .social-links p {
+            margin: 8px 0;
         }
     </style>
 </head>
@@ -136,27 +153,61 @@
         <div class="glitch">Click to enter</div>
     </div>
 
-    <div class="next-particle">
-        <img src="monopoly.png" id="logo" alt="Logo" width="1000" height="1000" />
-    </div>
+    <div class="container">
+        <div class="left-half">
+            <div class="interactive-section" id="logo-left">
+                <img src="monopoly.png" alt="Your Logo" style="display: none;">
+            </div>
+            <p class="meow glitch"><span class="status-glitch">DEAD$HOT</span></p>
+            <div class="social-links">
+                <p><a href="https://t.me/deadzhot" target="_blank">t.me/deadzhot</a></p>
+                <p><a href="xmpp:deadshot@anoxinon.me" target="_blank">xmpp:deadshot@anoxinon.me</a></p>
+                <p><a href="https://discord.com/users/1301271502489915445" target="_blank">@zzzz_c</a></p>
+                <p><a href="mailto:im@trolli.ng" target="_blank">im@trolli.ng</a> / <a href="pgp.txt" target="_blank">pgp</a></p>
+                <p><a href="https://doxbin.org/user/obey" target="_blank">doxbin:obey</a></p>
+            </div>
+        </div>
 
-    <p class="meow glitch"><span class="status-glitch">DEAD$HOT</span><span class="glitch"></span><span class="flicker-text1"><span class="grey"></span></span></p>
-    
-    <p>
-        <a href="https://t.me/deadzhot" target="_blank">t.me/deadzhot</a> -
-        <a href="xmpp:deadshot@anoxinon.me" target="_blank">xmpp:deadshot@anoxinon.me</a> -
-        <a href="https://discord.com/users/1301271502489915445" target="_blank">@zzzz_c</a>
-    </p>
-    <p>
-        <a href="mailto:im@trolli.ng" target="_blank">im@trolli.ng</a> / 
-        <a href="/pgp.txt" target="_blank">pgp</a>
-    </p>
-    <p>
-        <a href="https://doxbin.org/user/obey" target="_blank">doxbin:obey</a>
-    </p>
+        <div class="right-half">
+            <div class="interactive-section" id="logo-right">
+                <img src="ghouls" alt="Friend's Logo" style="display: none;">
+            </div>
+            <p class="meow glitch"><span class="status-glitch">LEON</span></p>
+            <div class="social-links">
+                <p><a href="https://t.me/criminal9281" target="_blank">t.me/criminal9281</a></p>
+                <p><a href="xmpp:friend@anoxinon.me" target="_blank">xmpp:cum@anoxinon.me</a></p>
+                <p><a href="https://discord.com/users/000000000000000000" target="_blank">@discord</a></p>
+                <p><a href="mailto:leon@nigger.cum" target="_blank">leon@nigger.cum</a> / <a href="pgp_leon.txt" target="_blank">pgp</a></p>
+                <p><a href="https://doxbin.org/user/nn" target="_blank">doxbin:nut</a></p>
+            </div>
+        </div>
+    </div>
 
     <audio id="music-player"></audio>
 
     <script src="main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            new NextParticle({
+                image: document.querySelector("#logo-left img"),
+                color: "#FFFFFF",
+                maxWidth: 500,
+                maxHeight: 500,
+                particleGap: 2,
+                noise: 15,
+                speed: 0.1,
+            });
+
+            new NextParticle({
+                image: document.querySelector("#logo-right img"),
+                color: "#FFFFFF",
+                maxWidth: 500,
+                maxHeight: 500,
+                particleGap: 2,
+                noise: 15,
+                speed: 0.1,
+            });
+        });
+    </script>
 </body>
 </html>
