@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         AudioPlayer.addEventListener('ended', playNextTrack);
     }
 
-    const titles = ['?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?'];
+    const titles = ['?', ' ?', '  ?', '   ?', '    ?', '     ?', '      ?', '       ?', '        ?', '       ?', '      ?', '     ?', '    ?', '   ?', '  ?', ' ?', '?'];
     let index = 0;
 
     function changeTitle() {
