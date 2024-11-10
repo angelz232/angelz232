@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         AudioPlayer.addEventListener('ended', playNextTrack);
     }
 
-    const titles = ['#', '#D', '#DE', '#DEA', '#DEAD', '#DEAD$', '#DEAD$H', '#DEAD$HO', '#DEAD$HOT', '#DEAD$HOT', '#DEAD$HO', '#DEAD$H', '#DEAD$', '#DEAD', '#DEA', '#DE', '#D', '#'];
+    const titles = ['?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?'];
     let index = 0;
 
     function changeTitle() {
