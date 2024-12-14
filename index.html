@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="" />
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+    <script src="https://nextparticle.nextco.de/nextparticle.min.js"></script>
+    <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pirata One', sans-serif;
+            background-color: #0d0d0d;
+            color: white;
+            height: 100vh; 
+            overflow: hidden; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #enter-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 13, 13, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .glitch {
+            font-size: 1em;
+            color: #ffffff;
+            position: relative;
+            animation: glitch 0.05s infinite, flicker 2s infinite;
+        }
+
+        .flicker-text1 {
+            color: #c3c3c3;
+            animation: flicker1 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% {
+                transform: translate(0);
+            }
+            10% {
+                transform: translate(-0.5px, 0.5px);
+            }
+            20% {
+                transform: translate(-0.5px, -0.5px);
+            }
+            30% {
+                transform: translate(0.5px, 0.5px);
+            }
+            40% {
+                transform: translate(0.5px, -0.5px);
+            }
+            50% {
+                transform: translate(-0.5px, 0.5px);
+            }
+            60% {
+                transform: translate(-0.5px, -0.5px);
+            }
+            70% {
+                transform: translate(0.5px, 0.5px);
+            }
+            80% {
+                transform: translate(0.5px, -0.5px);
+            }
+            90% {
+                transform: translate(-0.5px, 0.5px);
+            }
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0;
+            }
+        }
+
+        .center-half {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            background-color: #000000;
+        }
+
+        .interactive-section {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+        }
+
+        .meow {
+            color: #ffffff;
+            font-size: 19px;
+            margin-top: -10px;
+        }
+
+        a {
+            color: red;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        .social-links p {
+            margin: 8px 0;
+        }
+    </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="enter-overlay" onclick="enterSite()">
+        <div class="glitch">Click to enter</div> 
+    </div>
+
+    <div class="center-half">
+        <div class="interactive-section" id="logo-center">
+            <img src="rose.png" alt="?" style="display: none;">
+        </div>
+        <p class="meow glitch"><span class="status-glitch">Richtofen</span></p>
+        <div class="social-links">
+            <p><a href="https://doxbin.org/user/sxcvsdfwgsdfgsd" target="_blank">Doxbin</a></p>
+            <p><a href="https://t.me/richtofen77" target="_blank">Telegram</a></p>
+            <p><a href="" target="_blank"></a></p>
+            <p><a href="" target="_blank"></a></p>
+            <p><a href="" target="_blank"></a></p>
+        </div>
+    </div>
+
+    <audio id="music-player"></audio>
+
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            new NextParticle({
+                image: document.querySelector("#logo-center img"),
+                color: "#FF0000",
+                maxWidth: 255,
+                maxHeight: 255,
+                particleGap: 2,
+                noise: 15,
+                speed: 0.1,
+            });
+        });
+    </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
