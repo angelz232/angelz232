@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         AudioPlayer.addEventListener('ended', playNextTrack);
     }
 
-    const titles = ['?', ' ?', '  ?', '   ?', '    ?', '     ?', '      ?', '       ?', '        ?', '       ?', '      ?', '     ?', '    ?', '   ?', '  ?', ' ?', '?'];
+    const titles = ['R', 'Ri', 'Ric', 'Rich', 'Richt', 'Richto', 'Richtof', 'Richtofe', 'Richtofen', 'n', 'en', 'fen', 'ofen', 'tofen', 'htofen', 'chtofen', 'ichtofen', 'Richtofen'];
     let index = 0;
 
     function changeTitle() {
