@@ -3,23 +3,23 @@ var textarea = $('.term');
 var i = 0;
 var count = 0;
 
-var start = 'xoru.lol'
+var start = 'deadshot.org'
 var data = [
-  './xoru.lol',
-  'xoru',
+  './deadshot.org',
+  'Richtofen',
   '*********',
   'Yes\n',
-  'xoru',
-  'x0ru',
-  'x@loki.lol\n\n',
+  'Richtofen',
+  'Richtofen',
+  'im@trolli.ng\n\n',
 ]
 
 var info = [
   "Please state the user you would like to add > ",
-  "Please set the password for 'xoru123' > ",
-  "Shall we create a home directory for 'xoru' > ",
-  "Directory Created, time for your socials!\n\nPlease state your GitHub username, if none put 'N/A' > ",
-  "Please state your Discord username, if none put 'N/A' > ",
+  "Please set the password for 'Richtofen' > ",
+  "Shall we create a home directory for 'Richtofen' > ",
+  "Directory Created, time for your socials!\n\nPlease state your Doxbin username, if none put 'N/A' > ",
+  "Please state your Telegram @, if none put 'N/A' > ",
   "Please state your Email, if none put 'N/A' > ",
 ];
 
@@ -81,12 +81,12 @@ function feedbacker() {
 
 var output = [
   "\nInformation complete! Initializing database.",
-  "debug: Creating user account 'xoru'",
+  "debug: Creating user account 'Richtofen'",
   "debug: Setting user account password",
-  "debug: Creating user home directory, /home/xoru",
-  "debug: Granting sudo privileges to user 'xoru'",
-  "debug: Setting github account name 'xoru'",
-  "debug: Setting Discord username 'x0ru'",
-  "debug: Setting email address 'xoru@loki.lol'",
+  "debug: Creating user home directory, /home/Richtofen",
+  "debug: Granting sudo privileges to user 'Richtofen'",
+  "debug: Setting github account name 'sxcvsdfwgsdfgsd'",
+  "debug: Setting Discord username 'richtofen77'",
+  "debug: Setting email address 'im@trolli.ng'",
   "debug: Account initialized!"
 ];
