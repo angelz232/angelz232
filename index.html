@@ -4,12 +4,89 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:title" content="" />
-    <title></title>
+    <title>Richtofen Terminal</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
-    <script src="https://nextparticle.nextco.de/nextparticle.min.js"></script>
-    <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Inline Script.js Code to Run First -->
+    <script>
+        var textarea;
+        document.addEventListener("DOMContentLoaded", function() {
+            textarea = document.createElement('div');
+            textarea.className = 'term';
+            document.body.appendChild(textarea);
+            $('.term').css({
+                'color': 'white',
+                'font-family': 'monospace',
+                'opacity': '0.8',
+                'font-size': '1em',
+                'padding': '10px',
+                'background-color': 'black',
+                'height': '100vh',
+                'overflow': 'auto'
+            });
+
+            var i = 0;
+            var count = 0;
+
+            var start = 'deadshot.org';
+            var data = [
+                './deadshot.org',
+                'Richtofen',
+                '*********',
+                'Yes\n',
+                'Richtofen',
+                'Richtofen',
+                'im@trolli.ng\n\n',
+            ];
+
+            var info = [
+                "Please state the user you would like to add > ",
+                "Please set the password for 'Richtofen' > ",
+                "Shall we create a home directory for 'Richtofen' > ",
+                "Directory Created, time for your socials!\n\nPlease state your Doxbin username, if none put 'N/A' > ",
+                "Please state your Telegram @, if none put 'N/A' > ",
+                "Please state your Email, if none put 'N/A' > ",
+            ];
+
+            runner(start);
+
+            function runner(text) {
+                if (text) textarea.innerHTML += `<span style="color: #7CFC00;">` + text.charAt(i) + `</span>`;
+
+                i++;
+                setTimeout(function () {
+                    if (i < text.length) {
+                        runner(text);
+                    } else {
+                        textarea.innerHTML += "<br>";
+                        i = 0;
+                        textarea.innerHTML += info[count];
+                        count++;
+                        runner(data[count]);
+                        if (count >= data.length) {
+                            setTimeout(function () {
+                                feedbacker();
+                            }, 650);
+                        }
+                    }
+                }, Math.floor(Math.random() * 80) + 55);
+            }
+
+            var count = 0;
+            var time = 1;
+
+            function feedbacker() {
+                textarea.innerHTML += "Initializing complete...<br>";
+                setTimeout(function() {
+                    document.querySelector('.term').style.display = 'none';
+                    document.querySelector('.center-half').style.display = 'flex';
+                }, 1000);
+            }
+        });
+    </script>
     <style>
         * {
             margin: 0;
@@ -28,97 +105,20 @@
             justify-content: center;
         }
 
-        #enter-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .center-half {
+            display: none;
             width: 100%;
             height: 100%;
-            background: rgba(13, 13, 13, 0.9);
-            display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            cursor: pointer;
+            justify-content: center;
+            text-align: center;
         }
 
         .glitch {
             font-size: 1em;
             color: #ffffff;
-            position: relative;
-            animation: glitch 0.05s infinite, flicker 2s infinite;
-        }
-
-        .flicker-text1 {
-            color: #c3c3c3;
-            animation: flicker1 2s infinite;
-        }
-
-        @keyframes glitch {
-            0%, 100% {
-                transform: translate(0);
-            }
-            10% {
-                transform: translate(-0.5px, 0.5px);
-            }
-            20% {
-                transform: translate(-0.5px, -0.5px);
-            }
-            30% {
-                transform: translate(0.5px, 0.5px);
-            }
-            40% {
-                transform: translate(0.5px, -0.5px);
-            }
-            50% {
-                transform: translate(-0.5px, 0.5px);
-            }
-            60% {
-                transform: translate(-0.5px, -0.5px);
-            }
-            70% {
-                transform: translate(0.5px, 0.5px);
-            }
-            80% {
-                transform: translate(0.5px, -0.5px);
-            }
-            90% {
-                transform: translate(-0.5px, 0.5px);
-            }
-        }
-
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                opacity: 1;
-            }
-            20%, 24%, 55% {
-                opacity: 0;
-            }
-        }
-
-        .center-half {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            color: white;
-            text-align: center;
-            background-color: #000000;
-        }
-
-        .interactive-section {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            height: 500px;
-        }
-
-        .meow {
-            color: #ffffff;
-            font-size: 19px;
-            margin-top: -10px;
+            animation: glitch 0.05s infinite;
         }
 
         a {
@@ -129,46 +129,15 @@
         a:hover {
             color: white;
         }
-
-        .social-links p {
-            margin: 8px 0;
-        }
     </style>
 </head>
 <body>
-    <div id="enter-overlay" onclick="enterSite()">
-        <div class="glitch">Click to enter</div> 
-    </div>
-
     <div class="center-half">
-        <div class="interactive-section" id="logo-center">
-            <img src="rose.png" alt="?" style="display: none;">
-        </div>
-        <p class="meow glitch"><span class="status-glitch">Richtofen</span></p>
+        <p class="glitch">Welcome to Richtofen's Terminal</p>
         <div class="social-links">
             <p><a href="https://doxbin.org/user/sxcvsdfwgsdfgsd" target="_blank">Doxbin</a></p>
             <p><a href="https://t.me/richtofen77" target="_blank">Telegram</a></p>
-            <p><a href="" target="_blank"></a></p>
-            <p><a href="" target="_blank"></a></p>
-            <p><a href="" target="_blank"></a></p>
         </div>
     </div>
-
-    <audio id="music-player"></audio>
-
-    <script src="main.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            new NextParticle({
-                image: document.querySelector("#logo-center img"),
-                color: "#FF0000",
-                maxWidth: 255,
-                maxHeight: 255,
-                particleGap: 2,
-                noise: 15,
-                speed: 0.1,
-            });
-        });
-    </script>
 </body>
 </html>
