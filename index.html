@@ -100,8 +100,6 @@
             { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 1000 },
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 1000 },
             { text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>", delay: 500 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 1000 },
-            { text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>", delay: 500 },
             { text: "<span class='prompt'>user@deadshot:~$</span>" }
         ];
 
@@ -109,23 +107,23 @@
 
         // Generate realistic download progress output
         function generateDownloadOutput(url, totalSize, steps) {
-            let output = <span class='info'>Get:</span> <span class='command'>${url}</span> [ ;
+            let output = `<span class='info'>Get:</span> <span class='command'>${url}</span> [ `;
             for (let progress = 0; progress <= steps; progress++) {
                 let percent = Math.floor((progress / steps) * 100);
-                output += \n<span class='success'>${percent}%</span> ${'='.repeat(progress)}>;
+                output += `\n<span class='success'>${percent}%</span> ${'='.repeat(progress)}>`;
             }
-            output +=  ] ${totalSize} kB\n<span class='success'>Fetched ${totalSize} kB</span>;
+            output += ` ] ${totalSize} kB\n<span class='success'>Fetched ${totalSize} kB</span>`;
             return output;
         }
 
         // Generate progress bar animation
         function generateProgressBar(task, steps) {
-            let progress = <span class='info'>${task}:</span>\n;
+            let progress = `<span class='info'>${task}:</span>\n`;
             for (let i = 0; i <= steps; i++) {
                 let percent = Math.floor((i / steps) * 100);
-                progress += [${"=".repeat(i)}${" ".repeat(steps - i)}] ${percent}%\n;
+                progress += `[${"=".repeat(i)}${" ".repeat(steps - i)}] ${percent}%\n`;
             }
-            return progress + <span class='success'>Done!</span>;
+            return progress + `<span class='success'>Done!</span>`;
         }
 
         // Function to write lines with delay
