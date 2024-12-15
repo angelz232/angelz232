@@ -127,15 +127,16 @@
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>" },  <!-- Simulating a program execution -->
             { text: "<span class='info'>[INFO]</span> <span class='command'>Running Richtofen program...</span>" },
 
-            // Simulate Social Links (using `cat` command for files)
-            { text: "<span class='info'>[INFO] Social Links:</span>" },
-            { text: "<span class='info'>Doxbin: <span class='command'>cat /home/Richtofen/.doxbin_profile</span></span>" },
-            { text: "<span class='info'>Telegram: <span class='command'>cat /home/Richtofen/.telegram_profile</span></span>" },
-
-            // Social Links as clickable links:
-            { text: "<span class='info'>Doxbin: <a class='link' href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>sxcvsdfwgsdfgsd</a></span>" },
-            { text: "<span class='info'>Telegram: <a class='link' href='https://t.me/richtofen77' target='_blank'>richtofen77</a></span>" }
-        ];
+    // Simulate Social Links
+    { text: "<span class='info'>[INFO] Accessing Social Links...</span>" },
+    { 
+        text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>"
+    },
+    { 
+        text: "<span class='info'>/home/Richtofen/.telegram_profile</span>: " +
+              "<a class='file-link' href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a>"
+    }
+];
 
         function writeLine(text) {
             terminal.innerHTML += text + "<br>";
