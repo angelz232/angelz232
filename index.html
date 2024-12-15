@@ -97,36 +97,33 @@
         const music = document.getElementById("music");
         let currentInput = "";
         let awaitingInput = false;
+        let step = 0;
 
-        // Initial Terminal Commands
+        const prompts = [
+            "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Are you fluffy? (yes/no)</span>",
+            "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Would you like to play music? (y/n)</span>"
+        ];
+
+        // Commands to simulate Linux terminal
         const commands = [
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>" },
             { text: "<span class='info'>[INFO]</span> <span class='command'>Fetching package lists...</span>" },
             { text: "<span class='success'>Reading package lists... Done</span>" },
             { text: "<span class='success'>Building dependency tree... Done</span>" },
-            { text: "<span class='success'>System upgraded successfully.</span>" },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Would you like to play music? (y/n)</span>" }
+            { text: "<span class='success'>System upgraded successfully.</span>" }
         ];
 
-        let i = 0; // Command index
-
-        function typeLine() {
-            if (i < commands.length) {
-                terminal.innerHTML += commands[i].text + "<br>";
-                i++;
-                terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
-                setTimeout(typeLine, 500);
-            } else {
-                awaitingInput = true;
-            }
-        }
-
-        function appendToTerminal(text) {
+        function typeLine(text) {
             terminal.innerHTML += text + "<br>";
             terminal.scrollTop = terminal.scrollHeight;
         }
 
-        document.addEventListener("keydown", function(event) {
+        function renderPrompt() {
+            const prompt = `<span class='prompt'>user@deadshot:~$</span> <span class='command'>${currentInput}</span><span class='cursor'></span>`;
+            terminal.innerHTML = terminal.innerHTML.split("<br>").slice(0, -1).join("<br>") + `<br>${prompt}`;
+        }
+
+        document.addEventListener("keydown", (event) => {
             if (awaitingInput) {
                 if (event.key === "Enter") {
                     processInput(currentInput.trim());
@@ -136,54 +133,64 @@
                 } else if (event.key.length === 1) {
                     currentInput += event.key;
                 }
-
-                renderInput();
+                renderPrompt();
             }
         });
 
-        function renderInput() {
-            const prompt = "<span class='prompt'>user@deadshot:~$</span> <span class='command'>";
-            const cursor = "<span class='cursor'></span>";
-            terminal.innerHTML = terminal.innerHTML.split("<br>").slice(0, -1).join("<br>") + `<br>${prompt}${currentInput}${cursor}`;
-        }
-
         function processInput(input) {
             awaitingInput = false;
-            appendToTerminal(`<span class='prompt'>user@deadshot:~$</span> <span class='command'>${input}</span>`);
+            typeLine(`<span class='prompt'>user@deadshot:~$</span> <span class='command'>${input}</span>`);
 
-            if (input.toLowerCase() === "y" || input.toLowerCase() === "yes") {
-                playMusic();
-            } else if (input.toLowerCase() === "n" || input.toLowerCase() === "no") {
-                crashWebsite();
-            } else {
-                appendToTerminal("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
-                awaitingInput = true;
-                renderInput();
+            if (step === 0) {
+                if (input.toLowerCase() === "yes") {
+                    typeLine("<span class='error'>Error:</span> <span class='command'>Fluffers aren't allowed!</span>");
+                    return; // Block further execution
+                } else if (input.toLowerCase() === "no") {
+                    step++;
+                    setTimeout(() => promptNext(), 500);
+                } else {
+                    invalidInput();
+                }
+            } else if (step === 1) {
+                if (input.toLowerCase() === "y" || input.toLowerCase() === "yes") {
+                    playMusic();
+                } else if (input.toLowerCase() === "n" || input.toLowerCase() === "no") {
+                    continueSimulation();
+                } else {
+                    invalidInput();
+                }
             }
         }
 
+        function invalidInput() {
+            typeLine("<span class='error'>Invalid input. Please type 'yes' or 'no'.</span>");
+            awaitingInput = true;
+            renderPrompt();
+        }
+
+        function promptNext() {
+            typeLine(prompts[step]);
+            awaitingInput = true;
+            renderPrompt();
+        }
+
         function playMusic() {
-            appendToTerminal("<span class='info'>[INFO]</span> <span class='command'>Playing music...</span>");
+            typeLine("<span class='info'>[INFO]</span> <span class='command'>Playing music...</span>");
             music.play();
-
-            // Continue the Linux Terminal Simulation
-            const moreCommands = [
-                { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo useradd -m -s /bin/bash Richtofen</span>" },
-                { text: "<span class='info'>[INFO]</span> <span class='command'>Creating new user: Richtofen</span>" },
-                { text: "<span class='success'>User 'Richtofen' created successfully.</span>" }
-            ];
-
-            moreCommands.forEach(cmd => appendToTerminal(cmd.text));
+            continueSimulation();
         }
 
-        function crashWebsite() {
-            appendToTerminal("<span class='error'>[CRITICAL]</span> <span class='command'>System crash initiated...</span>");
-            setTimeout(() => {
-                document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>System Error: 404</h1>";
-            }, 2000);
+        function continueSimulation() {
+            commands.forEach(cmd => typeLine(cmd.text));
         }
 
-        typeLine();
+        function start() {
+            typeLine(prompts[step]);
+            awaitingInput = true;
+            renderPrompt();
+        }
+
+        start();
     </script>
 </body>
 </html>
