@@ -49,14 +49,15 @@
         }
 
         /* Text Colors */
-        .prompt { color: #FFFFFF; }
-        .command { color: #C0C0C0; }
-        .info { color: #FFFF00; }
-        .success { color: #00FF00; }
-        .error { color: #FF5555; }
-        .file-link { color: #00AAAA; text-decoration: none; }
-        .file-link:hover { color: #FFFFFF; text-decoration: underline; }
+        .prompt { color: #FFFFFF; } /* Prompt */
+        .command { color: #C0C0C0; } /* Commands */
+        .info { color: #FFFF00; } /* Info/Warnings */
+        .success { color: #00FF00; } /* Success */
+        .error { color: #FF5555; } /* Errors */
+        .file-link { color: #00AAAA; text-decoration: none; } /* File links */
+        .file-link:hover { color: #FFFFFF; text-decoration: underline; } /* Hover effect */
 
+        /* Typing Cursor */
         .input-cursor {
             display: inline-block;
             width: 8px;
@@ -82,134 +83,81 @@
     <!-- Terminal Window -->
     <div class="terminal" id="terminal"></div>
 
-    <!-- Audio (Music) -->
-    <audio id="background-music" src="track.mp3" loop></audio>
-
     <script>
         const terminal = document.getElementById("terminal");
-        const music = document.getElementById("background-music");
-
-        let questionIndex = 0;
-
-        const questions = [
-            { 
-                text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Would you like to play music? (y/n)</span>", 
-                handler: handleMusic
-            }
-        ];
 
         const commands = [
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>", delay: 500 },
-            { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 300 },
-            { text: generateDownloadOutput(), delay: 100 },
-            { text: "<span class='success'>Reading package lists... Done</span>", delay: 300 },
-            { text: "<span class='success'>Building dependency tree... Done</span>", delay: 300 },
-            { text: "<span class='success'>Calculating upgrade... Done</span>", delay: 300 },
-            { text: generateProgressBar("Upgrading packages", 10), delay: 500 },
-            { text: "<span class='success'>System upgraded successfully.</span>", delay: 300 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>", delay: 300 },
-            { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 300 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 300 },
-            { text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>", delay: 100 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.doxbin_profile</span>", delay: 300 },
-            { text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>", delay: 100 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>", delay: 800 },
+            { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 500 },
+            { text: generateDownloadOutput("http://archive.ubuntu.com/ubuntu focal/main amd64 Packages", 100, 20), delay: 3000 },
+            { text: generateDownloadOutput("http://security.ubuntu.com/ubuntu focal-security InRelease", 200, 15), delay: 3000 },
+            { text: "<span class='success'>Reading package lists... Done</span>", delay: 800 },
+            { text: "<span class='success'>Building dependency tree... Done</span>", delay: 800 },
+            { text: "<span class='success'>Calculating upgrade... Done</span>", delay: 800 },
+            { text: generateProgressBar("Upgrading packages", 30), delay: 2500 },
+            { text: "<span class='success'>System upgraded successfully.</span>", delay: 800 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>", delay: 1000 },
+            { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 1000 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 1000 },
+            { text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>", delay: 500 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 1000 },
+            { text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>", delay: 500 },
             { text: "<span class='prompt'>user@deadshot:~$</span>" }
         ];
 
-        let i = 0;
+        let i = 0; // Command index
 
         // Generate realistic download progress output
-        function generateDownloadOutput() {
-            const output = `
-            <span class='info'>Get:</span> <span class='command'>http://archive.ubuntu.com/ubuntu focal/main amd64 Packages</span> [1.2 MB]
-            <span class='info'>Get:</span> <span class='command'>http://security.ubuntu.com/ubuntu focal-security InRelease</span> [107 kB]
-            <span class='success'>Fetched 1.3 MB in 2s (650 kB/s)</span>`;
+        function generateDownloadOutput(url, totalSize, steps) {
+            let output = <span class='info'>Get:</span> <span class='command'>${url}</span> [ ;
+            for (let progress = 0; progress <= steps; progress++) {
+                let percent = Math.floor((progress / steps) * 100);
+                output += \n<span class='success'>${percent}%</span> ${'='.repeat(progress)}>;
+            }
+            output +=  ] ${totalSize} kB\n<span class='success'>Fetched ${totalSize} kB</span>;
             return output;
         }
 
-        // Compact progress bar (reduced size and lines)
+        // Generate progress bar animation
         function generateProgressBar(task, steps) {
-            let progress = `<span class='info'>${task}:</span> `;
+            let progress = <span class='info'>${task}:</span>\n;
             for (let i = 0; i <= steps; i++) {
                 let percent = Math.floor((i / steps) * 100);
-                progress += `[${"=".repeat(i)}${" ".repeat(steps - i)}] ${percent}% `;
+                progress += [${"=".repeat(i)}${" ".repeat(steps - i)}] ${percent}%\n;
             }
-            return progress + `<span class='success'>Done!</span>`;
+            return progress + <span class='success'>Done!</span>;
         }
 
-        // Write lines with dynamic delays
+        // Function to write lines with delay
         function writeLine(line, delay) {
             return new Promise(resolve => {
+                let j = 0;
                 const outputLine = document.createElement("div");
                 terminal.appendChild(outputLine);
-                outputLine.innerHTML = line;
 
-                // Auto-scrolling effect
-                terminal.scrollTop = terminal.scrollHeight;
-
-                setTimeout(resolve, delay);
-            });
-        }
-
-        // Handle music input (y/n)
-        function handleMusic(answer) {
-            if (answer === "y" || answer === "yes") {
-                writeLine("<span class='success'>Playing music...</span>");
-                music.play();
-            } else if (answer === "n" || answer === "no") {
-                writeLine("<span class='info'>No music will be played.</span>");
-            } else {
-                writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
-                return; // Don't continue unless valid input is given
-            }
-            questionIndex++;
-            loadCommands();
-        }
-
-        // Load the commands
-        function loadCommands() {
-            commands.forEach((cmd, index) => {
-                setTimeout(() => writeLine(cmd.text, cmd.delay), index * 500);
-            });
-        }
-
-        // Ask the first question to start interaction
-        function askNextQuestion() {
-            if (questionIndex < questions.length) {
-                writeLine(questions[questionIndex].text, 300);
-                writeInput("<span class='prompt'>user@deadshot:~$</span>");
-            }
-        }
-
-        // Write input prompt for user
-        function writeInput(promptText) {
-            terminal.innerHTML += promptText + " <span id='user-input'></span><span class='input-cursor'></span>";
-        }
-
-        // Handle keyboard input for answering questions
-        document.addEventListener("keydown", (e) => {
-            const userInput = document.getElementById("user-input");
-            if (!userInput) return;
-
-            if (e.key === "Enter") {
-                const input = userInput.textContent.trim().toLowerCase();
-                if (input === 'y' || input === 'yes' || input === 'n' || input === 'no') {
-                    handleMusic(input);
-                } else {
-                    writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
+                function typeCharacter() {
+                    outputLine.innerHTML = line.slice(0, j++);
+                    if (j <= line.length) {
+                        setTimeout(typeCharacter, 10);
+                    } else {
+                        terminal.scrollTop = terminal.scrollHeight;
+                        resolve();
+                    }
                 }
-            } else if (e.key.length === 1) {
-                userInput.textContent += e.key;
+                setTimeout(typeCharacter, delay);
+            });
+        }
+
+        // Simulate terminal commands typing out
+        async function typeCommands() {
+            for (let cmd of commands) {
+                await writeLine(cmd.text, cmd.delay || 500);
             }
-        });
+            terminal.innerHTML += "<span class='input-cursor'></span>";
+        }
 
         // Start the terminal simulation
-        function startTerminal() {
-            writeLine("<span class='prompt'>user@deadshot:~$</span> <span class='info'>Initializing interactive terminal...</span>");
-            setTimeout(askNextQuestion, 1000);
-        }
-
-        startTerminal();
+        typeCommands();
     </script>
 </body>
 </html>
