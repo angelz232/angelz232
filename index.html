@@ -86,7 +86,7 @@
 
         const questions = [
             { 
-                text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Do you want to continue? (y/n)</span>", 
+                text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Are you black? (y/n)</span>", 
                 handler: handleContinue 
             },
             { 
@@ -144,7 +144,7 @@
             } else if (answer === "n" || answer === "no") {
                 writeLine("<span class='error'>System crash detected! Exiting...</span>");
                 setTimeout(() => {
-                    document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>System Crashed</h1>";
+                    document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>System Crashed</h1><br>Niggers aren't allowed!</h1>";
                 }, 1000);
             } else {
                 writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
