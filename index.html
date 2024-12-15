@@ -92,9 +92,8 @@
     <div class="layout">
         <!-- ASCII Art Section -->
         <div class="ascii-art">
-            <pre>         
-
-
+            <pre>          
+          
 
 
 
@@ -103,7 +102,7 @@
                 
                                                                              %%%%                   #*+++++*#                     
                                                                          ##**%%%%#                  #++##%##                      
-                                                                     #%*+====*%%%%%                 #++#%                         
+                                                                     #%*+====*%%%%%                 #++#%                          
                                                                    %%=========*%%%%%                %#++*#                        
                                                                 %%%%%%*========+%%%%%#                %*++*#                      
                                                                %%%%%%%%%=====+##*#%%%%%    %@%          %*++#%                    
@@ -120,9 +119,9 @@
                                     ::::-+#+:::::-+.-%%%%%%%%%%%     %=:::::::::::-*...........=%%%%%%%%%%%%%%%%%*=               
                                     :-=-::-==++++*::#%%%%%%%%%%%%%%%%%%*=++::----=-.....-%*++#%%%%%%%%%%%%%%%%%%%%                
                                      :-+*%      #=:*%%%%%%%%%%%%%%%%%%%%%%%%=::+*:....=#*=::+%%%%%%%%%%%%%%%%%%%                  
-                                                  #@%%%%%%%%%%%%%%%%%%%%%%%%%%+-::===-::::=*#%%%%%%%%%%%%%%%%                     
-                                                    %%%%%%%%%%%%%%%%%%%%%%%%%%%*=*##**####%.=%%%%%%%%%%%%                         
-                                                         %%%%%%%%%%%%%%%%%%%%%%*..%#*####*%.:%%%%@%                               
+                                                  #@%%%%%%%%%%%%%%%%%%%%%%%%%%+-::===-::::=*#%%%%%%%%%%%%%%%%                      
+                                                    %%%%%%%%%%%%%%%%%%%%%%%%%%%*=*##**####%.=%%%%%%%%%%%%                          
+                                                         %%%%%%%%%%%%%%%%%%%%%%*..%#*####*%.:%%%%@%                                
                                                                 %%%%%%%%%%%%%%%*.:%%*=:-+##.:%%%                                  
                                                                    %%%%%%%%%%%%=......*-....:%%                                   
                                                                    %%%%%%%%%%%%.......... ..=@                                    
@@ -132,7 +131,7 @@
                                                               %%%%%%%%%%%%%**-......:.....#%%%%%                                  
                                                             %%%%%%%%%%%%%*++++%-.-#*+**..+++#%%%%%%                               
                                                            %%%%%%%%%%*++++++++++*++++++**+++++#%%%                                
-                                                                 %%#+++++++++++++++++++++++++++*%                                 
+                                                                 %%#+++++++++++++++++++++++++++*%                                  
                                                              %%%#*++++++++++++++++*+++++++++++++*%                                
                                                              %#+++++++++++++++++**+++++++++++++++*%                               
                                                             %%*++++++++++++++++*%@%#*+++++++++++++#%                              
@@ -145,26 +144,21 @@
                                                       %%%%#+++++*#%%                 %*+++++++++**     %@                         
                                                        %%%%%*#%%%                    %%%%%%%%%%%%%%%%%%%%                         
                                                         %%%%%%                       @%%%%#%%%%%%%%%%%%                           
-        </pre>
+            </pre>
         </div>
 
         <!-- Terminal Section -->
         <div class="terminal" id="terminal"></div>
     </div>
 
+    <audio id="background-music" src="track.mp3" loop></audio>
+
     <script>
         const terminal = document.getElementById("terminal");
+        const music = document.getElementById("background-music");
 
         const commands = [
-
-
-
-
-
-
-
-            
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>", delay: 80 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Do you want to play music? (y/n)</span>", delay: 50, input: true },
             { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 50 },
             { text: generateDownloadOutput("http://archive.ubuntu.com/ubuntu focal/main amd64 <span class='directory'>Packages", 534, 20), delay: 300 },
             { text: "<span class='directory'>Reading package lists... <span class='success'>Done</span>", delay: 80 },
@@ -173,16 +167,10 @@
             { text: "<span class='success'>System upgraded successfully.</span>", delay: 80 },
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>", delay: 100 },
             { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 100 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 100 },
-            { text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>", delay: 50 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.doxbin_profile</span>", delay: 100 },
-            { text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>", delay: 50 },
-            { text: "<span class='prompt'>user@deadshot:~$</span>" }
         ];
 
-        let i = 0; // Command index
+        let i = 0;
 
-        // Generate realistic download progress output
         function generateDownloadOutput(url, totalSize, steps) {
             let output = `<span class='info'>Get:</span> <span class='command'>${url}</span> [ `;
             for (let progress = 0; progress <= steps; progress++) {
@@ -193,18 +181,7 @@
             return output;
         }
 
-        // Generate progress bar animation
-        function generateProgressBar(task, steps) {
-            let progress = `<span class='info'>${task}:</span>\n`;
-            for (let i = 0; i <= steps; i++) {
-                let percent = Math.floor((i / steps) * 100);
-                progress += `[${"=".repeat(i)}${" ".repeat(steps - i)}] ${percent}%\n`;
-            }
-            return progress + `<span class='success'>Done!</span>`;
-        }
-
-        // Function to write lines with delay
-        function writeLine(line, delay) {
+        async function writeLine(line, delay, input = false) {
             return new Promise(resolve => {
                 let j = 0;
                 const outputLine = document.createElement("div");
@@ -216,22 +193,47 @@
                         setTimeout(typeCharacter, 10);
                     } else {
                         terminal.scrollTop = terminal.scrollHeight;
-                        resolve();
+                        if (input) {
+                            getUserInput(resolve);
+                        } else {
+                            resolve();
+                        }
                     }
                 }
                 setTimeout(typeCharacter, delay);
             });
         }
 
-        // Simulate terminal commands typing out
+        function getUserInput(resolve) {
+            const inputLine = document.createElement("div");
+            inputLine.innerHTML = `<span class='prompt'>user@deadshot:~$</span> <span id='user-input'></span>`;
+            terminal.appendChild(inputLine);
+            terminal.scrollTop = terminal.scrollHeight;
+
+            let inputText = "";
+            document.addEventListener("keydown", function onKeyPress(e) {
+                if (e.key === "Enter") {
+                    document.removeEventListener("keydown", onKeyPress);
+                    if (inputText.toLowerCase() === "y") {
+                        music.play();
+                    }
+                    resolve();
+                } else if (e.key === "Backspace") {
+                    inputText = inputText.slice(0, -1);
+                } else if (e.key.length === 1) {
+                    inputText += e.key;
+                }
+                document.getElementById("user-input").textContent = inputText;
+            });
+        }
+
         async function typeCommands() {
             for (let cmd of commands) {
-                await writeLine(cmd.text, cmd.delay || 500);
+                await writeLine(cmd.text, cmd.delay, cmd.input);
             }
             terminal.innerHTML += "<span class='input-cursor'></span>";
         }
 
-        // Start the terminal simulation
         typeCommands();
     </script>
 </body>
