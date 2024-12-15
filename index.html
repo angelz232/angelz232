@@ -86,6 +86,7 @@
     <script>
         const terminal = document.getElementById("terminal");
         const music = document.getElementById("background-music");
+
         let inputBuffer = ""; // Buffer to store user input
         let questionIndex = 0;
 
@@ -166,6 +167,7 @@
                 writeLine("<span class='info'>No music will be played.</span>");
             } else {
                 writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
+                return; // Don't continue unless valid input is given
             }
             questionIndex++;
             loadCommands();
