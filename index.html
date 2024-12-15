@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richtofen</title>
+    <title>Linux Terminal Simulation</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         body, html {
@@ -13,7 +13,7 @@
             font-family: 'IBM Plex Mono', monospace;
             color: #FFFFFF;
             overflow: hidden;
-            background-color: black; /* Fallback in case the video fails */
+            background-color: black; /* Fallback for video */
         }
 
         /* Video Background */
@@ -23,14 +23,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Behind terminal */
-            overflow: hidden;
+            z-index: -1;
         }
 
         .video-container video {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures full-screen video */
+            object-fit: cover;
         }
 
         /* Terminal Styling */
@@ -45,28 +44,19 @@
             white-space: pre-wrap;
             font-size: 1rem;
             line-height: 1.4;
-            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-            border-radius: 4px;
-            z-index: 1; /* Above video */
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
         }
 
         /* Text Colors */
-        .prompt { color: #FFFFFF; } /* Prompt */
-        .command { color: #C0C0C0; } /* Command */
-        .info { color: #FFFF00; } /* Info */
-        .success { color: #00FF00; } /* Success */
-        .error { color: #FF5555; } /* Errors */
-
-        /* File Links */
-        .file-link {
-            color: #00AAAA; /* Cyan for file paths */
-            text-decoration: none;
-        }
-
-        .file-link:hover {
-            color: #FFFFFF; /* White on hover */
-            text-decoration: underline;
-        }
+        .prompt { color: #FFFFFF; }
+        .command { color: #C0C0C0; }
+        .info { color: #FFFF00; }
+        .success { color: #00FF00; }
+        .progress { color: #87CEEB; } /* Progress bar color */
+        .error { color: #FF5555; }
+        .file-link { color: #00AAAA; text-decoration: none; }
+        .file-link:hover { color: #FFFFFF; text-decoration: underline; }
 
         /* Typing Cursor */
         .input-cursor {
@@ -85,84 +75,89 @@
 <body>
     <!-- Full-Screen Video Background -->
     <div class="video-container">
-        <video autoplay muted loop id="bg-video">
+        <video autoplay muted loop>
             <source src="video1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
-    <!-- Terminal Output -->
+    <!-- Terminal Window -->
     <div class="terminal" id="terminal"></div>
-
-    <!-- Music (Optional) -->
-    <audio id="background-music" src="track.mp3" loop></audio>
 
     <script>
         const terminal = document.getElementById("terminal");
-        const music = document.getElementById("background-music");
 
         const commands = [
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>" },
-            { text: "<span class='info'>[INFO]</span> Fetching package lists..." },
-            { text: "<span class='success'>Reading package lists... Done</span>" },
-            { text: "<span class='success'>Building dependency tree... Done</span>" },
-            { text: "<span class='success'>System upgraded successfully.</span>" },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo useradd -m -s /bin/bash Richtofen</span>" },
-            { text: "<span class='info'>[INFO]</span> Creating new user: Richtofen..." },
-            { text: "<span class='success'>User 'Richtofen' created successfully.</span>" },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo chmod 700 /home/Richtofen</span>" },
-            { text: "<span class='success'>Permissions updated: 700</span>" },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>" },
-            { text: "<span class='info'>[INFO]</span> Running Richtofen program..." },
-
-            // Social Links as clickable file paths
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.doxbin_profile</span>" },
-            { 
-                text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>" 
-            },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>" },
-            { 
-                text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>" 
-            },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>", delay: 800 },
+            { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 500 },
+            { text: simulateDownload("http://archive.ubuntu.com/ubuntu focal/main amd64 Packages", 100), delay: 3000 },
+            { text: simulateDownload("http://security.ubuntu.com/ubuntu focal-security InRelease", 100), delay: 3000 },
+            { text: "<span class='success'>Reading package lists... Done</span>", delay: 800 },
+            { text: "<span class='success'>Building dependency tree... Done</span>", delay: 800 },
+            { text: "<span class='success'>Calculating upgrade... Done</span>", delay: 800 },
+            { text: simulateProgress("Updating system packages", 20), delay: 2500 },
+            { text: "<span class='success'>System upgraded successfully.</span>", delay: 800 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>", delay: 1000 },
+            { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 1000 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 1000 },
+            { text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>", delay: 500 },
             { text: "<span class='prompt'>user@deadshot:~$</span>" }
         ];
 
         let i = 0; // Command index
-        let j = 0; // Typing index for the animation
-        const typingSpeed = 30; // Typing speed in milliseconds
 
-        // Function to simulate typing effect
-        function typeLine() {
-            if (i < commands.length) {
-                const currentCommand = commands[i].text;
-                const currentLine = document.createElement("div");
-                terminal.appendChild(currentLine);
-
-                function typeCharacter() {
-                    currentLine.innerHTML = currentCommand.slice(0, j++);
-                    if (j <= currentCommand.length) {
-                        setTimeout(typeCharacter, typingSpeed);
-                    } else {
-                        j = 0; // Reset typing index for the next command
-                        i++;
-                        setTimeout(typeLine, 500); // Wait before next command
-                    }
-                    terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
-                }
-                typeCharacter();
-            } else {
-                terminal.innerHTML += "<span class='input-cursor'></span>";
+        // Function to simulate download progress
+        function simulateDownload(url, totalSize) {
+            let output = `<span class='info'>Get:</span> <span class='progress'>${url}</span> [ `;
+            for (let progress = 0; progress <= 100; progress += 5) {
+                output += `#`;
             }
+            output += ` ] ${totalSize} kB`;
+            return output;
         }
 
-        // Start the simulation
-        typeLine();
+        // Function to simulate a progress bar
+        function simulateProgress(task, steps) {
+            let progress = `<span class='info'>${task}:</span>\n`;
+            for (let i = 0; i <= steps; i++) {
+                progress += `[`;
+                progress += "=".repeat(i);
+                progress += ">".padEnd(steps - i, " ");
+                progress += `] ${Math.floor((i / steps) * 100)}%\n`;
+            }
+            return progress + `<span class='success'>Done!</span>`;
+        }
 
-        // Handle video load errors
-        document.getElementById('bg-video').onerror = function() {
-            const errorMsg = "<span class='error'>[ERROR] Failed to load video background. Check video path.</span>";
-            terminal.innerHTML += errorMsg + "<br>";
-        };
+        // Function to write terminal lines with delay
+        function writeLine(line, delay) {
+            return new Promise(resolve => {
+                let j = 0;
+                const outputLine = document.createElement("div");
+                terminal.appendChild(outputLine);
+
+                function typeCharacter() {
+                    outputLine.innerHTML = line.slice(0, j++);
+                    if (j <= line.length) {
+                        setTimeout(typeCharacter, 20);
+                    } else {
+                        terminal.scrollTop = terminal.scrollHeight;
+                        resolve();
+                    }
+                }
+                setTimeout(typeCharacter, delay);
+            });
+        }
+
+        // Function to simulate the typing effect
+        async function typeCommands() {
+            for (let cmd of commands) {
+                await writeLine(cmd.text, cmd.delay || 500);
+            }
+            terminal.innerHTML += "<span class='input-cursor'></span>";
+        }
+
+        // Start simulation
+        typeCommands();
     </script>
 </body>
 </html>
