@@ -49,11 +49,13 @@
             z-index: 1; /* Ensure it’s above the video */
         }
 
-        .prompt { color: #FFFFFF; }
-        .command { color: #C0C0C0; }
-        .info { color: #FFFF00; }
-        .success { color: #00FF00; }
-        .error { color: #FF5555; }
+        .prompt { color: #FFFFFF; }      /* Prompt: user@hostname:~$ */
+        .command { color: #C0C0C0; }     /* Commands typed by user */
+        .info { color: #FFFF00; }        /* Yellow for informational outputs */
+        .success { color: #00FF00; }     /* Green for success messages */
+        .error { color: #FF5555; }       /* Red for errors or critical outputs */
+        .directory { color: #00AAAA; }   /* Cyan for directories */
+        .link { color: #FF0000; text-decoration: none; } /* Links for social media */
 
         .input-cursor {
             display: inline-block;
