@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Richtofen</title>
+    <title>xoru.lol</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: black;
-            color: #00FF00; /* Default terminal text color */
+            color: #FFFFFF; /* Default terminal text color */
             font-family: 'IBM Plex Mono', monospace;
             margin: 0;
             padding: 0;
@@ -35,7 +35,7 @@
 
         .cursor {
             display: inline-block;
-            background: #00FF00;
+            background: #FFFFFF;
             width: 10px;
             height: 18px;
             margin-left: 5px;
@@ -51,16 +51,12 @@
             color: #FFFF00; /* Yellow for info */
         }
 
-        .debug {
-            color: #1E90FF; /* Blue for debug logs */
-        }
-
         .success {
             color: #32CD32; /* Green for success messages */
         }
 
-        .error {
-            color: #FF6347; /* Red for errors */
+        .default {
+            color: #FFFFFF; /* White for plain text */
         }
 
         /* Scrollbar styling */
@@ -69,7 +65,7 @@
         }
 
         .term::-webkit-scrollbar-thumb {
-            background-color: #00FF00;
+            background-color: #32CD32;
         }
     </style>
 </head>
@@ -78,18 +74,20 @@
 
     <script>
         const terminal = document.getElementById("terminal");
+
+        // Real Linux-like commands with outputs
         const commands = [
             "user@deadshot:~$ <span class='command'>sudo apt update && sudo apt upgrade -y</span>",
             "<span class='info'>[INFO] Updating package lists...</span>",
             "<span class='success'>[SUCCESS] System packages updated.</span>",
             
             "user@deadshot:~$ <span class='command'>sudo useradd -m -s /bin/bash Richtofen</span>",
-            "<span class='debug'>[DEBUG] Creating user: Richtofen</span>",
+            "<span class='info'>[INFO] Creating user: Richtofen</span>",
             "<span class='success'>[SUCCESS] User 'Richtofen' created successfully.</span>",
 
             "user@deadshot:~$ <span class='command'>sudo passwd Richtofen</span>",
-            "Enter new UNIX password: <span class='error'>*********</span>",
-            "Retype new UNIX password: <span class='error'>*********</span>",
+            "Enter new UNIX password: <span class='default'>*********</span>",
+            "Retype new UNIX password: <span class='default'>*********</span>",
             "<span class='success'>[SUCCESS] Password updated successfully.</span>",
 
             "user@deadshot:~$ <span class='command'>sudo mkdir /home/Richtofen</span>",
@@ -97,32 +95,33 @@
             "<span class='success'>[SUCCESS] Directory created.</span>",
 
             "user@deadshot:~$ <span class='command'>sudo chmod 700 /home/Richtofen</span>",
-            "<span class='info'>[INFO] Setting directory permissions...</span>",
-            "<span class='success'>[SUCCESS] Permissions set to 700.</span>",
+            "<span class='info'>[INFO] Setting directory permissions to 700...</span>",
+            "<span class='success'>[SUCCESS] Permissions updated.</span>",
 
             "user@deadshot:~$ <span class='command'>sudo usermod -aG sudo Richtofen</span>",
-            "<span class='debug'>[DEBUG] Adding user 'Richtofen' to sudo group...</span>",
-            "<span class='success'>[SUCCESS] User 'Richtofen' now has sudo privileges.</span>",
+            "<span class='info'>[INFO] Granting sudo privileges to user: 'Richtofen'</span>",
+            "<span class='success'>[SUCCESS] User 'Richtofen' now has sudo access.</span>",
 
             "user@deadshot:~$ <span class='command'>cat /etc/passwd | grep Richtofen</span>",
-            "<span class='info'>Richtofen:x:1001:1001::/home/Richtofen:/bin/bash</span>",
+            "<span class='default'>Richtofen:x:1001:1001::/home/Richtofen:/bin/bash</span>",
 
             "user@deadshot:~$ <span class='command'>sudo systemctl restart apache2</span>",
-            "<span class='info'>[INFO] Restarting web service...</span>",
-            "<span class='success'>[SUCCESS] Apache2 restarted successfully.</span>",
+            "<span class='info'>[INFO] Restarting Apache2 service...</span>",
+            "<span class='success'>[SUCCESS] Apache2 service restarted successfully.</span>",
 
             "user@deadshot:~$ <span class='command'>exit</span>",
-            "<span class='info'>[INFO] Redirecting to Richtofen's page...</span>",
+            "<span class='info'>[INFO] Redirecting to Richtofen's page...</span>"
         ];
 
-        let i = 0;
-        let lineIndex = 0;
+        let i = 0; // Current command index
+        let lineIndex = 0; // Current character index
 
+        // Function to simulate typing effect
         function typeLine() {
             if (lineIndex < commands[i].length) {
                 terminal.innerHTML += commands[i].charAt(lineIndex);
                 lineIndex++;
-                setTimeout(typeLine, 20); // Typing speed
+                setTimeout(typeLine, 15); // Typing speed
             } else {
                 terminal.innerHTML += "<br>";
                 i++;
@@ -133,7 +132,7 @@
                 } else {
                     // Redirect after final line
                     setTimeout(() => {
-                        window.location.href = "Richtofen";
+                        window.location.href = "Richtofen.html";
                     }, 1500);
                 }
             }
