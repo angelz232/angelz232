@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Simulation with Full-Screen Video</title>
+    <title>Terminal Simulation with Social Links</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         /* General Page Styling */
@@ -17,7 +17,7 @@
             background-color: black;
         }
 
-        /* Full-Screen Video */
+        /* Full-Screen Video (background) */
         .video-container {
             position: fixed;
             top: 0;
@@ -41,12 +41,14 @@
             right: 20px;
             bottom: 20px;
             padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
             color: #FFFFFF;
             white-space: pre-wrap;
             font-size: 1rem;
             line-height: 1.4;
             overflow-y: auto;
-            pointer-events: none; /* Prevent interaction */
+            border-radius: 5px;
         }
 
         /* Typing Cursor */
@@ -119,8 +121,9 @@
             { text: "<span class='info'>[INFO]</span> <span class='command'>Restarting Apache2 service...</span>" },
             { text: "<span class='success'>Apache2 service restarted successfully.</span>" },
 
-            // Simulate the `clear` command
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>clear</span>" },
+            // Simulate running the "Richtofen" program
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Richtofen</span>" },
+            { text: "<span class='info'>[INFO]</span> <span class='command'>Running Richtofen...</span>" },
 
             // Display Social Links
             { text: "<span class='info'>[INFO] Social Links:</span>" },
