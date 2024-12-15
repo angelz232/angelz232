@@ -3,141 +3,81 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:title" content="" />
-    <title>Richtofen Terminal</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet"/>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Inline Script.js Code to Run First -->
-    <script>
-        var textarea;
-        document.addEventListener("DOMContentLoaded", function() {
-            textarea = document.createElement('div');
-            textarea.className = 'term';
-            document.body.appendChild(textarea);
-            $('.term').css({
-                'color': 'white',
-                'font-family': 'monospace',
-                'opacity': '0.8',
-                'font-size': '1em',
-                'padding': '10px',
-                'background-color': 'black',
-                'height': '100vh',
-                'overflow': 'auto'
-            });
-
-            var i = 0;
-            var count = 0;
-
-            var start = 'deadshot.org';
-            var data = [
-                './deadshot.org',
-                'Richtofen',
-                '*********',
-                'Yes\n',
-                'Richtofen',
-                'Richtofen',
-                'im@trolli.ng\n\n',
-            ];
-
-            var info = [
-                "Please state the user you would like to add > ",
-                "Please set the password for 'Richtofen' > ",
-                "Shall we create a home directory for 'Richtofen' > ",
-                "Directory Created, time for your socials!\n\nPlease state your Doxbin username, if none put 'N/A' > ",
-                "Please state your Telegram @, if none put 'N/A' > ",
-                "Please state your Email, if none put 'N/A' > ",
-            ];
-
-            runner(start);
-
-            function runner(text) {
-                if (text) textarea.innerHTML += `<span style="color: #7CFC00;">` + text.charAt(i) + `</span>`;
-
-                i++;
-                setTimeout(function () {
-                    if (i < text.length) {
-                        runner(text);
-                    } else {
-                        textarea.innerHTML += "<br>";
-                        i = 0;
-                        textarea.innerHTML += info[count];
-                        count++;
-                        runner(data[count]);
-                        if (count >= data.length) {
-                            setTimeout(function () {
-                                feedbacker();
-                            }, 650);
-                        }
-                    }
-                }, Math.floor(Math.random() * 80) + 55);
-            }
-
-            var count = 0;
-            var time = 1;
-
-            function feedbacker() {
-                textarea.innerHTML += "Initializing complete...<br>";
-                setTimeout(function() {
-                    document.querySelector('.term').style.display = 'none';
-                    document.querySelector('.center-half').style.display = 'flex';
-                }, 1000);
-            }
-        });
-    </script>
+    <title>xoru.lol</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Pirata One', sans-serif;
-            background-color: #0d0d0d;
-            color: white;
-            height: 100vh; 
-            overflow: hidden; 
+            background-color: black;
+            color: #7CFC00;
+            font-family: 'IBM Plex Mono', monospace;
+            margin: 0;
+            padding: 20px;
+            font-size: 1.1rem;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .center-half {
-            display: none;
-            width: 100%;
-            height: 100%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+        .term {
+            white-space: pre-line;
+            line-height: 1.5;
+            max-width: 80%;
         }
 
-        .glitch {
-            font-size: 1em;
-            color: #ffffff;
-            animation: glitch 0.05s infinite;
+        @keyframes blink {
+            50% { opacity: 0; }
         }
 
-        a {
-            color: red;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: white;
+        .cursor {
+            display: inline-block;
+            background: #7CFC00;
+            width: 8px;
+            height: 18px;
+            margin-left: 5px;
+            animation: blink 1s step-end infinite;
         }
     </style>
 </head>
 <body>
-    <div class="center-half">
-        <p class="glitch">Richtofen</p>
-        <div class="social-links">
-            <p><a href="https://doxbin.org/user/sxcvsdfwgsdfgsd" target="_blank">Doxbin</a></p>
-            <p><a href="https://t.me/richtofen77" target="_blank">Telegram</a></p>
-        </div>
-    </div>
+    <div class="term" id="terminal"></div>
+
+    <script>
+        const terminal = document.getElementById("terminal");
+        const text = [
+            "Initializing deadshot.org...",
+            "Loading user: Richtofen",
+            "Password: *********",
+            "Creating home directory...",
+            "Granting privileges...",
+            "Fetching user data...",
+            "Redirecting to Richtofen's page...",
+        ];
+
+        let i = 0;
+        let lineIndex = 0;
+
+        function typeLine() {
+            if (lineIndex < text[i].length) {
+                terminal.innerHTML += text[i].charAt(lineIndex);
+                lineIndex++;
+                setTimeout(typeLine, 50);
+            } else {
+                terminal.innerHTML += "<br>";
+                i++;
+                lineIndex = 0;
+
+                if (i < text.length) {
+                    setTimeout(typeLine, 500);
+                } else {
+                    setTimeout(() => {
+                        window.location.href = "Richtofen.html"; // Redirect
+                    }, 1000);
+                }
+            }
+        }
+
+        typeLine();
+    </script>
 </body>
 </html>
