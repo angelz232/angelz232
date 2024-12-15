@@ -121,14 +121,14 @@
             { text: "<span class='info'>[INFO]</span> <span class='command'>Restarting Apache2 service...</span>" },
             { text: "<span class='success'>Apache2 service restarted successfully.</span>" },
 
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>exit</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Redirecting to Richtofen's page...</span>" },
+            // Simulate the `clear` command
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>clear</span>" },
 
-            // Adding social links (Doxbin and Telegram)
+            // Display Social Links
             { text: "<span class='info'>[INFO] Social Links:</span>" },
             { text: "<span class='success'>Richtofen</span>" },
             { text: "<span class='info'>Doxbin: <a class='link' href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>sxcvsdfwgsdfgsd</a></span>" },
-            { text: "<span class='info'>Telegram: <a class='link' href='https://t.me/richtofen77' target='_blank'>richtofen77</a></span>" },
+            { text: "<span class='info'>Telegram: <a class='link' href='https://t.me/richtofen77' target='_blank'>richtofen77</a></span>" }
         ];
 
         let i = 0; // Command index
@@ -139,10 +139,6 @@
                 i++;
                 terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
                 setTimeout(typeLine, 500); // Adjust delay between lines
-            } else {
-                setTimeout(() => {
-                    window.location.href = ""; // Redirect after all lines are typed
-                }, 1500);
             }
         }
 
