@@ -36,17 +36,18 @@
             object-fit: cover;
         }
 
-        /* Layout Container for ASCII Art and Terminal */
+        /* Layout Container */
         .layout {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            align-items: flex-start;
             padding: 20px;
-            max-width: 90%;
+            max-width: 80%;
             overflow-y: auto;
         }
 
-        /* ASCII Art Section */
+        /* ASCII Art Styling */
         .ascii-art {
             font-size: 0.8rem;
             white-space: pre-wrap;
@@ -54,21 +55,20 @@
             background-color: rgba(0, 0, 0, 0.6);
             padding: 10px;
             color: #00FF00; /* Green color for the ASCII art */
-            margin-right: 20px; /* Add space between the ASCII art and terminal */
-            width: 45%; /* Control the width of the ASCII art */
+            margin-bottom: 20px;
+            width: 100%;
             border-radius: 5px;
         }
 
-        /* Terminal Section */
+        /* Terminal Styling */
         .terminal {
             padding: 20px;
             font-size: 1rem;
             line-height: 1.4;
             background: rgba(0, 0, 0, 0.6);
-            width: 50%; /* Control the width of the terminal */
+            width: 100%;
             max-width: 800px;
             border-radius: 5px;
-            overflow-y: auto;
         }
 
         /* Text Colors */
@@ -103,7 +103,7 @@
         </video>
     </div>
 
-    <!-- Layout for ASCII Art and Terminal -->
+    <!-- Layout for ASCII Art and Terminal Text -->
     <div class="layout">
         <!-- ASCII Art Section -->
         <div class="ascii-art">
@@ -155,6 +155,7 @@
                          %%%%%*#%%%                    %%%%%%%%%%%%%%%%%%%%                         
                           %%%%%%                       @%%%%#%%%%%%%%%%%%                           
                                                                                                     
+
 
         </pre>
         </div>
