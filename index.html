@@ -33,10 +33,10 @@
 
         .terminal {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
             padding: 20px;
             background: rgba(0, 0, 0, 0.6);
             overflow-y: auto;
@@ -50,6 +50,17 @@
         .info { color: #FFFF00; }
         .success { color: #00FF00; }
         .error { color: #FF5555; }
+        .input-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: #FFFFFF;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -70,6 +81,7 @@
     <script>
         const terminal = document.getElementById("terminal");
         const music = document.getElementById("background-music");
+        let inputBuffer = ""; // Buffer to store user input
         let questionIndex = 0;
 
         const questions = [
@@ -88,54 +100,84 @@
             terminal.scrollTop = terminal.scrollHeight;
         }
 
-        function promptQuestion() {
-            if (questionIndex < questions.length) {
-                writeLine(questions[questionIndex].text);
-                waitForInput(questions[questionIndex].handler);
+        function writeInput(promptText) {
+            terminal.innerHTML += promptText + " <span id='user-input'></span><span class='input-cursor'></span>";
+        }
+
+        function clearInputLine() {
+            const lastInput = document.getElementById("user-input");
+            if (lastInput) lastInput.parentElement.remove();
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === "Enter") {
+                processInput(inputBuffer);
+                inputBuffer = "";
+            } else if (e.key === "Backspace") {
+                inputBuffer = inputBuffer.slice(0, -1);
+                updateInputDisplay();
+            } else if (e.key.length === 1) {
+                inputBuffer += e.key;
+                updateInputDisplay();
             }
         }
 
-        function waitForInput(callback) {
-            document.addEventListener('keydown', function onInput(e) {
-                if (e.key === 'Enter') {
-                    const input = prompt("Type your answer (y/n):").toLowerCase().trim();
-                    document.removeEventListener('keydown', onInput);
-                    callback(input);
-                }
-            });
+        function updateInputDisplay() {
+            const userInput = document.getElementById("user-input");
+            if (userInput) userInput.textContent = inputBuffer;
+        }
+
+        function processInput(input) {
+            const trimmedInput = input.trim().toLowerCase();
+            clearInputLine();
+
+            if (questionIndex < questions.length) {
+                questions[questionIndex].handler(trimmedInput);
+            }
         }
 
         function handleContinue(answer) {
-            if (answer === 'y' || answer === 'yes') {
+            if (answer === "y" || answer === "yes") {
                 writeLine("<span class='success'>Continuing...</span>");
                 questionIndex++;
-                promptQuestion();
-            } else if (answer === 'n' || answer === 'no') {
+                askNextQuestion();
+            } else if (answer === "n" || answer === "no") {
                 writeLine("<span class='error'>System crash detected! Exiting...</span>");
                 setTimeout(() => {
                     document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>System Crashed</h1>";
                 }, 1000);
             } else {
                 writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
-                promptQuestion();
+                askNextQuestion();
             }
         }
 
         function handleMusic(answer) {
-            if (answer === 'y' || answer === 'yes') {
+            if (answer === "y" || answer === "yes") {
                 writeLine("<span class='success'>Playing music...</span>");
                 music.play();
-            } else if (answer === 'n' || answer === 'no') {
+            } else if (answer === "n" || answer === "no") {
                 writeLine("<span class='info'>No music will be played.</span>");
             } else {
                 writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
-                promptQuestion();
+            }
+            questionIndex++;
+        }
+
+        function askNextQuestion() {
+            if (questionIndex < questions.length) {
+                writeLine(questions[questionIndex].text);
+                writeInput("<span class='prompt'>user@deadshot:~$</span>");
             }
         }
 
-        // Start the terminal interaction
-        writeLine("<span class='prompt'>user@deadshot:~$</span> <span class='info'>Initializing interactive terminal...</span>");
-        setTimeout(promptQuestion, 1000);
+        function startTerminal() {
+            writeLine("<span class='prompt'>user@deadshot:~$</span> <span class='info'>Initializing interactive terminal...</span>");
+            setTimeout(askNextQuestion, 1000);
+        }
+
+        document.addEventListener("keydown", handleKeyDown);
+        startTerminal();
     </script>
 </body>
 </html>
