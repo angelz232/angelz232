@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -116,22 +115,9 @@
             { text: "<span class='info'>Telegram: <a class='link' href='https://t.me/richtofen77' target='_blank'>richtofen77</a></span>" }
         ];
 
-        function typeWriterEffect(text, speed = 50, callback = null) {
-            let index = 0;
-            const line = document.createElement("div");
-            terminal.appendChild(line);
-
-            function typeChar() {
-                if (index < text.length) {
-                    line.innerHTML += text.charAt(index);
-                    index++;
-                    setTimeout(typeChar, speed);
-                } else if (callback) {
-                    callback();
-                }
-            }
-
-            typeChar();
+        function writeLine(text) {
+            terminal.innerHTML += text + "<br>";
+            terminal.scrollTop = terminal.scrollHeight;
         }
 
         function writeInput(promptText) {
@@ -172,25 +158,28 @@
 
         function handleContinue(answer) {
             if (answer === "n" || answer === "no") {
-                typeWriterEffect("<span class='success'>Continuing...</span>", 50, askNextQuestion);
+                writeLine("<span class='success'>Continuing...</span>");
+                questionIndex++;
+                askNextQuestion();
             } else if (answer === "y" || answer === "yes") {
-                typeWriterEffect("<span class='error'>System crash detected! Exiting...</span>", 50, () => {
-                    setTimeout(() => {
-                        document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>Niggers aren't allowed!</h1>";
-                    }, 1000);
-                });
+                writeLine("<span class='error'>System crash detected! Exiting...</span>");
+                setTimeout(() => {
+                    document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>Niggers aren't allowed!</h1>";
+                }, 1000);
             } else {
-                typeWriterEffect("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>", 50, askNextQuestion);
+                writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
+                askNextQuestion();
             }
         }
 
         function handleMusic(answer) {
             if (answer === "y" || answer === "yes") {
-                typeWriterEffect("<span class='success'>Playing music...</span>", 50, () => music.play());
+                writeLine("<span class='success'>Playing music...</span>");
+                music.play();
             } else if (answer === "n" || answer === "no") {
-                typeWriterEffect("<span class='info'>No music will be played.</span>", 50);
+                writeLine("<span class='info'>No music will be played.</span>");
             } else {
-                typeWriterEffect("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>", 50);
+                writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
             }
             questionIndex++;
             loadCommands();
@@ -198,18 +187,20 @@
 
         function askNextQuestion() {
             if (questionIndex < questions.length) {
-                typeWriterEffect(questions[questionIndex].text, 50, () => writeInput("<span class='prompt'>user@deadshot:~$</span>"));
+                writeLine(questions[questionIndex].text);
+                writeInput("<span class='prompt'>user@deadshot:~$</span>");
             }
         }
 
         function loadCommands() {
             commands.forEach((cmd, index) => {
-                setTimeout(() => typeWriterEffect(cmd.text, 50), index * 500);
+                setTimeout(() => writeLine(cmd.text), index * 500);
             });
         }
 
         function startTerminal() {
-            typeWriterEffect("<span class='prompt'>user@deadshot:~$</span> <span class='info'>Initializing interactive terminal...</span>", 50, askNextQuestion);
+            writeLine("<span class='prompt'>user@deadshot:~$</span> <span class='info'>Initializing interactive terminal...</span>");
+            setTimeout(askNextQuestion, 1000);
         }
 
         document.addEventListener("keydown", handleKeyDown);
