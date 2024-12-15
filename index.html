@@ -3,37 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richtofen</title>
+    <title>Interactive Terminal</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        /* General Page Styling */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
-            font-family: 'IBM Plex Mono', monospace; /* Correct Google Font name */
-            color: #FFFFFF; /* Default text color */
+            font-family: 'IBM Plex Mono', monospace;
             background-color: black;
+            color: #FFFFFF;
         }
 
-        /* Full-Screen Video */
         .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Video stays in the background */
+            z-index: -1;
         }
 
         .video-container video {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cover the entire viewport */
+            object-fit: cover;
         }
 
-        /* Terminal Text Overlay */
         .terminal {
             position: absolute;
             top: 0;
@@ -41,45 +38,22 @@
             right: 0;
             bottom: 0;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.6); /* Semi-transparent black for text readability */
-            color: #FFFFFF;
+            background: rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
             white-space: pre-wrap;
             font-size: 1rem;
             line-height: 1.4;
-            overflow-y: auto;
-            border-radius: 5px;
-            z-index: 1; /* Text is above the video */
         }
 
-        /* Typing Cursor */
-        .cursor {
-            display: inline-block;
-            background-color: #FFFFFF;
-            width: 8px;
-            height: 16px;
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        /* Linux Terminal Colors */
-        .prompt { color: #FFFFFF; }      /* Prompt: user@hostname:~$ */
-        .command { color: #C0C0C0; }     /* Commands typed by user */
-        .info { color: #FFFF00; }        /* Yellow for informational outputs */
-        .success { color: #00FF00; }     /* Green for success messages */
-        .directory { color: #00AAAA; }   /* Cyan for directories */
-        .link { color: #FF0000; text-decoration: none; } /* Links for social media */
-
-        /* Hover effect for links */
-        .link:hover {
-            color: #FFFFFF;
-        }
+        .prompt { color: #FFFFFF; }
+        .command { color: #C0C0C0; }
+        .info { color: #FFFF00; }
+        .success { color: #00FF00; }
+        .error { color: #FF5555; }
     </style>
 </head>
 <body>
-    <!-- Full-Screen Background Video -->
+    <!-- Video Background -->
     <div class="video-container">
         <video autoplay muted loop>
             <source src="widowmaker.mp4" type="video/mp4">
@@ -87,67 +61,81 @@
         </video>
     </div>
 
-    <!-- Terminal Text Overlay -->
+    <!-- Terminal -->
     <div class="terminal" id="terminal"></div>
+
+    <!-- Audio (Music) -->
+    <audio id="background-music" src="track.mp3" loop></audio>
 
     <script>
         const terminal = document.getElementById("terminal");
+        const music = document.getElementById("background-music");
+        let questionIndex = 0;
 
-        // Linux Terminal Simulation with Colors
-        const commands = [
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Fetching package lists...</span>" },
-            { text: "<span class='success'>Reading package lists... Done</span>" },
-            { text: "<span class='success'>Building dependency tree... Done</span>" },
-            { text: "<span class='success'>System upgraded successfully.</span>" },
-
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo useradd -m -s /bin/bash Richtofen</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Creating new user: Richtofen</span>" },
-            { text: "<span class='success'>User 'Richtofen' created successfully.</span>" },
-
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo passwd Richtofen</span>" },
-            { text: "<span class='command'>Enter new UNIX password: ********</span>" },
-            { text: "<span class='command'>Retype new UNIX password: ********</span>" },
-            { text: "<span class='success'>Password updated successfully.</span>" },
-
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo chmod 700 /home/<span class='directory'>Richtofen</span></span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Setting permissions on /home/<span class='directory'>Richtofen</span></span>" },
-            { text: "<span class='success'>Permissions updated: 700</span>" },
-
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo usermod -aG sudo Richtofen</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Adding 'Richtofen' to sudo group</span>" },
-            { text: "<span class='success'>User 'Richtofen' now has sudo privileges.</span>" },
-
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /etc/passwd | grep Richtofen</span>" },
-            { text: "<span class='command'>Richtofen:x:1001:1001::/home/<span class='directory'>Richtofen</span>:/bin/bash</span>" },
-
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo systemctl restart apache2</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Restarting Apache2 service...</span>" },
-            { text: "<span class='success'>Apache2 service restarted successfully.</span>" },
-
-            // Simulate running the "Richtofen" program
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Richtofen</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Running Richtofen program...</span>" },
-
-            // Display Social Links
-            { text: "<span class='info'>[INFO] Social Links:</span>" },
-            { text: "<span class='success'>Richtofen</span>" },
-            { text: "<span class='info'>Doxbin: <a class='link' href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>sxcvsdfwgsdfgsd</a></span>" },
-            { text: "<span class='info'>Telegram: <a class='link' href='https://t.me/richtofen77' target='_blank'>richtofen77</a></span>" }
+        const questions = [
+            { 
+                text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Do you want to continue? (y/n)</span>", 
+                handler: handleContinue 
+            },
+            { 
+                text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Would you like to play music? (y/n)</span>", 
+                handler: handleMusic 
+            }
         ];
 
-        let i = 0;
+        function writeLine(text) {
+            terminal.innerHTML += text + "<br>";
+            terminal.scrollTop = terminal.scrollHeight;
+        }
 
-        function typeLine() {
-            if (i < commands.length) {
-                terminal.innerHTML += commands[i].text + "<br>";
-                i++;
-                terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
-                setTimeout(typeLine, 500); // Adjust delay between lines
+        function promptQuestion() {
+            if (questionIndex < questions.length) {
+                writeLine(questions[questionIndex].text);
+                waitForInput(questions[questionIndex].handler);
             }
         }
 
-        typeLine();
+        function waitForInput(callback) {
+            document.addEventListener('keydown', function onInput(e) {
+                if (e.key === 'Enter') {
+                    const input = prompt("Type your answer (y/n):").toLowerCase().trim();
+                    document.removeEventListener('keydown', onInput);
+                    callback(input);
+                }
+            });
+        }
+
+        function handleContinue(answer) {
+            if (answer === 'y' || answer === 'yes') {
+                writeLine("<span class='success'>Continuing...</span>");
+                questionIndex++;
+                promptQuestion();
+            } else if (answer === 'n' || answer === 'no') {
+                writeLine("<span class='error'>System crash detected! Exiting...</span>");
+                setTimeout(() => {
+                    document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>System Crashed</h1>";
+                }, 1000);
+            } else {
+                writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
+                promptQuestion();
+            }
+        }
+
+        function handleMusic(answer) {
+            if (answer === 'y' || answer === 'yes') {
+                writeLine("<span class='success'>Playing music...</span>");
+                music.play();
+            } else if (answer === 'n' || answer === 'no') {
+                writeLine("<span class='info'>No music will be played.</span>");
+            } else {
+                writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
+                promptQuestion();
+            }
+        }
+
+        // Start the terminal interaction
+        writeLine("<span class='prompt'>user@deadshot:~$</span> <span class='info'>Initializing interactive terminal...</span>");
+        setTimeout(promptQuestion, 1000);
     </script>
 </body>
 </html>
