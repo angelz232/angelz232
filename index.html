@@ -12,7 +12,7 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'IBM+Plex+Mono', monospace;
             color: #FFFFFF; /* Default text color */
             background-color: black;
         }
@@ -72,13 +72,18 @@
         .error { color: #FF5555; }       /* Red for errors or critical outputs */
         .directory { color: #00AAAA; }   /* Cyan for directories */
         .link { color: #FF0000; text-decoration: none; } /* Links for social media */
+
+        /* Hover effect for links */
+        .link:hover {
+            color: #FFFFFF; /* Turns the link color to white when hovered */
+        }
     </style>
 </head>
 <body>
     <!-- Full-Screen Background Video -->
     <div class="video-container">
         <video autoplay muted loop>
-            <source src="widowmaker.mp4" type="video/mp4">
+            <source src="your-video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -123,7 +128,7 @@
 
             // Simulate running the "Richtofen" program
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Richtofen</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Running Richtofen...</span>" },
+            { text: "<span class='info'>[INFO]</span> <span class='command'>Running Richtofen program...</span>" },
 
             // Display Social Links
             { text: "<span class='info'>[INFO] Social Links:</span>" },
