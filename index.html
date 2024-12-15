@@ -87,13 +87,12 @@
         const terminal = document.getElementById("terminal");
         const music = document.getElementById("background-music");
 
-        let inputBuffer = ""; // Buffer to store user input
         let questionIndex = 0;
 
         const questions = [
             { 
                 text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Would you like to play music? (y/n)</span>", 
-                handler: handleMusic 
+                handler: handleMusic
             }
         ];
 
@@ -132,33 +131,6 @@
             if (lastInput) lastInput.parentElement.remove();
         }
 
-        function handleKeyDown(e) {
-            if (e.key === "Enter") {
-                processInput(inputBuffer);
-                inputBuffer = "";
-            } else if (e.key === "Backspace") {
-                inputBuffer = inputBuffer.slice(0, -1);
-                updateInputDisplay();
-            } else if (e.key.length === 1) {
-                inputBuffer += e.key;
-                updateInputDisplay();
-            }
-        }
-
-        function updateInputDisplay() {
-            const userInput = document.getElementById("user-input");
-            if (userInput) userInput.textContent = inputBuffer;
-        }
-
-        function processInput(input) {
-            const trimmedInput = input.trim().toLowerCase();
-            clearInputLine();
-
-            if (questionIndex < questions.length) {
-                questions[questionIndex].handler(trimmedInput);
-            }
-        }
-
         function handleMusic(answer) {
             if (answer === "y" || answer === "yes") {
                 writeLine("<span class='success'>Playing music...</span>");
@@ -173,6 +145,12 @@
             loadCommands();
         }
 
+        function loadCommands() {
+            commands.forEach((cmd, index) => {
+                setTimeout(() => writeLine(cmd.text), index * 500);
+            });
+        }
+
         function askNextQuestion() {
             if (questionIndex < questions.length) {
                 writeLine(questions[questionIndex].text);
@@ -180,18 +158,27 @@
             }
         }
 
-        function loadCommands() {
-            commands.forEach((cmd, index) => {
-                setTimeout(() => writeLine(cmd.text), index * 500);
-            });
-        }
-
         function startTerminal() {
             writeLine("<span class='prompt'>user@deadshot:~$</span> <span class='info'>Initializing interactive terminal...</span>");
             setTimeout(askNextQuestion, 1000);
         }
 
-        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("keydown", (e) => {
+            const userInput = document.getElementById("user-input");
+            if (!userInput) return; // Only handle input if there's a prompt.
+
+            if (e.key === "Enter") {
+                const input = userInput.textContent.trim().toLowerCase();
+                if (input === 'y' || input === 'yes' || input === 'n' || input === 'no') {
+                    handleMusic(input);
+                } else {
+                    writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
+                }
+            } else if (e.key.length === 1) {
+                userInput.textContent += e.key;
+            }
+        });
+
         startTerminal();
     </script>
 </body>
