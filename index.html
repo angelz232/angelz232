@@ -117,21 +117,21 @@
         ];
 
         function typeWriterEffect(text, speed = 50, callback = null) {
-            let index = 0; 
+            let index = 0;
             const line = document.createElement("div");
             terminal.appendChild(line);
 
             function typeChar() {
                 if (index < text.length) {
-                    line.innerHTML += text.charAt(index); 
+                    line.innerHTML += text.charAt(index);
                     index++;
-                    setTimeout(typeChar, speed); 
+                    setTimeout(typeChar, speed);
                 } else if (callback) {
                     callback();
                 }
             }
 
-            typeChar(); 
+            typeChar();
         }
 
         function writeInput(promptText) {
