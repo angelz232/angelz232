@@ -176,12 +176,12 @@
         let i = 0;
 
         function generateDownloadOutput(url, totalSize, steps) {
-            let output = <span class='info'>Get:</span> <span class='command'>${url}</span> [ ;
+            let output = `<span class='info'>Get:</span> <span class='command'>${url}</span> [ `;
             for (let progress = 0; progress <= steps; progress++) {
                 let percent = Math.floor((progress / steps) * 100);
-                output += \n<span class='success'>${percent}%</span> ${'='.repeat(progress)}>;
+                output += `\n<span class='success'>${percent}%</span> ${'='.repeat(progress)}>`;
             }
-            output +=  ] ${totalSize} kB\n<span class='success'>Fetched ${totalSize} kB</span>;
+            output += ` ] ${totalSize} kB\n<span class='success'>Fetched ${totalSize} kB</span>`;
             return output;
         }
 
@@ -210,7 +210,7 @@
 
         function getUserInput(resolve) {
             const inputLine = document.createElement("div");
-            inputLine.innerHTML = <span class='prompt'>user@deadshot:~$</span> <span id='user-input'></span>;
+            inputLine.innerHTML = `<span class='prompt'>user@deadshot:~$</span> <span id='user-input'></span>`;
             terminal.appendChild(inputLine);
             terminal.scrollTop = terminal.scrollHeight;
 
