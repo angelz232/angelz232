@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Richtofen</title>
+    <title>xoru.lol</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -37,25 +37,38 @@
             animation: blink 1s step-end infinite;
         }
 
-        /* Text color classes for different types of output */
+        /* Linux Terminal Colors */
         .command {
-            color: #FF5733; /* Red for commands */
+            color: #FFFFFF; /* White for user commands */
         }
 
         .info {
-            color: #FFFF00; /* Yellow for info */
+            color: #FFFF00; /* Yellow for info or warnings */
         }
 
         .success {
-            color: #32CD32; /* Green for success messages */
-        }
-
-        .default {
-            color: #FFFFFF; /* Plain white for inputs */
+            color: #00FF00; /* Bright Green for success messages */
         }
 
         .error {
-            color: #FF6347; /* Red for errors */
+            color: #FF5555; /* Light Red for errors */
+        }
+
+        .directory {
+            color: #00AAAA; /* Cyan for directories or file paths */
+        }
+
+        .default {
+            color: #C0C0C0; /* Light gray for plain text */
+        }
+
+        /* Scrollbar styling */
+        .term::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .term::-webkit-scrollbar-thumb {
+            background-color: #00FF00;
         }
     </style>
 </head>
@@ -83,7 +96,7 @@
             { type: "success", text: "Password updated successfully." },
 
             { type: "command", text: "user@deadshot:~$ sudo chmod 700 /home/Richtofen" },
-            { type: "info", text: "[INFO] Setting permissions on /home/Richtofen" },
+            { type: "info", text: "[INFO] Setting permissions on /home/<span class='directory'>Richtofen</span>" },
             { type: "success", text: "Permissions updated: 700" },
 
             { type: "command", text: "user@deadshot:~$ sudo usermod -aG sudo Richtofen" },
@@ -91,7 +104,7 @@
             { type: "success", text: "User 'Richtofen' now has sudo privileges." },
 
             { type: "command", text: "user@deadshot:~$ cat /etc/passwd | grep Richtofen" },
-            { type: "default", text: "Richtofen:x:1001:1001::/home/Richtofen:/bin/bash" },
+            { type: "default", text: "Richtofen:x:1001:1001::/home/<span class='directory'>Richtofen</span>:/bin/bash" },
 
             { type: "command", text: "user@deadshot:~$ sudo systemctl restart apache2" },
             { type: "info", text: "[INFO] Restarting Apache2 service..." },
@@ -122,7 +135,7 @@
                 } else {
                     // Redirect after all commands finish
                     setTimeout(() => {
-                        window.location.href = "Richtofen";
+                        window.location.href = "Richtofen.html";
                     }, 1500);
                 }
             }
