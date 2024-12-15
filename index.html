@@ -14,10 +14,6 @@
             color: #FFFFFF;
             overflow: hidden;
             background-color: black; /* Fallback for video */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
         }
 
         /* Full-Screen Video Background */
@@ -39,46 +35,39 @@
         /* Layout Container */
         .layout {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            max-width: 80%;
-            overflow-y: auto;
+            height: 100%;
         }
 
-        /* ASCII Art Styling */
+        /* ASCII Art Styling (left side) */
         .ascii-art {
+            width: 50%; /* Adjust to your preference */
+            padding: 20px;
             font-size: 0.8rem;
             white-space: pre-wrap;
             overflow-y: auto;
             background-color: rgba(0, 0, 0, 0.6);
-            padding: 10px;
             color: #00FF00; /* Green color for the ASCII art */
-            margin-bottom: 20px;
-            width: 100%;
-            border-radius: 5px;
         }
 
-        /* Terminal Styling */
+        /* Terminal Styling (right side) */
         .terminal {
+            width: 50%; /* Adjust to your preference */
             padding: 20px;
+            overflow-y: auto;
+            white-space: pre-wrap;
             font-size: 1rem;
             line-height: 1.4;
             background: rgba(0, 0, 0, 0.6);
-            width: 100%;
-            max-width: 800px;
-            border-radius: 5px;
         }
 
         /* Text Colors */
-        .prompt { color: #FFFFFF; } /* Prompt */
-        .command { color: #C0C0C0; } /* Commands */
-        .info { color: #FFFF00; } /* Info/Warnings */
-        .success { color: #00FF00; } /* Success */
-        .error { color: #FF5555; } /* Errors */
-        .file-link { color: #00AAAA; text-decoration: none; } /* File links */
-        .file-link:hover { color: #FFFFFF; text-decoration: underline; } /* Hover effect */
+        .prompt { color: #FFFFFF; }
+        .command { color: #C0C0C0; }
+        .info { color: #FFFF00; }
+        .success { color: #00FF00; }
+        .error { color: #FF5555; }
+        .file-link { color: #00AAAA; text-decoration: none; }
+        .file-link:hover { color: #FFFFFF; text-decoration: underline; }
 
         /* Typing Cursor */
         .input-cursor {
@@ -92,6 +81,7 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
+
     </style>
 </head>
 <body>
@@ -154,7 +144,7 @@
                         %%%%#+++++*#%%                 %*+++++++++**     %@                         
                          %%%%%*#%%%                    %%%%%%%%%%%%%%%%%%%%                         
                           %%%%%%                       @%%%%#%%%%%%%%%%%%                           
-                                                                                                    
+                                                                                                         
 
 
         </pre>
@@ -181,8 +171,6 @@
             { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 1000 },
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 1000 },
             { text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>", delay: 500 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 1000 },
-            { text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>", delay: 500 },
             { text: "<span class='prompt'>user@deadshot:~$</span>" }
         ];
 
