@@ -108,6 +108,12 @@
 
         const commands = [
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Do you want to play music? (<span class='success'>y<span class='prompt'>/<span class='error'>n<span class='prompt'>)</span>", delay: 50, input: true },
+            { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 50 },
+            { text: generateDownloadOutput("http://archive.ubuntu.com/ubuntu focal/main amd64 <span class='directory'>Packages", 534, 20), delay: 300 },
+            { text: "<span class='directory'>Reading package lists... <span class='success'>Done</span>", delay: 80 },
+            { text: "<span class='directory'>Building dependency tree... <span class='success'>Done</span>", delay: 80 },
+            { text: "<span class='directory'>Calculating upgrade... <span class='success'>Done</span>", delay: 80 },
+            { text: "<span class='success'>System upgraded successfully.</span>", delay: 80 },
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>", delay: 100 },
             { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 100 },
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 100 },
