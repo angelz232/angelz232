@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richtofen</title>
+    <title>Linux Terminal Simulation</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
+        /* General styling */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
+            font-family: 'IBM Plex Mono', monospace; /* Terminal font */
             overflow: hidden;
-            font-family: 'IBM Plex Mono', monospace;
-            background-color: black;
-            color: #FFFFFF;
-            position: relative;
+            background-color: black; /* Fallback for video */
         }
 
-        /* Video as background */
+        /* Video background */
         .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Ensure it's behind the terminal text */
+            z-index: -1;
             overflow: hidden;
         }
 
@@ -34,29 +33,35 @@
             object-fit: cover;
         }
 
-        /* Terminal styling */
+        /* Terminal container */
         .terminal {
             position: absolute;
             top: 20px;
             left: 20px;
             right: 20px;
             bottom: 20px;
-            padding: 20px;
-
-            overflow-y: auto;
+            padding: 10px;
             white-space: pre-wrap;
+            line-height: 1.3;
             font-size: 1rem;
-            line-height: 1.4;
-            z-index: 1; /* Ensure it’s above the video */
+            color: #FFFFFF;
+            overflow-y: auto;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            border-radius: 4px;
         }
 
-        .prompt { color: #FFFFFF; }
-        .command { color: #C0C0C0; }
-        .info { color: #FFFF00; }
-        .success { color: #00FF00; }
-        .error { color: #FF5555; }
+        /* Colors */
+        .prompt { color: #FFFFFF; } /* White for user@hostname */
+        .command { color: #C0C0C0; } /* Light gray for commands */
+        .info { color: #FFFF00; } /* Yellow for informational messages */
+        .success { color: #00FF00; } /* Green for success messages */
+        .error { color: #FF5555; } /* Red for errors */
+        .file { color: #00AAAA; text-decoration: none; } /* Cyan for file paths */
+        .file:hover { color: #FFFFFF; text-decoration: underline; } /* Hover effect for file paths */
 
-        .input-cursor {
+        /* Typing cursor */
+        .cursor {
             display: inline-block;
             width: 8px;
             height: 16px;
@@ -67,144 +72,69 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
-
-        .link {
-            color: #00BFFF; /* Simulate clickable terminal-like links */
-            text-decoration: none;
-        }
-
-        .link:hover {
-            color: #FFFFFF; /* Hover effect to make the link white */
-        }
     </style>
 </head>
 <body>
     <!-- Video Background -->
     <div class="video-container">
-        <video autoplay muted loop id="bg-video">
-            <source src="video1.mp4" type="video/mp4">
+        <video autoplay muted loop>
+            <source src="video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
-    <!-- Terminal -->
+    <!-- Terminal Window -->
     <div class="terminal" id="terminal"></div>
-
-    <!-- Audio (Music) -->
-    <audio id="background-music" src="track.mp3" loop></audio>
 
     <script>
         const terminal = document.getElementById("terminal");
-        const music = document.getElementById("background-music");
 
-        let questionIndex = 0;
-
-        const questions = [
-            { 
-                text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Would you like to play music? (y/n)</span>", 
-                handler: handleMusic
-            }
-        ];
-
+        // Linux commands and outputs
         const commands = [
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Fetching package lists...</span>" },
+            { text: "<span class='info'>[INFO]</span> Fetching package lists..." },
             { text: "<span class='success'>Reading package lists... Done</span>" },
             { text: "<span class='success'>Building dependency tree... Done</span>" },
             { text: "<span class='success'>System upgraded successfully.</span>" },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo useradd -m -s /bin/bash Richtofen</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Creating new user: Richtofen</span>" },
-            { text: "<span class='success'>User 'Richtofen' created successfully.</span>" },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo passwd Richtofen</span>" },
-            { text: "<span class='command'>Enter new UNIX password: ********</span>" },
-            { text: "<span class='success'>Password updated successfully.</span>" },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo chmod 700 /home/Richtofen</span>" },
-            { text: "<span class='success'>Permissions updated: 700</span>" },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo usermod -aG sudo Richtofen</span>" },
-            { text: "<span class='success'>User 'Richtofen' now has sudo privileges.</span>" },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>" },
+            { text: "<span class='info'>[INFO]</span> Running Richtofen program..." },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>" },
+            { 
+                text: "<span class='file'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>"
+            },
+            { text: "<span class='prompt'>user@deadshot:~$</span>" } // Final prompt
+        ];
 
-            // Simulate running the "Richtofen" program
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>" },  <!-- Simulating a program execution -->
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Running Richtofen program...</span>" },
+        let i = 0; // Command index
+        let j = 0; // Character index for typing effect
+        let typingSpeed = 30; // Typing speed in milliseconds
 
-    // Simulate Social Links
-    { text: "<span class='info'>[INFO] Accessing Social Links...</span>" },
-    { 
-        text: "<a class='file-link' href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a>"
-    },
-    { 
-        text: "<a class='file-link' href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a>"
-    }
-];
+        // Function to "type out" the terminal content
+        function typeLine() {
+            if (i < commands.length) {
+                const command = commands[i].text;
+                const currentLine = document.createElement("div");
+                terminal.appendChild(currentLine);
 
-        function writeLine(text) {
-            terminal.innerHTML += text + "<br>";
-            terminal.scrollTop = terminal.scrollHeight;
-        }
-
-        function writeInput(promptText) {
-            terminal.innerHTML += promptText + " <span id='user-input'></span><span class='input-cursor'></span>";
-        }
-
-        function clearInputLine() {
-            const lastInput = document.getElementById("user-input");
-            if (lastInput) lastInput.parentElement.remove();
-        }
-
-        function handleMusic(answer) {
-            if (answer === "y" || answer === "yes") {
-                writeLine("<span class='success'>Playing music...</span>");
-                music.play();
-            } else if (answer === "n" || answer === "no") {
-                writeLine("<span class='info'>No music will be played.</span>");
-            } else {
-                writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
-                return; // Don't continue unless valid input is given
-            }
-            questionIndex++;
-            loadCommands();
-        }
-
-        function loadCommands() {
-            commands.forEach((cmd, index) => {
-                setTimeout(() => writeLine(cmd.text), index * 500);
-            });
-        }
-
-        function askNextQuestion() {
-            if (questionIndex < questions.length) {
-                writeLine(questions[questionIndex].text);
-                writeInput("<span class='prompt'>user@deadshot:~$</span>");
-            }
-        }
-
-        function startTerminal() {
-            writeLine("<span class='prompt'>user@deadshot:~$</span> <span class='info'>Initializing interactive terminal...</span>");
-            setTimeout(askNextQuestion, 1000);
-        }
-
-        document.addEventListener("keydown", (e) => {
-            const userInput = document.getElementById("user-input");
-            if (!userInput) return; // Only handle input if there's a prompt.
-
-            if (e.key === "Enter") {
-                const input = userInput.textContent.trim().toLowerCase();
-                if (input === 'y' || input === 'yes' || input === 'n' || input === 'no') {
-                    handleMusic(input);
-                } else {
-                    writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
+                function typeCharacter() {
+                    currentLine.innerHTML = command.slice(0, j++);
+                    if (j <= command.length) {
+                        setTimeout(typeCharacter, typingSpeed);
+                    } else {
+                        j = 0; // Reset character index for next command
+                        i++;
+                        setTimeout(typeLine, 500); // Delay before typing the next command
+                    }
+                    terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
                 }
-            } else if (e.key.length === 1) {
-                userInput.textContent += e.key;
+                typeCharacter();
+            } else {
+                terminal.innerHTML += "<span class='cursor'></span>";
             }
-        });
+        }
 
-        // Debugging: Check if video is loaded properly
-        document.getElementById('bg-video').onerror = function() {
-            writeLine("<span class='error'>Failed to load video. Check video path.</span>");
-        };
-
-        startTerminal();
+        // Start the terminal simulation
+        typeLine();
     </script>
 </body>
 </html>
