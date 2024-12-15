@@ -102,17 +102,38 @@
             { text: "<span class='success'>Reading package lists... Done</span>" },
             { text: "<span class='success'>Building dependency tree... Done</span>" },
             { text: "<span class='success'>System upgraded successfully.</span>" },
+
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo useradd -m -s /bin/bash Richtofen</span>" },
             { text: "<span class='info'>[INFO]</span> <span class='command'>Creating new user: Richtofen</span>" },
             { text: "<span class='success'>User 'Richtofen' created successfully.</span>" },
+
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo passwd Richtofen</span>" },
             { text: "<span class='command'>Enter new UNIX password: ********</span>" },
+            { text: "<span class='command'>Retype new UNIX password: ********</span>" },
             { text: "<span class='success'>Password updated successfully.</span>" },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo chmod 700 /home/Richtofen</span>" },
+
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo chmod 700 /home/<span class='directory'>Richtofen</span></span>" },
+            { text: "<span class='info'>[INFO]</span> <span class='command'>Setting permissions on /home/<span class='directory'>Richtofen</span></span>" },
             { text: "<span class='success'>Permissions updated: 700</span>" },
+
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo usermod -aG sudo Richtofen</span>" },
+            { text: "<span class='info'>[INFO]</span> <span class='command'>Adding 'Richtofen' to sudo group</span>" },
             { text: "<span class='success'>User 'Richtofen' now has sudo privileges.</span>" },
+
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /etc/passwd | grep Richtofen</span>" },
+            { text: "<span class='command'>Richtofen:x:1001:1001::/home/<span class='directory'>Richtofen</span>:/bin/bash</span>" },
+
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo systemctl restart apache2</span>" },
+            { text: "<span class='info'>[INFO]</span> <span class='command'>Restarting Apache2 service...</span>" },
+            { text: "<span class='success'>Apache2 service restarted successfully.</span>" },
+
+            // Simulate running the "Richtofen" program
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Richtofen</span>" },
+            { text: "<span class='info'>[INFO]</span> <span class='command'>Running Richtofen program...</span>" },
+
+            // Display Social Links
             { text: "<span class='info'>[INFO] Social Links:</span>" },
+            { text: "<span class='success'>Richtofen</span>" },
             { text: "<span class='info'>Doxbin: <a class='link' href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>sxcvsdfwgsdfgsd</a></span>" },
             { text: "<span class='info'>Telegram: <a class='link' href='https://t.me/richtofen77' target='_blank'>richtofen77</a></span>" }
         ];
