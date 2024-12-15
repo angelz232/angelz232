@@ -90,8 +90,8 @@
         const commands = [
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>", delay: 800 },
             { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 500 },
-            { text: simulateDownload("http://archive.ubuntu.com/ubuntu focal/main amd64 Packages", 100), delay: 3000 },
-            { text: simulateDownload("http://security.ubuntu.com/ubuntu focal-security InRelease", 100), delay: 3000 },
+            { text: simulateDownload("http://archive.ubuntu.com/ubuntu focal/main amd64 Packages", 243), delay: 3000 },
+            { text: simulateDownload("http://security.ubuntu.com/ubuntu focal-security InRelease", 127), delay: 3000 },
             { text: "<span class='success'>Reading package lists... Done</span>", delay: 800 },
             { text: "<span class='success'>Building dependency tree... Done</span>", delay: 800 },
             { text: "<span class='success'>Calculating upgrade... Done</span>", delay: 800 },
