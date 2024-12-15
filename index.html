@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richtofen</title>
+    <title>Terminal Simulation with Social Links</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         /* General Page Styling */
@@ -14,22 +14,23 @@
             overflow: hidden;
             font-family: 'IBM Plex Mono', monospace;
             color: #FFFFFF; /* Default text color */
+            background-color: black;
         }
 
-        /* Full-Screen Video */
+        /* Full-Screen Video (background) */
         .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Send video to the background */
+            z-index: -1;
         }
 
         .video-container video {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures video covers the full screen */
+            object-fit: cover; /* Ensures the video covers the full screen */
         }
 
         /* Terminal Text Overlay */
@@ -39,12 +40,15 @@
             left: 20px;
             right: 20px;
             bottom: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
             color: #FFFFFF;
             white-space: pre-wrap;
             font-size: 1rem;
             line-height: 1.4;
             overflow-y: auto;
-            pointer-events: none; /* Prevent interaction */
+            border-radius: 5px;
         }
 
         /* Typing Cursor */
@@ -67,12 +71,16 @@
         .success { color: #00FF00; }     /* Green for success messages */
         .error { color: #FF5555; }       /* Red for errors or critical outputs */
         .directory { color: #00AAAA; }   /* Cyan for directories */
+        .link { color: #FF0000; text-decoration: none; } /* Links for social media */
     </style>
 </head>
 <body>
-    
-    <div class="gif-container">
-        <img src="1.gif" alt="Background GIF"> 
+    <!-- Video Background -->
+    <div class="video-container">
+        <video autoplay muted loop>
+            <source src="widowmaker.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 
     <!-- Terminal Text Overlay -->
@@ -114,7 +122,13 @@
             { text: "<span class='success'>Apache2 service restarted successfully.</span>" },
 
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>exit</span>" },
-            { text: "<span class='info'>[INFO]</span> <span class='command'>Redirecting to Richtofen's page...</span>" }
+            { text: "<span class='info'>[INFO]</span> <span class='command'>Redirecting to Richtofen's page...</span>" },
+
+            // Adding social links (Doxbin and Telegram)
+            { text: "<span class='info'>[INFO] Social Links:</span>" },
+            { text: "<span class='success'>Richtofen</span>" },
+            { text: "<span class='info'>Doxbin: <a class='link' href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>sxcvsdfwgsdfgsd</a></span>" },
+            { text: "<span class='info'>Telegram: <a class='link' href='https://t.me/richtofen77' target='_blank'>richtofen77</a></span>" },
         ];
 
         let i = 0; // Command index
@@ -127,7 +141,7 @@
                 setTimeout(typeLine, 500); // Adjust delay between lines
             } else {
                 setTimeout(() => {
-                    window.location.href = "Richtofen";
+                    window.location.href = ""; // Redirect after all lines are typed
                 }, 1500);
             }
         }
