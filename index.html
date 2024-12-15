@@ -3,65 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Terminal Simulation</title>
+    <title>Richtofen</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        /* General styling */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'IBM Plex Mono', monospace; /* Terminal font */
+            font-family: 'IBM Plex Mono', monospace;
+            color: #FFFFFF;
             overflow: hidden;
-            background-color: black; /* Fallback for video */
+            background-color: black; /* Fallback in case the video fails */
         }
 
-        /* Video background */
+        /* Video Background */
         .video-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -1; /* Behind terminal */
             overflow: hidden;
         }
 
         .video-container video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Ensures full-screen video */
         }
 
-        /* Terminal container */
+        /* Terminal Styling */
         .terminal {
             position: absolute;
             top: 20px;
             left: 20px;
             right: 20px;
             bottom: 20px;
-            padding: 10px;
-            white-space: pre-wrap;
-            line-height: 1.3;
-            font-size: 1rem;
-            color: #FFFFFF;
+            padding: 20px;
             overflow-y: auto;
-            box-sizing: border-box;
+            white-space: pre-wrap;
+            font-size: 1rem;
+            line-height: 1.4;
             background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
             border-radius: 4px;
+            z-index: 1; /* Above video */
         }
 
-        /* Colors */
-        .prompt { color: #FFFFFF; } /* White for user@hostname */
-        .command { color: #C0C0C0; } /* Light gray for commands */
-        .info { color: #FFFF00; } /* Yellow for informational messages */
-        .success { color: #00FF00; } /* Green for success messages */
-        .error { color: #FF5555; } /* Red for errors */
-        .file { color: #00AAAA; text-decoration: none; } /* Cyan for file paths */
-        .file:hover { color: #FFFFFF; text-decoration: underline; } /* Hover effect for file paths */
+        /* Text Colors */
+        .prompt { color: #FFFFFF; } /* Prompt */
+        .command { color: #C0C0C0; } /* Command */
+        .info { color: #FFFF00; } /* Info */
+        .success { color: #00FF00; } /* Success */
+        .error { color: #FF5555; } /* Errors */
 
-        /* Typing cursor */
-        .cursor {
+        /* File Links */
+        .file-link {
+            color: #00AAAA; /* Cyan for file paths */
+            text-decoration: none;
+        }
+
+        .file-link:hover {
+            color: #FFFFFF; /* White on hover */
+            text-decoration: underline;
+        }
+
+        /* Typing Cursor */
+        .input-cursor {
             display: inline-block;
             width: 8px;
             height: 16px;
@@ -75,66 +83,86 @@
     </style>
 </head>
 <body>
-    <!-- Video Background -->
+    <!-- Full-Screen Video Background -->
     <div class="video-container">
-        <video autoplay muted loop>
-            <source src="video.mp4" type="video/mp4">
+        <video autoplay muted loop id="bg-video">
+            <source src="video1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
-    <!-- Terminal Window -->
+    <!-- Terminal Output -->
     <div class="terminal" id="terminal"></div>
+
+    <!-- Music (Optional) -->
+    <audio id="background-music" src="track.mp3" loop></audio>
 
     <script>
         const terminal = document.getElementById("terminal");
+        const music = document.getElementById("background-music");
 
-        // Linux commands and outputs
         const commands = [
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>" },
             { text: "<span class='info'>[INFO]</span> Fetching package lists..." },
             { text: "<span class='success'>Reading package lists... Done</span>" },
             { text: "<span class='success'>Building dependency tree... Done</span>" },
             { text: "<span class='success'>System upgraded successfully.</span>" },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo useradd -m -s /bin/bash Richtofen</span>" },
+            { text: "<span class='info'>[INFO]</span> Creating new user: Richtofen..." },
+            { text: "<span class='success'>User 'Richtofen' created successfully.</span>" },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo chmod 700 /home/Richtofen</span>" },
+            { text: "<span class='success'>Permissions updated: 700</span>" },
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>" },
             { text: "<span class='info'>[INFO]</span> Running Richtofen program..." },
+
+            // Social Links as clickable file paths
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.doxbin_profile</span>" },
+            { 
+                text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>" 
+            },
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>" },
             { 
-                text: "<span class='file'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>"
+                text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>" 
             },
-            { text: "<span class='prompt'>user@deadshot:~$</span>" } // Final prompt
+            { text: "<span class='prompt'>user@deadshot:~$</span>" }
         ];
 
         let i = 0; // Command index
-        let j = 0; // Character index for typing effect
-        let typingSpeed = 30; // Typing speed in milliseconds
+        let j = 0; // Typing index for the animation
+        const typingSpeed = 30; // Typing speed in milliseconds
 
-        // Function to "type out" the terminal content
+        // Function to simulate typing effect
         function typeLine() {
             if (i < commands.length) {
-                const command = commands[i].text;
+                const currentCommand = commands[i].text;
                 const currentLine = document.createElement("div");
                 terminal.appendChild(currentLine);
 
                 function typeCharacter() {
-                    currentLine.innerHTML = command.slice(0, j++);
-                    if (j <= command.length) {
+                    currentLine.innerHTML = currentCommand.slice(0, j++);
+                    if (j <= currentCommand.length) {
                         setTimeout(typeCharacter, typingSpeed);
                     } else {
-                        j = 0; // Reset character index for next command
+                        j = 0; // Reset typing index for the next command
                         i++;
-                        setTimeout(typeLine, 500); // Delay before typing the next command
+                        setTimeout(typeLine, 500); // Wait before next command
                     }
                     terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
                 }
                 typeCharacter();
             } else {
-                terminal.innerHTML += "<span class='cursor'></span>";
+                terminal.innerHTML += "<span class='input-cursor'></span>";
             }
         }
 
-        // Start the terminal simulation
+        // Start the simulation
         typeLine();
+
+        // Handle video load errors
+        document.getElementById('bg-video').onerror = function() {
+            const errorMsg = "<span class='error'>[ERROR] Failed to load video background. Check video path.</span>";
+            terminal.innerHTML += errorMsg + "<br>";
+        };
     </script>
 </body>
 </html>
