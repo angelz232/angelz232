@@ -139,31 +139,16 @@
 
         let i = 0; // Command index
 
-        // Function to type each character in the text with delay
         function typeLine() {
-            let text = commands[i].text;
-            let currentIndex = 0;
-
-            // Function to simulate typing character by character
-            function typeCharacter() {
-                terminal.innerHTML += text.charAt(currentIndex);
-                currentIndex++;
-                terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
-                if (currentIndex < text.length) {
-                    setTimeout(typeCharacter, 50); // Adjust typing speed (50 ms between each character)
-                }
-            }
-
-            typeCharacter(); // Start typing this line
-            i++;
-
-            // After typing the line, wait before typing the next one
             if (i < commands.length) {
-                setTimeout(typeLine, 500); // Delay between commands
+                terminal.innerHTML += commands[i].text + "<br>";
+                i++;
+                terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
+                setTimeout(typeLine, 500); // Adjust delay between lines
             }
         }
 
-        typeLine(); // Start typing the terminal output
+        typeLine();
     </script>
 </body>
 </html>
