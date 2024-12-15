@@ -167,7 +167,7 @@
             const userInput = document.getElementById("user-input");
             if (!userInput) return; // Only handle input if there's a prompt.
 
-            if (e.key === "y") {
+            if (e.key === "Enter") {
                 const input = userInput.textContent.trim().toLowerCase();
                 if (input === 'y' || input === 'yes' || input === 'n' || input === 'no') {
                     handleMusic(input);
