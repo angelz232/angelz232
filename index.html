@@ -158,7 +158,7 @@
         const music = document.getElementById("background-music");
 
         const commands = [
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Do you want to play music? (y/n)</span>", delay: 50, input: true },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Do you want to play music? (<span class='success'>y/<span class='error'>n)</span>", delay: 50, input: true },
             { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 50 },
             { text: generateDownloadOutput("http://archive.ubuntu.com/ubuntu focal/main amd64 <span class='directory'>Packages", 534, 20), delay: 300 },
             { text: "<span class='directory'>Reading package lists... <span class='success'>Done</span>", delay: 80 },
