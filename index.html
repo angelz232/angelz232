@@ -40,7 +40,7 @@
 
         /* ASCII Art Styling (left side) */
         .ascii-art {
-            width: 45%;
+            width: 45%; /* Adjust to your preference */
             padding: 20px;
             font-size: 0.8rem;
             white-space: pre-wrap;
@@ -51,7 +51,7 @@
 
         /* Terminal Styling (right side) */
         .terminal {
-            width: 60%;
+            width: 60%; /* Adjust to your preference */
             padding: 20px;
             overflow-y: auto;
             white-space: pre-wrap;
@@ -61,13 +61,13 @@
         }
 
         /* Text Colors */
-        .prompt { color: #FFFFFF; }
-        .command { color: #C0C0C0; }
-        .info { color: #FFFF00; }
-        .success { color: #00FF00; }
-        .error { color: #FF5555; }
-        .directory { color: #00AAAA; }
-        .link { color: #FF0000; text-decoration: none; }
+        .prompt { color: #FFFFFF; }      /* Prompt: user@hostname:~$ */
+        .command { color: #C0C0C0; }     /* Commands typed by user */
+        .info { color: #FFFF00; }        /* Yellow for informational outputs */
+        .success { color: #00FF00; }     /* Green for success messages */
+        .error { color: #FF5555; }       /* Red for errors or critical outputs */
+        .directory { color: #00AAAA; }   /* Cyan for directories */
+        .link { color: #FF0000; text-decoration: none; } /* Links for social media */
         .file-link { color: #00AAAA; text-decoration: none; }
         .file-link:hover { color: #FFFFFF; text-decoration: underline; }
 
@@ -83,6 +83,7 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
+
     </style>
 </head>
 <body>
@@ -92,7 +93,57 @@
         <!-- ASCII Art Section -->
         <div class="ascii-art">
             <pre>          
-                ASCII ART HERE
+          
+
+
+
+
+
+                
+                                                                             %%%%                   #*+++++*#                     
+                                                                         ##**%%%%#                  #++##%##                      
+                                                                     #%*+====*%%%%%                 #++#%                          
+                                                                   %%=========*%%%%%                %#++*#                        
+                                                                %%%%%%*========+%%%%%#                %*++*#                      
+                                                               %%%%%%%%%=====+##*#%%%%%    %@%          %*++#%                    
+                                                             %%%%%%%%%%%%*+#**++++#%%%%%%%%%%             #+++#%                  
+                                                             %#*%%%%%%%%%##++++++++*###%%%%                ##++*%                 
+                                                              #%##%%%%%#%%%#**##%%%#*+=::+##%                #*++*%  #            
+                                                                %%*%%#%##%%%#**=-:::::::::::=%                 #+++#*=*:-*        
+                                                                  %%##%%#**=::**-::::::::::=:-%                 ##=::=*::#+       
+                                               %++              %%#*%*-:::--:::::::::::-*-:=%               #+:::==:-*-:=      
+                                              %%--*              %%#*%%=:-:::::::#+:::::::::::-#            %#+*=:::=%*--=+:      
+                                           #%@%=::*%             %%*%%#=++-::::::=-:::::-+::::-* #*      #%%%%-.-=:::-=--:+*      
+                                       #%%+::::::::*%##%         %%%%%%=::::::::::::::::=#**##*%#-+   %%%%%%%%%+.:=::::=%*++      
+                                     ==-=+*+-:::::=+.=%%%%%%      %%%%=::::::::::::-#=...........+%%%%%%%%%%%%%%+.=###%%%%#*      
+                                    ::::-+#+:::::-+.-%%%%%%%%%%%     %=:::::::::::-*...........=%%%%%%%%%%%%%%%%%*=               
+                                    :-=-::-==++++*::#%%%%%%%%%%%%%%%%%%*=++::----=-.....-%*++#%%%%%%%%%%%%%%%%%%%%                
+                                     :-+*%      #=:*%%%%%%%%%%%%%%%%%%%%%%%%=::+*:....=#*=::+%%%%%%%%%%%%%%%%%%%                  
+                                                  #@%%%%%%%%%%%%%%%%%%%%%%%%%%+-::===-::::=*#%%%%%%%%%%%%%%%%                      
+                                                    %%%%%%%%%%%%%%%%%%%%%%%%%%%*=*##**####%.=%%%%%%%%%%%%                          
+                                                         %%%%%%%%%%%%%%%%%%%%%%*..%#*####*%.:%%%%@%                                
+                                                                %%%%%%%%%%%%%%%*.:%%*=:-+##.:%%%                                  
+                                                                   %%%%%%%%%%%%=......*-....:%%                                   
+                                                                   %%%%%%%%%%%%.......... ..=@                                    
+                                                                   %%%%%%%%%%%=.    .-#.. ..*%                                    
+                                                                 %%%%%%%%%%%%*... .........-%@                                    
+                                                                %%%%%%%%%%%%*...  ...#:....#%%%                                   
+                                                              %%%%%%%%%%%%%**-......:.....#%%%%%                                  
+                                                            %%%%%%%%%%%%%*++++%-.-#*+**..+++#%%%%%%                               
+                                                           %%%%%%%%%%*++++++++++*++++++**+++++#%%%                                
+                                                                 %%#+++++++++++++++++++++++++++*%                                  
+                                                             %%%#*++++++++++++++++*+++++++++++++*%                                
+                                                             %#+++++++++++++++++**+++++++++++++++*%                               
+                                                            %%*++++++++++++++++*%@%#*+++++++++++++#%                              
+                                              #%          %#+++++++++++++++*%%    %#*+++++++++++#%                              
+                                             %%%%        %%#+++++++++++++++#%       %%#++++++++++*%                              
+                                              %%%%%%##%%%%#+++++++++++++++#%%         %%*+++++++++*#                              
+                                               %%%%%%#++++++++++++++++++#%%          #%*++++++++++*%                              
+                                                 %%%%%%#++++++++++++++#%%            %#+++++++++++#%                              
+                                                   %%%%%%++++++++++*%%%              %*++++++++++*%                               
+                                                      %%%%#+++++*#%%                 %*+++++++++**     %@                         
+                                                       %%%%%*#%%%                    %%%%%%%%%%%%%%%%%%%%                         
+                                                        %%%%%%                       @%%%%#%%%%%%%%%%%%                           
             </pre>
         </div>
 
@@ -122,24 +173,27 @@
             { text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>", delay: 50 },
         ];
 
+        let i = 0;
+
+        function generateDownloadOutput(url, totalSize, steps) {
+            let output = <span class='info'>Get:</span> <span class='command'>${url}</span> [ ;
+            for (let progress = 0; progress <= steps; progress++) {
+                let percent = Math.floor((progress / steps) * 100);
+                output += \n<span class='success'>${percent}%</span> ${'='.repeat(progress)}>;
+            }
+            output +=  ] ${totalSize} kB\n<span class='success'>Fetched ${totalSize} kB</span>;
+            return output;
+        }
+
         async function writeLine(line, delay, input = false) {
             return new Promise(resolve => {
                 let j = 0;
-
-                // Split into prompt and command
-                const promptMatch = line.match(/(<span class='prompt'>user@deadshot:~\$<\/span>)\s*(.*)/);
-                const prompt = promptMatch ? promptMatch[1] : "";
-                const command = promptMatch ? promptMatch[2] : line;
-
                 const outputLine = document.createElement("div");
                 terminal.appendChild(outputLine);
 
-                // Display the static prompt immediately
-                outputLine.innerHTML = prompt;
-
                 function typeCharacter() {
-                    outputLine.innerHTML = prompt + " " + command.slice(0, j++);
-                    if (j <= command.length) {
+                    outputLine.innerHTML = line.slice(0, j++);
+                    if (j <= line.length) {
                         setTimeout(typeCharacter, 10);
                     } else {
                         terminal.scrollTop = terminal.scrollHeight;
@@ -156,7 +210,7 @@
 
         function getUserInput(resolve) {
             const inputLine = document.createElement("div");
-            inputLine.innerHTML = `<span class='prompt'>user@deadshot:~$</span> <span id='user-input'></span>`;
+            inputLine.innerHTML = <span class='prompt'>user@deadshot:~$</span> <span id='user-input'></span>;
             terminal.appendChild(inputLine);
             terminal.scrollTop = terminal.scrollHeight;
 
