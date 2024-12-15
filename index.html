@@ -158,16 +158,16 @@
         function handleContinue(answer) {
             if (answer === "n" || answer === "no") {
                 writeLine("<span class='success'>Continuing...</span>");
-                questionIndex++;
-                askNextQuestion();
+                questionIndex++; // Move to the next question
+                askNextQuestion(); // Ask the next question
             } else if (answer === "y" || answer === "yes") {
                 writeLine("<span class='error'>System crash detected! Exiting...</span>");
                 setTimeout(() => {
-                    document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>Niggers aren't allowed!</h1>";
+                    document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>The system encountered an error and is shutting down.</h1>";
                 }, 1000);
             } else {
                 writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
-                askNextQuestion();
+                askNextQuestion(); // Repeat the question if input is invalid
             }
         }
 
