@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Terminal</title>
+    <title>Richtofen</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
+        /* General Page Styling */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
             font-family: 'IBM Plex Mono', monospace;
-            background-color: black;
             color: #FFFFFF;
+            background-color: black;
         }
 
+        /* Full-Screen Video (background) */
         .video-container {
             position: fixed;
             top: 0;
@@ -31,6 +33,7 @@
             object-fit: cover;
         }
 
+        /* Terminal Text Overlay */
         .terminal {
             position: absolute;
             top: 20px;
@@ -38,33 +41,44 @@
             right: 20px;
             bottom: 20px;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            color: #FFFFFF;
             white-space: pre-wrap;
             font-size: 1rem;
             line-height: 1.4;
+            overflow-y: auto;
+            border-radius: 5px;
         }
 
-        .prompt { color: #FFFFFF; }
-        .command { color: #C0C0C0; }
-        .info { color: #FFFF00; }
-        .success { color: #00FF00; }
-        .error { color: #FF5555; }
-        .input-cursor {
+        /* Typing Cursor */
+        .cursor {
             display: inline-block;
+            background-color: #FFFFFF;
             width: 8px;
             height: 16px;
-            background-color: #FFFFFF;
             animation: blink 1s step-end infinite;
         }
 
         @keyframes blink {
             50% { opacity: 0; }
         }
+
+        /* Linux Terminal Colors */
+        .prompt { color: #FFFFFF; }
+        .command { color: #C0C0C0; }
+        .info { color: #FFFF00; }
+        .success { color: #00FF00; }
+        .error { color: #FF5555; }
+        .directory { color: #00AAAA; }
+        .link { color: #FF0000; text-decoration: none; }
+
+        /* Hover effect for links */
+        .link:hover { color: #FFFFFF; }
     </style>
 </head>
 <body>
-    <!-- Video Background -->
+    <!-- Full-Screen Background Video -->
     <div class="video-container">
         <video autoplay muted loop>
             <source src="widowmaker.mp4" type="video/mp4">
@@ -72,112 +86,104 @@
         </video>
     </div>
 
-    <!-- Terminal -->
+    <!-- Terminal Text Overlay -->
     <div class="terminal" id="terminal"></div>
 
-    <!-- Audio (Music) -->
-    <audio id="background-music" src="track.mp3" loop></audio>
+    <!-- Audio Player -->
+    <audio id="music" src="your-music-file.mp3"></audio>
 
     <script>
         const terminal = document.getElementById("terminal");
-        const music = document.getElementById("background-music");
-        let inputBuffer = ""; // Buffer to store user input
-        let questionIndex = 0;
+        const music = document.getElementById("music");
+        let currentInput = "";
+        let awaitingInput = false;
 
-        const questions = [
-            { 
-                text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Are you black? (y/n)</span>", 
-                handler: handleContinue 
-            },
-            { 
-                text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Would you like to play music? (y/n)</span>", 
-                handler: handleMusic 
-            }
+        // Initial Terminal Commands
+        const commands = [
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>" },
+            { text: "<span class='info'>[INFO]</span> <span class='command'>Fetching package lists...</span>" },
+            { text: "<span class='success'>Reading package lists... Done</span>" },
+            { text: "<span class='success'>Building dependency tree... Done</span>" },
+            { text: "<span class='success'>System upgraded successfully.</span>" },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>Would you like to play music? (y/n)</span>" }
         ];
 
-        function writeLine(text) {
+        let i = 0; // Command index
+
+        function typeLine() {
+            if (i < commands.length) {
+                terminal.innerHTML += commands[i].text + "<br>";
+                i++;
+                terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
+                setTimeout(typeLine, 500);
+            } else {
+                awaitingInput = true;
+            }
+        }
+
+        function appendToTerminal(text) {
             terminal.innerHTML += text + "<br>";
             terminal.scrollTop = terminal.scrollHeight;
         }
 
-        function writeInput(promptText) {
-            terminal.innerHTML += promptText + " <span id='user-input'></span><span class='input-cursor'></span>";
-        }
+        document.addEventListener("keydown", function(event) {
+            if (awaitingInput) {
+                if (event.key === "Enter") {
+                    processInput(currentInput.trim());
+                    currentInput = "";
+                } else if (event.key === "Backspace") {
+                    currentInput = currentInput.slice(0, -1);
+                } else if (event.key.length === 1) {
+                    currentInput += event.key;
+                }
 
-        function clearInputLine() {
-            const lastInput = document.getElementById("user-input");
-            if (lastInput) lastInput.parentElement.remove();
-        }
-
-        function handleKeyDown(e) {
-            if (e.key === "Enter") {
-                processInput(inputBuffer);
-                inputBuffer = "";
-            } else if (e.key === "Backspace") {
-                inputBuffer = inputBuffer.slice(0, -1);
-                updateInputDisplay();
-            } else if (e.key.length === 1) {
-                inputBuffer += e.key;
-                updateInputDisplay();
+                renderInput();
             }
-        }
+        });
 
-        function updateInputDisplay() {
-            const userInput = document.getElementById("user-input");
-            if (userInput) userInput.textContent = inputBuffer;
+        function renderInput() {
+            const prompt = "<span class='prompt'>user@deadshot:~$</span> <span class='command'>";
+            const cursor = "<span class='cursor'></span>";
+            terminal.innerHTML = terminal.innerHTML.split("<br>").slice(0, -1).join("<br>") + `<br>${prompt}${currentInput}${cursor}`;
         }
 
         function processInput(input) {
-            const trimmedInput = input.trim().toLowerCase();
-            clearInputLine();
+            awaitingInput = false;
+            appendToTerminal(`<span class='prompt'>user@deadshot:~$</span> <span class='command'>${input}</span>`);
 
-            if (questionIndex < questions.length) {
-                questions[questionIndex].handler(trimmedInput);
-            }
-        }
-
-        function handleContinue(answer) {
-            if (answer === "y" || answer === "yes") {
-                writeLine("<span class='success'>Continuing...</span>");
-                questionIndex++;
-                askNextQuestion();
-            } else if (answer === "n" || answer === "no") {
-                writeLine("<span class='error'>System crash detected! Exiting...</span>");
-                setTimeout(() => {
-                    document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>System Crashed</h1>";
-                }, 1000);
+            if (input.toLowerCase() === "y" || input.toLowerCase() === "yes") {
+                playMusic();
+            } else if (input.toLowerCase() === "n" || input.toLowerCase() === "no") {
+                crashWebsite();
             } else {
-                writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
-                askNextQuestion();
+                appendToTerminal("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
+                awaitingInput = true;
+                renderInput();
             }
         }
 
-        function handleMusic(answer) {
-            if (answer === "y" || answer === "yes") {
-                writeLine("<span class='success'>Playing music...</span>");
-                music.play();
-            } else if (answer === "n" || answer === "no") {
-                writeLine("<span class='info'>No music will be played.</span>");
-            } else {
-                writeLine("<span class='error'>Invalid input. Please type 'y' or 'n'.</span>");
-            }
-            questionIndex++;
+        function playMusic() {
+            appendToTerminal("<span class='info'>[INFO]</span> <span class='command'>Playing music...</span>");
+            music.play();
+
+            // Continue the Linux Terminal Simulation
+            const moreCommands = [
+                { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo useradd -m -s /bin/bash Richtofen</span>" },
+                { text: "<span class='info'>[INFO]</span> <span class='command'>Creating new user: Richtofen</span>" },
+                { text: "<span class='success'>User 'Richtofen' created successfully.</span>" }
+            ];
+
+            moreCommands.forEach(cmd => appendToTerminal(cmd.text));
         }
 
-        function askNextQuestion() {
-            if (questionIndex < questions.length) {
-                writeLine(questions[questionIndex].text);
-                writeInput("<span class='prompt'>user@deadshot:~$</span>");
-            }
+        function crashWebsite() {
+            appendToTerminal("<span class='error'>[CRITICAL]</span> <span class='command'>System crash initiated...</span>");
+            setTimeout(() => {
+                document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>System Error: 404</h1>";
+            }, 2000);
         }
 
-        function startTerminal() {
-            writeLine("<span class='prompt'>user@deadshot:~$</span> <span class='info'>Initializing interactive terminal...</span>");
-            setTimeout(askNextQuestion, 1000);
-        }
-
-        document.addEventListener("keydown", handleKeyDown);
-        startTerminal();
+        typeLine();
     </script>
 </body>
 </html>
