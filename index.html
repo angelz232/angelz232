@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Richtofen</title>
+    <title>xoru.lol</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: black;
-            color: #7CFC00;
+            color: #00FF00;
             font-family: 'IBM Plex Mono', monospace;
             margin: 0;
             padding: 20px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .term {
             white-space: pre-line;
             line-height: 1.5;
             max-width: 80%;
+            height: 80%;
+            overflow-y: auto;
         }
 
         @keyframes blink {
@@ -31,11 +34,15 @@
 
         .cursor {
             display: inline-block;
-            background: #7CFC00;
-            width: 8px;
+            background: #00FF00;
+            width: 10px;
             height: 18px;
             margin-left: 5px;
             animation: blink 1s step-end infinite;
+        }
+
+        .highlight {
+            color: #FF0000;
         }
     </style>
 </head>
@@ -44,35 +51,51 @@
 
     <script>
         const terminal = document.getElementById("terminal");
-        const text = [
-            "Initializing deadshot.org...",
-            "Loading user: Richtofen",
+        const commands = [
+            "user@deadshot:~$ <span class='highlight'>sudo init deadshot.org</span>",
+            "[INFO] Initializing environment...",
+            "user@deadshot:~$ <span class='highlight'>sudo useradd Richtofen</span>",
+            "[DEBUG] Loading user: Richtofen",
+            "user@deadshot:~$ <span class='highlight'>sudo passwd Richtofen</span>",
             "Password: *********",
-            "Creating home directory...",
-            "Granting privileges...",
-            "Fetching user data...",
-            "Redirecting to Richtofen's page...",
+            "[SYSTEM] Password successfully set.",
+            "user@deadshot:~$ <span class='highlight'>sudo mkdir /home/Richtofen</span>",
+            "[SYSTEM] Creating home directory... /home/Richtofen",
+            "user@deadshot:~$ <span class='highlight'>sudo chmod 700 /home/Richtofen</span>",
+            "[INFO] Directory permissions set to 700.",
+            "user@deadshot:~$ <span class='highlight'>sudo usermod -aG sudo Richtofen</span>",
+            "[DEBUG] Granting sudo privileges to user 'Richtofen'...",
+            "[INFO] Privileges granted successfully.",
+            "user@deadshot:~$ <span class='highlight'>fetch_user_data --target=Richtofen</span>",
+            "[DEBUG] Fetching user data...",
+            "[SYSTEM] Doxbin: sxcvsdfwgsdfgsd",
+            "[SYSTEM] Telegram: richtofen77",
+            "[SYSTEM] Email: im@trolli.ng",
+            "[INFO] User data fetch complete.",
+            "user@deadshot:~$ <span class='highlight'>systemctl restart Richtofen</span>",
+            "[SYSTEM] Redirecting to Richtofen...",
         ];
 
         let i = 0;
         let lineIndex = 0;
 
         function typeLine() {
-            if (lineIndex < text[i].length) {
-                terminal.innerHTML += text[i].charAt(lineIndex);
+            if (lineIndex < commands[i].length) {
+                terminal.innerHTML += commands[i].charAt(lineIndex);
                 lineIndex++;
-                setTimeout(typeLine, 50);
+                setTimeout(typeLine, 20); // Typing speed
             } else {
                 terminal.innerHTML += "<br>";
                 i++;
                 lineIndex = 0;
 
-                if (i < text.length) {
-                    setTimeout(typeLine, 500);
+                if (i < commands.length) {
+                    setTimeout(typeLine, 500); // Pause between lines
                 } else {
+                    // Redirect after final line
                     setTimeout(() => {
-                        window.location.href = "Richtofen"; // Redirect
-                    }, 1000);
+                        window.location.href = "Richtofen";
+                    }, 1500);
                 }
             }
         }
