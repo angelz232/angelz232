@@ -11,22 +11,18 @@
             color: #FFFFFF; /* Default terminal text color */
             font-family: 'IBM Plex Mono', monospace;
             margin: 0;
-            padding: 0;
-            font-size: 1rem;
+            padding: 10px;
+            font-size: 0.9rem; /* Smaller text for realism */
             height: 100vh;
             overflow: hidden;
         }
 
         .term {
-            white-space: pre-line;
-            line-height: 1.5;
+            white-space: pre-wrap;
+            line-height: 1.4;
             max-width: 100%;
             height: 100%;
             overflow-y: auto;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 1.1rem;
         }
 
         @keyframes blink {
@@ -36,9 +32,8 @@
         .cursor {
             display: inline-block;
             background: #FFFFFF;
-            width: 10px;
-            height: 18px;
-            margin-left: 5px;
+            width: 8px;
+            height: 15px;
             animation: blink 1s step-end infinite;
         }
 
@@ -56,16 +51,11 @@
         }
 
         .default {
-            color: #FFFFFF; /* White for plain text */
+            color: #FFFFFF; /* Plain white for inputs */
         }
 
-        /* Scrollbar styling */
-        .term::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        .term::-webkit-scrollbar-thumb {
-            background-color: #32CD32;
+        .error {
+            color: #FF6347; /* Red for errors */
         }
     </style>
 </head>
@@ -75,67 +65,80 @@
     <script>
         const terminal = document.getElementById("terminal");
 
-        // Real Linux-like commands with outputs
+        // Realistic Linux commands split into chunks
         const commands = [
-            "user@deadshot:~$ <span class='command'>sudo apt update && sudo apt upgrade -y</span>",
-            "<span class='info'>[INFO] Updating package lists...</span>",
-            "<span class='success'>[SUCCESS] System packages updated.</span>",
-            
-            "user@deadshot:~$ <span class='command'>sudo useradd -m -s /bin/bash Richtofen</span>",
-            "<span class='info'>[INFO] Creating user: Richtofen</span>",
-            "<span class='success'>[SUCCESS] User 'Richtofen' created successfully.</span>",
+            { type: "command", text: "user@deadshot:~$ sudo apt update && sudo apt upgrade -y" },
+            { type: "info", text: "[INFO] Fetching package lists..." },
+            { type: "success", text: "Reading package lists... Done" },
+            { type: "success", text: "Building dependency tree... Done" },
+            { type: "success", text: "System upgraded successfully." },
 
-            "user@deadshot:~$ <span class='command'>sudo passwd Richtofen</span>",
-            "Enter new UNIX password: <span class='default'>*********</span>",
-            "Retype new UNIX password: <span class='default'>*********</span>",
-            "<span class='success'>[SUCCESS] Password updated successfully.</span>",
+            { type: "command", text: "user@deadshot:~$ sudo useradd -m -s /bin/bash Richtofen" },
+            { type: "info", text: "[INFO] Creating new user: Richtofen" },
+            { type: "success", text: "User 'Richtofen' created successfully." },
 
-            "user@deadshot:~$ <span class='command'>sudo mkdir /home/Richtofen</span>",
-            "<span class='info'>[INFO] Creating home directory: /home/Richtofen</span>",
-            "<span class='success'>[SUCCESS] Directory created.</span>",
+            { type: "command", text: "user@deadshot:~$ sudo passwd Richtofen" },
+            { type: "default", text: "Enter new UNIX password: ********" },
+            { type: "default", text: "Retype new UNIX password: ********" },
+            { type: "success", text: "Password updated successfully." },
 
-            "user@deadshot:~$ <span class='command'>sudo chmod 700 /home/Richtofen</span>",
-            "<span class='info'>[INFO] Setting directory permissions to 700...</span>",
-            "<span class='success'>[SUCCESS] Permissions updated.</span>",
+            { type: "command", text: "user@deadshot:~$ sudo chmod 700 /home/Richtofen" },
+            { type: "info", text: "[INFO] Setting permissions on /home/Richtofen" },
+            { type: "success", text: "Permissions updated: 700" },
 
-            "user@deadshot:~$ <span class='command'>sudo usermod -aG sudo Richtofen</span>",
-            "<span class='info'>[INFO] Granting sudo privileges to user: 'Richtofen'</span>",
-            "<span class='success'>[SUCCESS] User 'Richtofen' now has sudo access.</span>",
+            { type: "command", text: "user@deadshot:~$ sudo usermod -aG sudo Richtofen" },
+            { type: "info", text: "[INFO] Adding 'Richtofen' to sudo group" },
+            { type: "success", text: "User 'Richtofen' now has sudo privileges." },
 
-            "user@deadshot:~$ <span class='command'>cat /etc/passwd | grep Richtofen</span>",
-            "<span class='default'>Richtofen:x:1001:1001::/home/Richtofen:/bin/bash</span>",
+            { type: "command", text: "user@deadshot:~$ cat /etc/passwd | grep Richtofen" },
+            { type: "default", text: "Richtofen:x:1001:1001::/home/Richtofen:/bin/bash" },
 
-            "user@deadshot:~$ <span class='command'>sudo systemctl restart apache2</span>",
-            "<span class='info'>[INFO] Restarting Apache2 service...</span>",
-            "<span class='success'>[SUCCESS] Apache2 service restarted successfully.</span>",
+            { type: "command", text: "user@deadshot:~$ sudo systemctl restart apache2" },
+            { type: "info", text: "[INFO] Restarting Apache2 service..." },
+            { type: "success", text: "Apache2 service restarted successfully." },
 
-            "user@deadshot:~$ <span class='command'>exit</span>",
-            "<span class='info'>[INFO] Redirecting to Richtofen's page...</span>"
+            { type: "command", text: "user@deadshot:~$ exit" },
+            { type: "info", text: "[INFO] Redirecting to Richtofen's page..." }
         ];
 
-        let i = 0; // Current command index
-        let lineIndex = 0; // Current character index
+        let i = 0; // Command index
+        let lineIndex = 0; // Character index
+        let currentLine = "";
+        let cursorVisible = true;
 
-        // Function to simulate typing effect
         function typeLine() {
-            if (lineIndex < commands[i].length) {
-                terminal.innerHTML += commands[i].charAt(lineIndex);
+            if (lineIndex < commands[i].text.length) {
+                currentLine += commands[i].text.charAt(lineIndex);
+                render();
                 lineIndex++;
-                setTimeout(typeLine, 15); // Typing speed
+                setTimeout(typeLine, 20); // Typing speed
             } else {
-                terminal.innerHTML += "<br>";
+                currentLine += "<br>"; // Move to next line
                 i++;
                 lineIndex = 0;
-
+                currentLine = "";
                 if (i < commands.length) {
-                    setTimeout(typeLine, 500); // Pause between lines
+                    setTimeout(typeLine, 500); // Pause between commands
                 } else {
-                    // Redirect after final line
+                    // Redirect after all commands finish
                     setTimeout(() => {
                         window.location.href = "Richtofen.html";
                     }, 1500);
                 }
             }
+        }
+
+        function render() {
+            let output = "";
+            for (let j = 0; j < i; j++) {
+                const line = commands[j];
+                output += `<span class="${line.type}">${line.text}</span><br>`;
+            }
+            output += `<span class="${commands[i].type}">${currentLine}</span><span class="cursor"></span>`;
+            terminal.innerHTML = output;
+
+            // Auto-scroll terminal
+            terminal.scrollTop = terminal.scrollHeight;
         }
 
         typeLine();
