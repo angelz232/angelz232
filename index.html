@@ -67,6 +67,15 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
+
+        .link {
+            color: #00BFFF; /* Simulate clickable terminal-like links */
+            text-decoration: none;
+        }
+
+        .link:hover {
+            color: #FFFFFF; /* Hover effect to make the link white */
+        }
     </style>
 </head>
 <body>
@@ -121,7 +130,11 @@
             // Simulate Social Links (using `cat` command for files)
             { text: "<span class='info'>[INFO] Social Links:</span>" },
             { text: "<span class='info'>Doxbin: <span class='command'>cat /home/Richtofen/.doxbin_profile</span></span>" },
-            { text: "<span class='info'>Telegram: <span class='command'>cat /home/Richtofen/.telegram_profile</span></span>" }
+            { text: "<span class='info'>Telegram: <span class='command'>cat /home/Richtofen/.telegram_profile</span></span>" },
+
+            // Social Links as clickable links:
+            { text: "<span class='info'>Doxbin: <a class='link' href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>sxcvsdfwgsdfgsd</a></span>" },
+            { text: "<span class='info'>Telegram: <a class='link' href='https://t.me/richtofen77' target='_blank'>richtofen77</a></span>" }
         ];
 
         function writeLine(text) {
