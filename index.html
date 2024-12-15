@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Terminal Simulation</title>
+    <title>Richtofen</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         body, html {
@@ -49,14 +49,13 @@
         }
 
         /* Text Colors */
-        .prompt { color: #FFFFFF; }
-        .command { color: #C0C0C0; }
-        .info { color: #FFFF00; }
-        .success { color: #00FF00; }
-        .progress { color: #87CEEB; } /* Progress bar color */
-        .error { color: #FF5555; }
-        .file-link { color: #00AAAA; text-decoration: none; }
-        .file-link:hover { color: #FFFFFF; text-decoration: underline; }
+        .prompt { color: #FFFFFF; } /* Prompt */
+        .command { color: #C0C0C0; } /* Commands */
+        .info { color: #FFFF00; } /* Info/Warnings */
+        .success { color: #00FF00; } /* Success */
+        .error { color: #FF5555; } /* Errors */
+        .file-link { color: #00AAAA; text-decoration: none; } /* File links */
+        .file-link:hover { color: #FFFFFF; text-decoration: underline; } /* Hover effect */
 
         /* Typing Cursor */
         .input-cursor {
@@ -75,7 +74,7 @@
 <body>
     <!-- Full-Screen Video Background -->
     <div class="video-container">
-        <video autoplay muted loop>
+        <video autoplay muted loop id="bg-video">
             <source src="video1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -90,12 +89,12 @@
         const commands = [
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>", delay: 800 },
             { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 500 },
-            { text: simulateDownload("http://archive.ubuntu.com/ubuntu focal/main amd64 Packages", 243), delay: 3000 },
-            { text: simulateDownload("http://security.ubuntu.com/ubuntu focal-security InRelease", 127), delay: 3000 },
+            { text: generateDownloadOutput("http://archive.ubuntu.com/ubuntu focal/main amd64 Packages", 100, 20), delay: 3000 },
+            { text: generateDownloadOutput("http://security.ubuntu.com/ubuntu focal-security InRelease", 200, 15), delay: 3000 },
             { text: "<span class='success'>Reading package lists... Done</span>", delay: 800 },
             { text: "<span class='success'>Building dependency tree... Done</span>", delay: 800 },
             { text: "<span class='success'>Calculating upgrade... Done</span>", delay: 800 },
-            { text: simulateProgress("Updating system packages", 20), delay: 2500 },
+            { text: generateProgressBar("Upgrading packages", 30), delay: 2500 },
             { text: "<span class='success'>System upgraded successfully.</span>", delay: 800 },
             { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>", delay: 1000 },
             { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 1000 },
@@ -106,29 +105,28 @@
 
         let i = 0; // Command index
 
-        // Function to simulate download progress
-        function simulateDownload(url, totalSize) {
-            let output = `<span class='info'>Get:</span> <span class='progress'>${url}</span> [ `;
-            for (let progress = 0; progress <= 100; progress += 5) {
-                output += `#`;
+        // Generate realistic download progress output
+        function generateDownloadOutput(url, totalSize, steps) {
+            let output = `<span class='info'>Get:</span> <span class='command'>${url}</span> [ `;
+            for (let progress = 0; progress <= steps; progress++) {
+                let percent = Math.floor((progress / steps) * 100);
+                output += `\n<span class='success'>${percent}%</span> ${'='.repeat(progress)}>`;
             }
-            output += ` ] ${totalSize} kB`;
+            output += ` ] ${totalSize} kB\n<span class='success'>Fetched ${totalSize} kB</span>`;
             return output;
         }
 
-        // Function to simulate a progress bar
-        function simulateProgress(task, steps) {
+        // Generate progress bar animation
+        function generateProgressBar(task, steps) {
             let progress = `<span class='info'>${task}:</span>\n`;
             for (let i = 0; i <= steps; i++) {
-                progress += `[`;
-                progress += "=".repeat(i);
-                progress += ">".padEnd(steps - i, " ");
-                progress += `] ${Math.floor((i / steps) * 100)}%\n`;
+                let percent = Math.floor((i / steps) * 100);
+                progress += `[${"=".repeat(i)}${" ".repeat(steps - i)}] ${percent}%\n`;
             }
             return progress + `<span class='success'>Done!</span>`;
         }
 
-        // Function to write terminal lines with delay
+        // Function to write lines with delay
         function writeLine(line, delay) {
             return new Promise(resolve => {
                 let j = 0;
@@ -138,7 +136,7 @@
                 function typeCharacter() {
                     outputLine.innerHTML = line.slice(0, j++);
                     if (j <= line.length) {
-                        setTimeout(typeCharacter, 20);
+                        setTimeout(typeCharacter, 10);
                     } else {
                         terminal.scrollTop = terminal.scrollHeight;
                         resolve();
@@ -148,7 +146,7 @@
             });
         }
 
-        // Function to simulate the typing effect
+        // Simulate terminal commands typing out
         async function typeCommands() {
             for (let cmd of commands) {
                 await writeLine(cmd.text, cmd.delay || 500);
@@ -156,7 +154,7 @@
             terminal.innerHTML += "<span class='input-cursor'></span>";
         }
 
-        // Start simulation
+        // Start the terminal simulation
         typeCommands();
     </script>
 </body>
