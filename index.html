@@ -57,7 +57,6 @@
         .file-link { color: #00AAAA; text-decoration: none; } /* File links */
         .file-link:hover { color: #FFFFFF; text-decoration: underline; } /* Hover effect */
 
-        /* Typing Cursor */
         .input-cursor {
             display: inline-block;
             width: 8px;
@@ -74,7 +73,7 @@
 <body>
     <!-- Full-Screen Video Background -->
     <div class="video-container">
-        <video autoplay muted loop id="bg-video">
+        <video autoplay muted loop>
             <source src="video1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -87,38 +86,39 @@
         const terminal = document.getElementById("terminal");
 
         const commands = [
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>", delay: 800 },
-            { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 500 },
-            { text: generateDownloadOutput("http://archive.ubuntu.com/ubuntu focal/main amd64 Packages", 100, 20), delay: 3000 },
-            { text: generateDownloadOutput("http://security.ubuntu.com/ubuntu focal-security InRelease", 200, 15), delay: 3000 },
-            { text: "<span class='success'>Reading package lists... Done</span>", delay: 800 },
-            { text: "<span class='success'>Building dependency tree... Done</span>", delay: 800 },
-            { text: "<span class='success'>Calculating upgrade... Done</span>", delay: 800 },
-            { text: generateProgressBar("Upgrading packages", 30), delay: 2500 },
-            { text: "<span class='success'>System upgraded successfully.</span>", delay: 800 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>", delay: 1000 },
-            { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 1000 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 1000 },
-            { text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>", delay: 500 },
-            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 1000 },
-            { text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>", delay: 500 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>sudo apt update && sudo apt upgrade -y</span>", delay: 500 },
+            { text: "<span class='info'>[INFO]</span> Fetching package lists...", delay: 300 },
+            { text: generateDownloadOutput(), delay: 100 },
+            { text: "<span class='success'>Reading package lists... Done</span>", delay: 300 },
+            { text: "<span class='success'>Building dependency tree... Done</span>", delay: 300 },
+            { text: "<span class='success'>Calculating upgrade... Done</span>", delay: 300 },
+            { text: generateProgressBar("Upgrading packages", 20), delay: 500 },
+            { text: "<span class='success'>System upgraded successfully.</span>", delay: 300 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>./richtofen</span>", delay: 300 },
+            { text: "<span class='info'>[INFO]</span> Running Richtofen program...", delay: 300 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.telegram_profile</span>", delay: 300 },
+            { text: "<span class='file-link'><a href='https://t.me/richtofen77' target='_blank'>/home/Richtofen/.telegram_profile</a></span>", delay: 100 },
+            { text: "<span class='prompt'>user@deadshot:~$</span> <span class='command'>cat /home/Richtofen/.doxbin_profile</span>", delay: 300 },
+            { text: "<span class='file-link'><a href='https://doxbin.org/user/sxcvsdfwgsdfgsd' target='_blank'>/home/Richtofen/.doxbin_profile</a></span>", delay: 100 },
             { text: "<span class='prompt'>user@deadshot:~$</span>" }
         ];
 
-        let i = 0; // Command index
+        let i = 0;
 
-        // Generate realistic download progress output
-        function generateDownloadOutput(url, totalSize, steps) {
-            let output = `<span class='info'>Get:</span> <span class='command'>${url}</span> [ `;
-            for (let progress = 0; progress <= steps; progress++) {
-                let percent = Math.floor((progress / steps) * 100);
-                output += `\n<span class='success'>${percent}%</span> ${'='.repeat(progress)}>`;
-            }
-            output += ` ] ${totalSize} kB\n<span class='success'>Fetched ${totalSize} kB</span>`;
-            return output;
+        // Simulate download progress output instantly
+        function generateDownloadOutput() {
+            const downloads = [
+                "Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease",
+                "Get:2 http://security.ubuntu.com/ubuntu focal-security InRelease [107 kB]",
+                "Get:3 http://archive.ubuntu.com/ubuntu focal/main amd64 Packages [1,234 kB]",
+                "Get:4 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [12.3 MB]",
+                "Fetched 13.7 MB in 1s (8,450 kB/s)",
+                "Reading package lists... Done"
+            ];
+            return downloads.map(line => `<span class='info'>${line}</span>`).join("\n");
         }
 
-        // Generate progress bar animation
+        // Simulate a quick progress bar
         function generateProgressBar(task, steps) {
             let progress = `<span class='info'>${task}:</span>\n`;
             for (let i = 0; i <= steps; i++) {
@@ -128,35 +128,27 @@
             return progress + `<span class='success'>Done!</span>`;
         }
 
-        // Function to write lines with delay
+        // Write lines instantly or with reduced delay
         function writeLine(line, delay) {
             return new Promise(resolve => {
-                let j = 0;
                 const outputLine = document.createElement("div");
                 terminal.appendChild(outputLine);
-
-                function typeCharacter() {
-                    outputLine.innerHTML = line.slice(0, j++);
-                    if (j <= line.length) {
-                        setTimeout(typeCharacter, 10);
-                    } else {
-                        terminal.scrollTop = terminal.scrollHeight;
-                        resolve();
-                    }
-                }
-                setTimeout(typeCharacter, delay);
+                outputLine.innerHTML = line;
+                setTimeout(() => {
+                    terminal.scrollTop = terminal.scrollHeight;
+                    resolve();
+                }, delay);
             });
         }
 
-        // Simulate terminal commands typing out
+        // Simulate terminal output
         async function typeCommands() {
             for (let cmd of commands) {
-                await writeLine(cmd.text, cmd.delay || 500);
+                await writeLine(cmd.text, cmd.delay || 200);
             }
             terminal.innerHTML += "<span class='input-cursor'></span>";
         }
 
-        // Start the terminal simulation
         typeCommands();
     </script>
 </body>
