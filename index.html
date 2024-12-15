@@ -137,11 +137,11 @@
         }
 
         function handleContinue(answer) {
-            if (answer === "y" || answer === "yes") {
+            if (answer === "n" || answer === "no") {
                 writeLine("<span class='success'>Continuing...</span>");
                 questionIndex++;
                 askNextQuestion();
-            } else if (answer === "n" || answer === "no") {
+            } else if (answer === "y" || answer === "yes") {
                 writeLine("<span class='error'>System crash detected! Exiting...</span>");
                 setTimeout(() => {
                     document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%;'>💥 CRITICAL ERROR 💥<br>System Crashed</h1><br>Niggers aren't allowed!</h1>";
