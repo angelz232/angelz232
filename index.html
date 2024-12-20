@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/gif" sizes="64x64" href="monopoly3.gif">
+    <meta property="og:title" content="DEAD$HOT" />
+    <title>#deadshot</title>
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+    <script src="https://nextparticle.nextco.de/nextparticle.min.js"></script>
+    <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pirata One', sans-serif;
+            background-color: #0d0d0d;
+            color: white;
+            height: 100vh; 
+            overflow: hidden; 
+            display: flex;
+            align-items: center;
+        }
+
+        #enter-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 13, 13, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .glitch {
+            font-size: 1em;
+            color: #ffffff;
+            position: relative;
+            animation: glitch 0.05s infinite, flicker 2s infinite;
+        }
+
+        .flicker-text1 {
+            color: #c3c3c3;
+            animation: flicker1 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% {
+                transform: translate(0);
+            }
+            10% {
+                transform: translate(-0.5px, 0.5px);
+            }
+            20% {
+                transform: translate(-0.5px, -0.5px);
+            }
+            30% {
+                transform: translate(0.5px, 0.5px);
+            }
+            40% {
+                transform: translate(0.5px, -0.5px);
+            }
+            50% {
+                transform: translate(-0.5px, 0.5px);
+            }
+            60% {
+                transform: translate(-0.5px, -0.5px);
+            }
+            70% {
+                transform: translate(0.5px, 0.5px);
+            }
+            80% {
+                transform: translate(0.5px, -0.5px);
+            }
+            90% {
+                transform: translate(-0.5px, 0.5px);
+            }
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0;
+            }
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .left-half, .center-half, .right-half {
+            width: 33.33%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .left-half, .center-half, .right-half {
+            background-color: #0d0d0d;
+        }
+
+        .interactive-section {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+        }
+
+        .meow {
+            color: #ffffff;
+            font-size: 19px;
+            margin-top: -10px;
+        }
+
+        a {
+            color: red;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        .social-links p {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="enter-overlay" onclick="enterSite()">
+        <div class="glitch">Click to enter</div>
+    </div>
+
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-half">
+            <div class="interactive-section" id="logo-left">
+                <img src="monopoly.png" alt="obey" style="display: none;">
+            </div>
+            <p class="meow glitch"><span class="status-glitch">OBEY</span></p>
+            <div class="social-links">
+                <p><a href="https://t.me/a22cw" target="_blank">t.me/a22cw</a></p>
+                <p><a href="xmpp:obey@creep.im" target="_blank">xmpp:obey@creep.im</a></p>
+                <p><a href="https://discord.com/users/1301271502489915445" target="_blank">@zzzz_c</a></p>
+                <p><a href="mailto:im@trolli.ng" target="_blank"></a>  <a href="obey_pgp.txt" target="_blank">pgp</a></p>
+                <p><a href="https://doxbin.org/user/obey" target="_blank">doxbin:obey</a></p>
+            </div>
+        </div>
+
+        <!-- Center Section -->
+        <div class="center-half">
+            <div class="interactive-section" id="logo-center">
+                <img src="leon.png" alt="leon" style="display: none;">
+            </div>
+            <p class="meow glitch"><span class="status-glitch">LEON</span></p>
+            <div class="social-links">
+                <p><a href="https://t.me/criminal9281" target="_blank">t.me/criminal9281</a></p>
+                <p><a href="xmpp:leon@creep.im" target="_blank">xmpp:leon@creep.im</a></p>
+                <p><a href="https://discord.com/users/1220742473320632396" target="_blank">@sad_user91818</a></p>
+                <p><a href="mailto:love@defton.es" target="_blank"></a>  <a href="leon_pgp.txt" target="_blank">pgp</a></p>
+                <p><a href="https://doxbin.org/user/nn" target="_blank">doxbin:nn</a></p>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-half">
+            <div class="interactive-section" id="logo-right">
+                <img src="tongue.png" alt="tongue" style="display: none;">
+            </div>
+            <p class="meow glitch"><span class="status-glitch">TONGUE</span></p>
+            <div class="social-links">
+                <p><a href="https://t.me/rockstar95" target="_blank">t.me/rockstar95</a></p>
+                <p><a href="xmpp:tounge@creep.im" target="_blank">xmpp:tounge@creep.im</a></p>
+                <p><a href="https://x.com/1894" target="_blank">@1894</a></p>
+                <p><a href="mailto:sfshahsf@yopmail.com" target="_blank"></a>  <a href="tongue_pgp.txt" target="_blank">pgp</a></p>
+            </div>
+        </div>
+    </div>
+
+    <audio id="music-player"></audio>
+
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            new NextParticle({
+                image: document.querySelector("#logo-left img"),
+                color: "#FFFFFF",
+                maxWidth: 500,
+                maxHeight: 500,
+                particleGap: 2,
+                noise: 15,
+                speed: 0.1,
+            });
+
+            new NextParticle({
+                image: document.querySelector("#logo-center img"),
+                color: "#FFFFFF",
+                maxWidth: 500,
+                maxHeight: 500,
+                particleGap: 2,
+                noise: 15,
+                speed: 0.1,
+            });
+
+            new NextParticle({
+                image: document.querySelector("#logo-right img"),
+                color: "#FFFFFF",
+                maxWidth: 500,
+                maxHeight: 500,
+                particleGap: 2,
+                noise: 15,
+                speed: 0.1,
+            });
+        });
+    </script>
+</body>
+</html>
