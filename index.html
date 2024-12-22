@@ -50,7 +50,7 @@
             display: inline-block;
             background-image: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
             background-size: 200% 200%;
-            animation: glitch 0.05s infinite, flicker 2s infinite, rainbow 5s linear infinite;
+            animation: glitch 0.05s infinite, flicker 2s infinite, rainbow-fade 6s linear infinite;
             -webkit-background-clip: text;
             color: transparent;
         }
@@ -102,7 +102,7 @@
             }
         }
 
-        @keyframes rainbow {
+        @keyframes rainbow-fade {
             0% {
                 background-position: 0% 50%;
             }
@@ -153,7 +153,7 @@
             display: inline-block;
             background-image: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
             background-size: 200% 200%;
-            animation: rainbow 5s linear infinite;
+            animation: rainbow-fade 6s linear infinite;  /* smooth continuous loop */
             -webkit-background-clip: text;
         }
 
@@ -181,7 +181,7 @@
             <div class="social-links">
                 <p><a href="https://t.me/richtofen77" target="_blank">t.me/richtofen77</a></p>
                 <p><a href="xmpp:obey@creep.im" target="_blank">xmpp:obey@creep.im</a></p>
-                <p><a href="mailto:im@trolli.ng" target="_blank">im@trolli.ng</a>  <a href="obey_pgp.txt" target="_blank">| pgp</a></p>
+                <p><a href="mailto:im@trolli.ng" target="_blank">im@trolli.ng</a>  <a href="obey_pgp.txt" target="_blank">pgp</a></p>
                 <p><a href="https://doxbin.org/user/obey" target="_blank">doxbin:obey</a></p>
             </div>
         </div>
