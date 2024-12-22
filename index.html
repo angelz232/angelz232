@@ -8,7 +8,7 @@
     <title>#deadshot</title>
     <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet"/>
-    <script defer src="stars.js"></script>
+    <script defer src="stars.js"></script> <!-- Your starry animation script -->
     <script src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
     <script src="https://nextparticle.nextco.de/nextparticle.min.js"></script>
     <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
@@ -27,6 +27,7 @@
             overflow: hidden; 
             display: flex;
             align-items: center;
+            position: relative; /* Important for the star animation */
         }
 
         #enter-overlay {
@@ -55,45 +56,21 @@
         }
 
         @keyframes glitch {
-            0%, 100% {
-                transform: translate(0);
-            }
-            10% {
-                transform: translate(-0.5px, 0.5px);
-            }
-            20% {
-                transform: translate(-0.5px, -0.5px);
-            }
-            30% {
-                transform: translate(0.5px, 0.5px);
-            }
-            40% {
-                transform: translate(0.5px, -0.5px);
-            }
-            50% {
-                transform: translate(-0.5px, 0.5px);
-            }
-            60% {
-                transform: translate(-0.5px, -0.5px);
-            }
-            70% {
-                transform: translate(0.5px, 0.5px);
-            }
-            80% {
-                transform: translate(0.5px, -0.5px);
-            }
-            90% {
-                transform: translate(-0.5px, 0.5px);
-            }
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-0.5px, 0.5px); }
+            20% { transform: translate(-0.5px, -0.5px); }
+            30% { transform: translate(0.5px, 0.5px); }
+            40% { transform: translate(0.5px, -0.5px); }
+            50% { transform: translate(-0.5px, 0.5px); }
+            60% { transform: translate(-0.5px, -0.5px); }
+            70% { transform: translate(0.5px, 0.5px); }
+            80% { transform: translate(0.5px, -0.5px); }
+            90% { transform: translate(-0.5px, 0.5px); }
         }
 
         @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                opacity: 1;
-            }
-            20%, 24%, 55% {
-                opacity: 0;
-            }
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0; }
         }
 
         .container {
@@ -165,13 +142,14 @@
                 <p><a href="https://doxbin.org/user/obey" target="_blank">doxbin:obey</a></p>
             </div>
         </div>
+    </div>
 
     <audio id="music-player"></audio>
 
     <script src="main.js"></script>
     <script>
+        // Make sure your star animation starts
         document.addEventListener("DOMContentLoaded", function() {
-
             new NextParticle({
                 image: document.querySelector("#logo-center img"),
                 color: "#FFFFFF",
@@ -181,7 +159,15 @@
                 noise: 15,
                 speed: 0.1,
             });
+
+            // Initialize the sparkle animation
+            sparkle(true);
         });
+
+        // Function to handle site entry
+        function enterSite() {
+            document.getElementById("enter-overlay").style.display = "none";
+        }
     </script>
 </body>
 </html>
