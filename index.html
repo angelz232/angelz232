@@ -20,14 +20,13 @@
         }
 
         body {
-            font-family: 'Satoshi', sans-serif;
+            font-family: 'Pirata One', sans-serif;
             background-color: #0d0d0d;
             color: white;
             height: 100vh; 
             overflow: hidden; 
             display: flex;
             align-items: center;
-            justify-content: center;
         }
 
         #enter-overlay {
@@ -44,35 +43,56 @@
         }
 
         .glitch {
-            font-size: 3em;
-            color: white;
+            font-size: 1em;
+            color: #ffffff;
             position: relative;
-            display: inline-block;
+            animation: glitch 0.05s infinite, flicker 2s infinite;
         }
 
-        .rainbow {
-            display: inline;
+        .flicker-text1 {
+            color: #c3c3c3;
+            animation: flicker1 2s infinite;
         }
 
-        .rainbow span {
-            display: inline-block;
-            font-size: 2em;
-            color: transparent;
-            background-image: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            animation: rainbow-fade 6s ease-in-out infinite;
-        }
-
-        @keyframes rainbow-fade {
-            0% {
-                background-position: 0% 50%;
+        @keyframes glitch {
+            0%, 100% {
+                transform: translate(0);
+            }
+            10% {
+                transform: translate(-0.5px, 0.5px);
+            }
+            20% {
+                transform: translate(-0.5px, -0.5px);
+            }
+            30% {
+                transform: translate(0.5px, 0.5px);
+            }
+            40% {
+                transform: translate(0.5px, -0.5px);
             }
             50% {
-                background-position: 100% 50%;
+                transform: translate(-0.5px, 0.5px);
             }
-            100% {
-                background-position: 0% 50%;
+            60% {
+                transform: translate(-0.5px, -0.5px);
+            }
+            70% {
+                transform: translate(0.5px, 0.5px);
+            }
+            80% {
+                transform: translate(0.5px, -0.5px);
+            }
+            90% {
+                transform: translate(-0.5px, 0.5px);
+            }
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0;
             }
         }
 
@@ -113,13 +133,8 @@
         }
 
         a {
-            color: transparent;
+            color: red;
             text-decoration: none;
-            display: inline-block;
-            background-image: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
-            background-size: 200% 200%;
-            animation: rainbow-fade 6s ease-in-out infinite;
-            -webkit-background-clip: text;
         }
 
         a:hover {
