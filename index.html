@@ -49,11 +49,6 @@
             animation: glitch 0.05s infinite, flicker 2s infinite;
         }
 
-        .flicker-text1 {
-            color: #c3c3c3;
-            animation: flicker1 2s infinite;
-        }
-
         @keyframes glitch {
             0%, 100% {
                 transform: translate(0);
@@ -170,16 +165,22 @@
 
     <script src="main.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to generate random rainbow colors
+            function getRandomRainbowColor() {
+                const hue = Math.floor(Math.random() * 360); // Random hue (0 to 360)
+                return `hsl(${hue}, 100%, 50%)`; // Bright, saturated colors
+            }
 
+            // Initialize NextParticle with rainbow particles
             new NextParticle({
                 image: document.querySelector("#logo-center img"),
-                color: "#FFFFFF",
                 maxWidth: 500,
                 maxHeight: 500,
                 particleGap: 2,
                 noise: 15,
                 speed: 0.1,
+                color: (x, y) => getRandomRainbowColor() // Assign random rainbow color to each particle
             });
         });
     </script>
