@@ -47,6 +47,12 @@
             color: #ffffff;
             position: relative;
             animation: glitch 0.05s infinite, flicker 2s infinite;
+            display: inline-block;
+            background-image: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
+            background-size: 200% 200%;
+            animation: glitch 0.05s infinite, flicker 2s infinite, rainbow 5s linear infinite;
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
         .flicker-text1 {
@@ -96,6 +102,15 @@
             }
         }
 
+        @keyframes rainbow {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
         .container {
             display: flex;
             width: 100%;
@@ -133,8 +148,13 @@
         }
 
         a {
-            color: red;
+            color: transparent;
             text-decoration: none;
+            display: inline-block;
+            background-image: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red);
+            background-size: 200% 200%;
+            animation: rainbow 5s linear infinite;
+            -webkit-background-clip: text;
         }
 
         a:hover {
