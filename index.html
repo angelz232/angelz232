@@ -429,17 +429,19 @@
             loadFirstSong(); 
         };
         
-        function adjustVolumeForCurrentSong() {
-            const currentSong = songs[currentSongIndex];
-            
-            if (currentSong.includes('ilovefreaks.mp3')) {
-                backgroundAudio.volume = 1;
-            } else if (currentSong.includes('bluebills.mp3')) {
-                backgroundAudio.volume = 1;  
-            } else if (currentSong.includes('dip.mp3')) {
-                backgroundAudio.volume = 1;
-            } else if (currentSong.includes('5unna.mp3')) {
-                backgroundAudio.volume = 1;    
+function adjustVolumeForCurrentSong() {
+    const currentSong = songs[currentSongIndex];
+    
+    if (currentSong.includes('ilovefreaks.mp3')) {
+        backgroundAudio.volume = 1;
+    } else if (currentSong.includes('bluebills.mp3')) {
+        backgroundAudio.volume = 1;  
+    } else if (currentSong.includes('dip.mp3')) {
+        backgroundAudio.volume = 1;
+    } else if (currentSong.includes('5unna.mp3')) {
+        backgroundAudio.volume = 1;    
+    }
+}   
         
         
         function skipSong() {
