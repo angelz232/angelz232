@@ -439,69 +439,86 @@
                     document.getElementById('visitCount').innerText = data.count;
                 })
                 .catch(error => console.error('Error fetching visit count:', error));
+       }
+        
+        let currentSongIndex = 0;
+        const songs = [
+            'dip.mp3'
+        ];
+        
+        const backgroundAudio = document.getElementById('backgroundAudio');
+        
+        function adjustVolumeForCurrentSong() {
+            const currentSong = songs[currentSongIndex];
+            
+            if (currentSong.includes('keepingsecrets.mp3')) {
+                backgroundAudio.volume = 0.25;
+            } else if (currentSong.includes('asaprocky.mp3')) {
+                backgroundAudio.volume = 1.2;  
+            } else if (currentSong.includes('imnotgod.mp3')) {
+                backgroundAudio.volume = 1;
+            } else if (currentSong.includes('incelboy.mp3')) {
+                backgroundAudio.volume = 0.1;    
+            } else if (currentSong.includes('angel.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('youresopathetic.mp3')) {
+                backgroundAudio.volume = 0.75;  
+            } else if (currentSong.includes('pikachu.mp3')) {
+                backgroundAudio.volume = 0.75;  
+            } else if (currentSong.includes('ihatemyself.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('edgy.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('hogs.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('prettyscenegirl.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('SemBlink182Remix.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('youresoprettyandimjustaloser.mp3')) {
+                backgroundAudio.volume = 0.5;
+            } else if (currentSong.includes('goinmordumghostmountainAI.mp3')) {
+                backgroundAudio.volume = 0.25;    
+            } else {
+                backgroundAudio.volume = 1;  
+            }
         }
         
-const songs = [
-    'dip.mp3',
-    'ilovefreaks.mp3',
-    'bluebills.mp3',
-    '5unna.mp3'
-];
-
-function loadFirstSong() {
-    if (songs.length > 0) {
-        const backgroundAudio = document.getElementById('backgroundAudio');
-        backgroundAudio.src = songs[0]; // Load the first song
-        backgroundAudio.load(); // Prepare the audio for playback
-    } else {
-        console.error('No songs available in the playlist.');
-    }
-}
-
-// Add event listener to the "Boot" button
-const enterButton = document.getElementById('enterButton');
-enterButton.addEventListener('click', function () {
-    const backgroundAudio = document.getElementById('backgroundAudio');
-    backgroundAudio.play(); // Start playing the audio
-});
-
-// Load the first song when the page loads
-window.onload = function () {
-    loadFirstSong();
-};
-
-
-
-function skipSong() {
-    if (songs.length > 1) {
-        currentSongIndex = (currentSongIndex + 1) % songs.length;
-        backgroundAudio.src = songs[currentSongIndex];
-        adjustVolumeForCurrentSong();
-        backgroundAudio.play();
-    } else {
-        console.warn('Only one song available in the playlist.');
-    }
-}
-
-function toggleMute() {
-    isMuted = !isMuted;
-
-    if (isMuted) {
-        backgroundAudio.muted = true;
-        muteButton.style.display = 'block';
-        speakerIcon.style.display = 'none';
-    } else {
-        backgroundAudio.muted = false;
-        muteButton.style.display = 'none';
-        speakerIcon.style.display = 'block';
-    }
-}
-
-window.onload = function () {
-    fetchVisitCount();
-    loadFirstSong();
-    backgroundAudio.play().catch((err) => console.warn('Autoplay prevented:', err));
-};
+        function loadFirstSong() {
+            backgroundAudio.src = songs[currentSongIndex];
+            adjustVolumeForCurrentSong();
+            backgroundAudio.load();
+        }
+        
+        function skipSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;  
+            backgroundAudio.src = songs[currentSongIndex];
+            adjustVolumeForCurrentSong();
+            backgroundAudio.play();
+        }
+        
+        function reloadPage() {
+            location.reload();
+        }
+        
+        const muteButton = document.getElementById('muteButton');
+        const speakerIcon = document.getElementById('speakerIcon');
+        
+        function toggleMute() {
+            isMuted = !isMuted; 
+        
+            if (isMuted) {
+                audio.muted = true; 
+                backgroundAudio.muted = true;
+                muteButton.style.display = 'block'; 
+                speakerIcon.style.display = 'none';
+            } else {
+                audio.muted = false; 
+                backgroundAudio.muted = false;
+                muteButton.style.display = 'none'; 
+                speakerIcon.style.display = 'block';
+            }
+        }
         
         // Click sound
         document.addEventListener('click', function() {
@@ -579,6 +596,5 @@ window.onload = function () {
         </script>
         
 
-        
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8f6b0948eb219ff9',t:'MTczNDk4NTA1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
