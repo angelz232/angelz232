@@ -361,8 +361,7 @@
                 <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Ghouls.txt')">
                        <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
                      <p>Ghouls.txt</p>
-                 </div>
-            </div>
+                </div>
                 <div class="resizer right"></div>
                 <div class="resizer bottom"></div>
                 <div class="resizer bottom-right"></div>
@@ -442,7 +441,6 @@
                 .catch(error => console.error('Error fetching visit count:', error));
         }
         
-        let currentSongIndex = 0;
 const songs = [
     'dip.mp3',
     'ilovefreaks.mp3',
@@ -450,21 +448,29 @@ const songs = [
     '5unna.mp3'
 ];
 
-const backgroundAudio = document.getElementById('backgroundAudio');
-
-function adjustVolumeForCurrentSong() {
-    backgroundAudio.volume = 1; // Set a default volume for all songs
-}
-
 function loadFirstSong() {
     if (songs.length > 0) {
-        backgroundAudio.src = songs[currentSongIndex];
-        adjustVolumeForCurrentSong();
-        backgroundAudio.load();
+        const backgroundAudio = document.getElementById('backgroundAudio');
+        backgroundAudio.src = songs[0]; // Load the first song
+        backgroundAudio.load(); // Prepare the audio for playback
     } else {
         console.error('No songs available in the playlist.');
     }
 }
+
+// Add event listener to the "Boot" button
+const enterButton = document.getElementById('enterButton');
+enterButton.addEventListener('click', function () {
+    const backgroundAudio = document.getElementById('backgroundAudio');
+    backgroundAudio.play(); // Start playing the audio
+});
+
+// Load the first song when the page loads
+window.onload = function () {
+    loadFirstSong();
+};
+
+
 
 function skipSong() {
     if (songs.length > 1) {
