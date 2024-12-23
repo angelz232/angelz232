@@ -1,0 +1,213 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+@font-face {
+    font-family: me;
+    src: url(code.ttf)
+}
+
+
+.logo hr{
+    width: 75px; 
+    border: none;
+    border-top: 2px solid #dddddd; 
+    margin: 10px auto; 
+}
+
+.logo{
+    text-align: center;
+    color: #dddddd;
+    font-family: me;
+    margin-top: 30px;
+}
+
+.logo h1{
+    font-family: me;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    margin-top: 15px;
+    color: #dddddd;
+    font-family: me;
+}
+
+@media (max-width: 768px) {
+    .logo h1 {
+        font-size: 1.5rem; 
+    }
+    
+    .logo hr {
+        width: 60px; 
+    }
+    
+    .subtitle {
+        font-size: 0.9rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.2rem; 
+    }
+    
+    .logo hr {
+        width: 50px; 
+    }
+    
+    .subtitle {
+        font-size: 0.8rem; 
+    }
+}
+
+.nav{
+    position: absolute;
+    left: 1%;
+    top: 4%;
+}
+
+.nav a{
+    flex-direction: column;
+    font-size: 19px;
+    font-weight:bolder;
+    text-decoration: none;
+    font-family: me;
+    padding: 15px;
+    color: #424242;
+}
+
+.nav a:hover{
+    color: #ff78ed;
+}
+
+
+.content{
+    animation-name: fadein;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-delay: 0ms;
+}
+
+.questions{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    font-family: me;
+    color:#ff78edcb;
+    width: 1300px;
+    
+}
+
+.answer{
+    font-size: 20px;
+    color: white;
+}
+
+
+.title-donate{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 27%;
+    font-family: me;
+    color: #dddddd;
+    width: 1200px;
+    text-align: center;
+}
+
+.invite{
+    font-family: me;
+    font-size: 17px;
+    top: 33%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.enterScreen{
+    font-family: me;
+}
+
+.categoriees{
+    list-style-type: none; /* Remove bullets */
+    padding: 0;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+ /* Navigation bar */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding: 10px;
+    position: relative; /* Ensure the navbar is positioned relative */
+    width: 100%;
+    top: 0;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: absolute; /* Position the dropdown container absolutely */
+    top: 10px; /* Adjust the spacing from the top */
+    right: 10px; /* Adjust the spacing from the right */
+}
+
+/* Dropdown button */
+.dropbtn {
+    background-color: #141414b9;
+    color: #dddddd;
+    font-family: me;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #1a1a1a;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #111111b9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    font-family: me;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #1a1a1a;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
