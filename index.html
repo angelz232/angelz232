@@ -354,9 +354,29 @@
                     <button class="close-button" onclick="toggleFolder('inner-folder')">X</button>
                 </div>
                 <div class="folder-body">
-                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Potings.txt')">
+                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Hix.txt')">
                         <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
-                        <p>Potings.txt</p>
+                        <p>Hix.txt</p>
+                    </div>
+                </div>
+            
+                <div class="resizer right"></div>
+                <div class="resizer bottom"></div>
+                <div class="resizer bottom-right"></div>
+            
+                <div class="resizable-arrow">↘</div>
+            </div>
+
+                        <!-- Inner Folder (As a separate entity) -->
+            <div id="inner-folder" class="folder-content" style="display: none;" draggable="false">
+                <div class="folder-header">
+                    <span>HOA</span>
+                    <button class="close-button" onclick="toggleFolder('inner-folder')">X</button>
+                </div>
+                <div class="folder-body">
+                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Ghouls.txt')">
+                        <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
+                        <p>Ghouls.txt</p>
                     </div>
                 </div>
             
