@@ -232,11 +232,6 @@
         <img id="powerIcon" src="/static/uploads/power.svg" alt="Power Icon" onclick="reloadPage()">
     </div>
 
-    <div id="eyeIconContainer">
-        <img id="eyeIcon" src="" alt="Eye Icon">
-        <div id="visitCount"></div>
-    </div>
-
     <!-- Earflaps -->
     <div id="chooseUserScreen">
         <div id="clock"></div>
@@ -261,7 +256,7 @@
 
             <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="twitter-icon" ondblclick="openSite('https://doxbin.org/user/obey')">
                 <img src="https://files.catbox.moe/qhu71v.png" alt="web" class="desktop-icon">
-                <p>website</p>
+                <p>Doxbin</p>
             </div>
 
 <!--            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="discord-icon" ondblclick="openSite('https://discord.dog/203572576386154498')">
@@ -426,13 +421,11 @@
         const clickSound = document.getElementById('clickSound');
         const iconContainer = document.getElementById('iconContainer');
         const skipIcon = document.getElementById('skipIcon');
-        const eyeIconContainer = document.getElementById('eyeIconContainer');
         
         clickSound.volume = 0.5;
         
 
         window.onload = function() {
-            fetchVisitCount();
             loadFirstSong(); 
         };
         
@@ -445,12 +438,6 @@
                 .catch(error => console.error('Error fetching visit count:', error));
         }
         
-        let currentSongIndex = 0;
-        const songs = [
-            'black.mp3'
-        ];
-        
-        const backgroundAudio = document.getElementById('backgroundAudio');
         
         function adjustVolumeForCurrentSong() {
             const currentSong = songs[currentSongIndex];
