@@ -216,9 +216,9 @@ EEtMhS52bLrQAekA/0aqlEvxiOQuyGJIzFVGcPOpREUr0N+uoVTMtCnhGrEDAQDp
     'Guestbook.txt': 'This is the content of the Guestbook.txt file.',
     'Hix.txt': 'THIS KID IS A NIGGER AND A SKID',
     'Ghouls.txt': 'THIS KID IS A NIGGER AND A SKID',
-    'BTC.txt': 'bc1qfh5e3w7sgyxuz00v0p0eqc425la6zjt6n405vc',
-    'XMR.txt': '45EaBDn5X8iQBTot3dWxVZjTj3on5fjR81zdErrndgfU8to4cZ4r4jveoKMpLcQxU8CKQL9dbxgsmjenboi8p1hpMuDJq3F',
-    'ETH.txt': '0x2B896c89C3ac3c82bd7f58338816f2b644B310e1',
+    'BTC.txt': '34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo',
+    'XMR.txt': '42eiTEphhiUZDQM577s7bdNgj9X4auUPnRG4Xh74aqNZfQtLfeVuS1dStqtqMuqg6XCd8qPmyQKXtXyGcub3DzkXDUvSkb7',
+    'ETH.txt': '0x00000000219ab540356cbb839cbe05303d7705fa',
 };
 
 let draggedTxtWindow = null;
