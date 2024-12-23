@@ -260,7 +260,7 @@
             <div id="clock"></div>
 
             <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="twitter-icon" ondblclick="openSite('https://doxbin.org/user/obey')">
-                <img src="https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png" alt="web" class="desktop-icon">
+                <img src="https://files.catbox.moe/qhu71v.png" alt="web" class="desktop-icon">
                 <p>website</p>
             </div>
 
@@ -384,7 +384,7 @@
                         <img src="/static/XMR.png" alt="File Icon" class="desktop-icon">
                         <p>XMR.txt</p>
                     </div>
-                    <!--<div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('BTC.txt')">
+                     <!--   <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('BTC.txt')">
                         <img src="/static/BTC.png" alt="File Icon" class="desktop-icon">
                         <p>BTC.txt</p>
                     </div>
@@ -456,33 +456,13 @@
             const currentSong = songs[currentSongIndex];
             
             if (currentSong.includes('ilovefreaks.mp3')) {
-                backgroundAudio.volume = 0.25;
+                backgroundAudio.volume = 1;
             } else if (currentSong.includes('dip.mp3')) {
-                backgroundAudio.volume = 1.2;  
+                backgroundAudio.volume = 1;  
             } else if (currentSong.includes('bluebills.mp3')) {
                 backgroundAudio.volume = 1;
             } else if (currentSong.includes('5unna.mp3')) {
-                backgroundAudio.volume = 0.1;    
-            } else if (currentSong.includes('angel.mp3')) {
-                backgroundAudio.volume = 0.5;  
-            } else if (currentSong.includes('youresopathetic.mp3')) {
-                backgroundAudio.volume = 0.75;  
-            } else if (currentSong.includes('pikachu.mp3')) {
-                backgroundAudio.volume = 0.75;  
-            } else if (currentSong.includes('ihatemyself.mp3')) {
-                backgroundAudio.volume = 0.5;  
-            } else if (currentSong.includes('edgy.mp3')) {
-                backgroundAudio.volume = 0.5;  
-            } else if (currentSong.includes('hogs.mp3')) {
-                backgroundAudio.volume = 0.5;  
-            } else if (currentSong.includes('prettyscenegirl.mp3')) {
-                backgroundAudio.volume = 0.5;  
-            } else if (currentSong.includes('SemBlink182Remix.mp3')) {
-                backgroundAudio.volume = 0.5;  
-            } else if (currentSong.includes('youresoprettyandimjustaloser.mp3')) {
-                backgroundAudio.volume = 0.5;
-            } else if (currentSong.includes('goinmordumghostmountainAI.mp3')) {
-                backgroundAudio.volume = 0.25;    
+                backgroundAudio.volume = 1;      
             } else {
                 backgroundAudio.volume = 1;  
             }
