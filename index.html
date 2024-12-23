@@ -4,9 +4,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>DEAD$HOT</title>
-    <link rel="stylesheet" href="deadshot.css">
-    <link rel="stylesheet" href="index.css">
+    <title>potion</title>
+    <link rel="stylesheet" href="/static/potings.css">
+    <link rel="stylesheet" href="/static/index.css">
 
 <style>
         body, html {
@@ -226,10 +226,15 @@
     </div>
 
     <div id="iconContainer" >
-        <img id="skipIcon" src="skip.svg" alt="Skip Icon" onclick="skipSong()">
-        <img id="muteButton" src="muted.svg" alt="Mute Button" style="display: none;" onclick="toggleMute()">
-        <img id="speakerIcon" src="speaker.svg" alt="Speaker Icon" onclick="toggleMute()">
-        <img id="powerIcon" src="power.svg" alt="Power Icon" onclick="reloadPage()">
+        <img id="skipIcon" src="/static/uploads/skip.svg" alt="Skip Icon" onclick="skipSong()">
+        <img id="muteButton" src="/static/uploads/muted.svg" alt="Mute Button" style="display: none;" onclick="toggleMute()">
+        <img id="speakerIcon" src="/static/uploads/speaker.svg" alt="Speaker Icon" onclick="toggleMute()">
+        <img id="powerIcon" src="/static/uploads/power.svg" alt="Power Icon" onclick="reloadPage()">
+    </div>
+
+    <div id="eyeIconContainer">
+        <img id="eyeIcon" src="/static/uploads/eye.svg" alt="Eye Icon">
+        <div id="visitCount">0</div>
     </div>
 
     <!-- Earflaps -->
@@ -237,12 +242,12 @@
         <div id="clock"></div>
 
         <div id="basedOS" class="basedOS">
-            <img src="BasedOS.png" alt="BasedOS Logo" class="basedOSImage">
+            <img src="/static/uploads/BasedOS.png" alt="BasedOS Logo" class="basedOSImage">
         </div>
 
         <div class="userOption" onclick="chooseUser('user1')">
-            <img src="monopoly.gif" alt="User 1" class="userAvatar">
-            <div class="userName">DEAD$HOT</div>
+            <img src="/static/uploads/earflaps.gif" alt="User 1" class="userAvatar">
+            <div class="userName">Potion</div>
         </div>
 
     </div>
@@ -254,9 +259,9 @@
         <div class="desktop" id="desktop">
             <div id="clock"></div>
 
-            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="doxbin-icon" ondblclick="openSite('https://doxbin.org/user/obey')">
-                <img src="https://files.catbox.moe/42rfwk.png" alt="web" class="desktop-icon">
-                <p>doxbin</p>
+            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="twitter-icon" ondblclick="openSite('https://selfharm.lol')">
+                <img src="https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png" alt="web" class="desktop-icon">
+                <p>website</p>
             </div>
 
 <!--            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="discord-icon" ondblclick="openSite('https://discord.dog/203572576386154498')">
@@ -264,7 +269,7 @@
                 <p></p>
             </div> -->
 
-            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://t.me/richtofen77')">
+            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://t.me/devioidfromemotions')">
                 <img src="https://telegram.org/img/favicon.ico" alt="Telegram Icon" class="desktop-icon" id="telegram-icon">
                 <p>Telegram</p>
             </div>
@@ -275,9 +280,9 @@
                 <p>Roblox</p>
             </div>-->
 
-            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('mailto:im@trolli.ng')">
-                <img src="https://files.catbox.moe/630y1r.png" alt="Email Icon" class="desktop-icon" id="email-icon">
-                <p>Email</p>
+            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://breachforums.st/User-potion')">
+                <img src="https://breachforums.st/logo.png" alt="BreachForums Icon" class="desktop-icon" id="breachforums-icon">
+                <p>BreachForums</p>
             </div>
             
 
@@ -286,7 +291,7 @@
             
 
             <div class="icon-container folder" ondblclick="toggleFolder('outer-folder')" ondragstart="dragStart(event)">
-                <img src="folder.png" alt="Folder Icon" class="desktop-icon">
+                <img src="/static/uploads/folder.png" alt="Folder Icon" class="desktop-icon">
                 <p>Other</p>
             </div>
             
@@ -300,24 +305,24 @@
 
                 <div class="folder-body">
 
-                        <div class="icon-container folder" ondblclick="toggleFolder('donate-folder')" ondragstart="dragStart(event)">
-                        <img src="folder.png" alt="Folder Icon" class="desktop-icon">
+<!--                    <div class="icon-container folder" ondblclick="toggleFolder('donate-folder')" ondragstart="dragStart(event)">
+                        <img src="/static/uploads/folder.png" alt="Folder Icon" class="desktop-icon">
                         <p>Donate</p>
                     </div>
 
-                        <div class="icon-container folder" ondblclick="toggleFolder('inner-folder')" ondragstart="dragStart(event)">
-                        <img src="folder.png" alt="Folder Icon" class="desktop-icon">
+                    <!--<div class="icon-container folder" ondblclick="toggleFolder('inner-folder')" ondragstart="dragStart(event)">
+                        <img src="/static/uploads/folder.png" alt="Folder Icon" class="desktop-icon">
                         <p>HOA</p>
                     </div>
 
                     <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openGuestbook()">
                         <img src="/static/uploads/book.png" alt="Guestbook Icon" class="desktop-icon">
                         <p>Guestbook</p>
-                    </div>
+                    </div>-->
 
 
                     <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Public.txt')">
-                        <img src="txt.png" alt="File Icon" class="desktop-icon">
+                        <img src="/static/txt.png" alt="File Icon" class="desktop-icon">
                         <p>PGP Public.txt</p>
                     </div>
                 </div>
@@ -355,9 +360,9 @@
                     <button class="close-button" onclick="toggleFolder('inner-folder')">X</button>
                 </div>
                 <div class="folder-body">
-                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('DEAD$HOT.txt')">
-                        <img src="clown.png" alt="File Icon" class="desktop-icon">
-                        <p>DEAD$HOT.txt</p>
+                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Potings.txt')">
+                        <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
+                        <p>Potings.txt</p>
                     </div>
                 </div>
             
@@ -376,17 +381,17 @@
                 </div>
                 <div class="folder-body">
                     <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('XMR.txt')">
-                        <img src="XMR.png" alt="File Icon" class="desktop-icon">
+                        <img src="/static/XMR.png" alt="File Icon" class="desktop-icon">
                         <p>XMR.txt</p>
                     </div>
-                        <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('BTC.txt')">
-                        <img src="BTC.png" alt="File Icon" class="desktop-icon">
+                    <!--<div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('BTC.txt')">
+                        <img src="/static/BTC.png" alt="File Icon" class="desktop-icon">
                         <p>BTC.txt</p>
                     </div>
                     <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('ETH.txt')">
-                        <img src="ETH.png" alt="File Icon" class="desktop-icon">
+                        <img src="/static/ETH.png" alt="File Icon" class="desktop-icon">
                         <p>ETH.txt</p>
-                    </div>
+                    </div>-->
                 </div>
             
                 <div class="resizer right"></div>
@@ -395,19 +400,20 @@
             
                 <div class="resizable-arrow">↘</div>
             </div>
-            <script src="folder.js"></script>
+            <script src="/static/folder.js"></script>
             <!-- Copy paste more ^ -->
         
             <div id="selection-box"></div>
         </div>
 
-        <script src="deadshot.js"></script>
+        <script src="/static/potings.js"></script>
 
         <div id="clock"></div>
 
     </div>
 
-    <audio id="clickSound" src="Click.wav"></audio>
+    <audio id="clickSound" src="/static/uploads/Click.wav"></audio>
+    <audio id="backgroundAudio" preload="auto" loop></audio>
 
     <script>
 
@@ -426,23 +432,67 @@
         
 
         window.onload = function() {
+            fetchVisitCount();
             loadFirstSong(); 
         };
         
-function adjustVolumeForCurrentSong() {
-    const currentSong = songs[currentSongIndex];
-    
-    if (currentSong.includes('ilovefreaks.mp3')) {
-        backgroundAudio.volume = 1;
-    } else if (currentSong.includes('bluebills.mp3')) {
-        backgroundAudio.volume = 1;  
-    } else if (currentSong.includes('dip.mp3')) {
-        backgroundAudio.volume = 1;
-    } else if (currentSong.includes('5unna.mp3')) {
-        backgroundAudio.volume = 1;    
-    }
-}   
+        function fetchVisitCount() {
+            fetch('/increment-visit', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('visitCount').innerText = data.count;
+                })
+                .catch(error => console.error('Error fetching visit count:', error));
+        }
         
+        let currentSongIndex = 0;
+        const songs = [
+            'black.mp3'
+        ];
+        
+        const backgroundAudio = document.getElementById('backgroundAudio');
+        
+        function adjustVolumeForCurrentSong() {
+            const currentSong = songs[currentSongIndex];
+            
+            if (currentSong.includes('keepingsecrets.mp3')) {
+                backgroundAudio.volume = 0.25;
+            } else if (currentSong.includes('asaprocky.mp3')) {
+                backgroundAudio.volume = 1.2;  
+            } else if (currentSong.includes('imnotgod.mp3')) {
+                backgroundAudio.volume = 1;
+            } else if (currentSong.includes('incelboy.mp3')) {
+                backgroundAudio.volume = 0.1;    
+            } else if (currentSong.includes('angel.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('youresopathetic.mp3')) {
+                backgroundAudio.volume = 0.75;  
+            } else if (currentSong.includes('pikachu.mp3')) {
+                backgroundAudio.volume = 0.75;  
+            } else if (currentSong.includes('ihatemyself.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('edgy.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('hogs.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('prettyscenegirl.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('SemBlink182Remix.mp3')) {
+                backgroundAudio.volume = 0.5;  
+            } else if (currentSong.includes('youresoprettyandimjustaloser.mp3')) {
+                backgroundAudio.volume = 0.5;
+            } else if (currentSong.includes('goinmordumghostmountainAI.mp3')) {
+                backgroundAudio.volume = 0.25;    
+            } else {
+                backgroundAudio.volume = 1;  
+            }
+        }
+        
+        function loadFirstSong() {
+            backgroundAudio.src = songs[currentSongIndex];
+            adjustVolumeForCurrentSong();
+            backgroundAudio.load();
+        }
         
         function skipSong() {
             currentSongIndex = (currentSongIndex + 1) % songs.length;  
