@@ -353,12 +353,16 @@
                     <button class="close-button" onclick="toggleFolder('inner-folder')">X</button>
                 </div>
                 <div class="folder-body">
-                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('RageQuill.txt')">
+                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Hix.txt')">
                         <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
-                        <p>RageQuill.txt</p>
+                        <p>Hix.txt</p>
                     </div>
-                </div>
-            
+                 <div class="folder-body">
+                <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Ghouls.txt')">
+                       <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
+                     <p>Ghouls.txt</p>
+                 </div>
+            </div>
                 <div class="resizer right"></div>
                 <div class="resizer bottom"></div>
                 <div class="resizer bottom-right"></div>
@@ -438,7 +442,7 @@
                 .catch(error => console.error('Error fetching visit count:', error));
         }
         
-        let currentSongIndex = 0;
+        let currentSongIndex = 1;
         const songs = [
             'dip.mp3'
         ];
