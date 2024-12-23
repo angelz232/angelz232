@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>potion</title>
+    <title>DEAD$HOT</title>
     <link rel="stylesheet" href="/static/potings.css">
     <link rel="stylesheet" href="/static/index.css">
 
@@ -232,6 +232,11 @@
         <img id="powerIcon" src="/static/uploads/power.svg" alt="Power Icon" onclick="reloadPage()">
     </div>
 
+    <div id="eyeIconContainer">
+        <img id="eyeIcon" src="/static/uploads/eye.svg" alt="Eye Icon">
+        <div id="visitCount">496744</div>
+    </div>
+
     <!-- Earflaps -->
     <div id="chooseUserScreen">
         <div id="clock"></div>
@@ -269,14 +274,8 @@
                 <p>Telegram</p>
             </div>
 
-            
-  <!--          <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://roblox.com/users/4154074593/profile')">
-                <img src="https://images.rbxcdn.com/7bba321f4d8328683d6e59487ce514eb" alt="Roblox Icon" class="desktop-icon" id="roblox-icon">
-                <p>Roblox</p>
-            </div>-->
-
-            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://breachforums.st/User-potion')">
-                <img src="https://breachforums.st/logo.png" alt="BreachForums Icon" class="desktop-icon" id="email-icon">
+            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('mailto:im@trolli.ng')">
+                <img src="https://files.catbox.moe/zbgo4n.png" alt="Email Icon" class="desktop-icon" id="email-icon">
                 <p>Email</p>
             </div>
             
@@ -379,7 +378,7 @@
                         <img src="/static/XMR.png" alt="File Icon" class="desktop-icon">
                         <p>XMR.txt</p>
                     </div>
-                     <!--   <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('BTC.txt')">
+                    <!--<div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('BTC.txt')">
                         <img src="/static/BTC.png" alt="File Icon" class="desktop-icon">
                         <p>BTC.txt</p>
                     </div>
@@ -421,11 +420,13 @@
         const clickSound = document.getElementById('clickSound');
         const iconContainer = document.getElementById('iconContainer');
         const skipIcon = document.getElementById('skipIcon');
+        const eyeIconContainer = document.getElementById('eyeIconContainer');
         
         clickSound.volume = 0.5;
         
 
         window.onload = function() {
+            fetchVisitCount();
             loadFirstSong(); 
         };
         
@@ -438,6 +439,12 @@
                 .catch(error => console.error('Error fetching visit count:', error));
         }
         
+        let currentSongIndex = 0;
+        const songs = [
+            'black.mp3'
+        ];
+        
+        const backgroundAudio = document.getElementById('backgroundAudio');
         
         function adjustVolumeForCurrentSong() {
             const currentSong = songs[currentSongIndex];
@@ -450,8 +457,6 @@
                 backgroundAudio.volume = 1;
             } else if (currentSong.includes('5unna.mp3')) {
                 backgroundAudio.volume = 1;      
-            } else {
-                backgroundAudio.volume = 1;  
             }
         }
         
@@ -567,5 +572,5 @@
         </script>
         
 
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8f67f1aad80b2448',t:'MTczNDk1MjYzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
