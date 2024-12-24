@@ -17,7 +17,7 @@
     justify-content: start;
     align-content: flex-start;
     position: relative;
-    z-index:1;
+    z-index: 1;
 }
 
 #background-video {
@@ -87,7 +87,6 @@ p {
     overflow: hidden;
 }
 
-
 .folder-header {
     display: flex;
     justify-content: space-between;
@@ -155,7 +154,6 @@ p {
     flex-direction: column;
     color: white; 
     z-index: 1000;
-
 }
 
 .txt-header {
@@ -206,3 +204,4 @@ p {
 #guestbook-messages p strong {
     color: #ff6f61; 
 }
+
