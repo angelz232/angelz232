@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/obeylol
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://deadshot.org
+  * I am obeylol (https://keybase.io/obeylol) on keybase.
+  * I have a public key ASBo3tb_Hc1VDqSNR0rr-H-GhIJIlL_UyZIk-GE64rOSiQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012068ded6ff1dcd550ea48d474aebf87f8684824894bfd4c99224f8613ae2b392890a",
+      "host": "keybase.io",
+      "kid": "012068ded6ff1dcd550ea48d474aebf87f8684824894bfd4c99224f8613ae2b392890a",
+      "uid": "66f7dcde473db241e7d484a49f345b19",
+      "username": "obeylol"
+    },
+    "merkle_root": {
+      "ctime": 1735093454,
+      "hash": "92dd24804cfccf03bfa60a735d50a2c233c5068fb404b90c79515d97bf0e009778231b295858c34b08f087f91608ca2cb8484c5692605bd7816b46b49817bffd",
+      "hash_meta": "3a6489e7aed7f219085c69a0dacdc7db46d52cfc0344c59d62b85c89430cfedd",
+      "seqno": 26404104
+    },
+    "service": {
+      "entropy": "wIsOdOJLhqPDEGkMg3WgBUy4",
+      "hostname": "deadshot.org",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.4.0"
+  },
+  "ctime": 1735093457,
+  "expire_in": 504576000,
+  "prev": "4426b5631d361e8d4bb94a24b3a0e8e7a61c7a0e2a4b525ad8d5cfdc9894920b",
+  "seqno": 12,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgaN7W/x3NVQ6kjUdK6/h/hoSCSJS/1MmSJPhhOuKzkokKp3BheWxvYWTESpcCDMQgRCa1Yx02Ho1LuUoks6Do56Yceg4qS1Ja2NXP3JiUkgvEIICVzFJjjlcZF4e1EGfRdNr/X9UHq6FQJ27KNcZaGJsNAgHCo3NpZ8RAGb/O45R8FvCwmaAqD+JQqOHNHcT6jIknfABE/pK1yE+82Ldba+PFoTMwiW+FKP/TdZffKli3E95OH/CfHTBNBKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIH5NlR5YW44wfOyS3MyRvh9cSsrwoQa51+iVbc0wZhkAo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/obeylol
+
+==================================================================
