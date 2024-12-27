@@ -19,7 +19,7 @@
     min-width: 100%;
     min-height: 200%;
     z-index: -1;
-    object-fit: cover;
+    object-fit: auto-fill;
 }
 
 .icon-container {
