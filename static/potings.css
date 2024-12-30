@@ -12,7 +12,7 @@
     z-index: 1;
 }
 
-.desktop video {
+.desktop img {
     position: fixed;
     right: 0;
     bottom: 0;
