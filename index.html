@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>obey</title>
+    <title>potion</title>
     <link rel="stylesheet" href="/static/potings.css">
     <link rel="stylesheet" href="/static/index.css">
 
@@ -208,65 +207,10 @@
 
 #visitCount {
     margin-left: 5px; 
-    font-size: 0px;
+    font-size: 16px;
     transition: opacity 0.5s ease-in-out;
     display: inline-block; 
 }
-
-
-        .glitch {
-            font-size: 1em;
-            color: #ffffff;
-            position: relative;
-            animation: glitch 0.05s infinite, flicker 2s infinite;
-        }
-
-        .flicker-text1 {
-            color: #c3c3c3;
-            animation: flicker1 2s infinite;
-        }
-
-        @keyframes glitch {
-            0%, 100% {
-                transform: translate(0);
-            }
-            10% {
-                transform: translate(-0.5px, 0.5px);
-            }
-            20% {
-                transform: translate(-0.5px, -0.5px);
-            }
-            30% {
-                transform: translate(0.5px, 0.5px);
-            }
-            40% {
-                transform: translate(0.5px, -0.5px);
-            }
-            50% {
-                transform: translate(-0.5px, 0.5px);
-            }
-            60% {
-                transform: translate(-0.5px, -0.5px);
-            }
-            70% {
-                transform: translate(0.5px, 0.5px);
-            }
-            80% {
-                transform: translate(0.5px, -0.5px);
-            }
-            90% {
-                transform: translate(-0.5px, 0.5px);
-            }
-        }
-
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                opacity: 1;
-            }
-            20%, 24%, 55% {
-                opacity: 0;
-            }
-        }    
 
 
 
@@ -277,7 +221,7 @@
 
     <!-- Boot -->
     <div id="enterScreen">
-        <p id="enterButton" class="glitch">Boot</p>
+        <p id="enterButton">Boot</p>
     </div>
 
     <div id="iconContainer" >
@@ -287,10 +231,10 @@
         <img id="powerIcon" src="/static/uploads/power.svg" alt="Power Icon" onclick="reloadPage()">
     </div>
 
-        <div id="eyeIconContainer">
-        <img id="eyeIcon" src="/static/uploads/monopoly.gif" alt="Eye Icon">
-        <div id="visitCount"></div>
-    </div> 
+    <div id="eyeIconContainer">
+        <img id="eyeIcon" src="/static/uploads/eye.svg" alt="Eye Icon">
+        <div id="visitCount">0</div>
+    </div>
 
     <!-- Earflaps -->
     <div id="chooseUserScreen">
@@ -301,33 +245,43 @@
         </div>
 
         <div class="userOption" onclick="chooseUser('user1')">
-            <img src="/static/uploads/frog.gif" alt="User 1" class="userAvatar">
-            <div class="userName" class="glitch">obey</div>
+            <img src="/static/uploads/earflaps.gif" alt="User 1" class="userAvatar">
+            <div class="userName">Potion</div>
         </div>
 
     </div>
+
+    <!-- Desktop -->
+    <div id="mainContent">
+
         
         <div class="desktop" id="desktop">
             <div id="clock"></div>
 
-            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="twitter-icon" ondblclick="openSite('https://doxbin.org/user/obey')">
-                <img src="https://files.catbox.moe/qhu71v.png" alt="web" class="desktop-icon">
-                <p>Doxbin</p>
+            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="twitter-icon" ondblclick="openSite('https://selfharm.lol')">
+                <img src="https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png" alt="web" class="desktop-icon">
+                <p>website</p>
             </div>
 
-                <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="discord-icon" ondblclick="openSite('https://breachforums.st/User-amazing')">
-                <img src="https://breachforums.st/logo.png" alt="BreachForums Icon" class="desktop-icon">
-                <p>BreachForums</p>
-            </div> 
+<!--            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="discord-icon" ondblclick="openSite('https://discord.dog/203572576386154498')">
+                <img src="/static/uploads/Discord.svg" alt="Discord Icon" class="desktop-icon">
+                <p></p>
+            </div> -->
 
-            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://t.me/richtofen77')">
+            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://t.me/devioidfromemotions')">
                 <img src="https://telegram.org/img/favicon.ico" alt="Telegram Icon" class="desktop-icon" id="telegram-icon">
                 <p>Telegram</p>
             </div>
 
-            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://scare.sh')">
-                <img src="https://files.catbox.moe/4x498e.png" alt="Scare Icon" class="desktop-icon" id="scare-icon">
-                <p>Scare</p>
+            
+  <!--          <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://roblox.com/users/4154074593/profile')">
+                <img src="https://images.rbxcdn.com/7bba321f4d8328683d6e59487ce514eb" alt="Roblox Icon" class="desktop-icon" id="roblox-icon">
+                <p>Roblox</p>
+            </div>-->
+
+            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://breachforums.st/User-potion')">
+                <img src="https://breachforums.st/logo.png" alt="BreachForums Icon" class="desktop-icon" id="breachforums-icon">
+                <p>BreachForums</p>
             </div>
             
 
@@ -350,20 +304,20 @@
 
                 <div class="folder-body">
 
-                  <!--     <div class="icon-container folder" ondblclick="toggleFolder('donate-folder')" ondragstart="dragStart(event)">
+<!--                    <div class="icon-container folder" ondblclick="toggleFolder('donate-folder')" ondragstart="dragStart(event)">
                         <img src="/static/uploads/folder.png" alt="Folder Icon" class="desktop-icon">
                         <p>Donate</p>
-                    </div> --->
+                    </div>
 
-                        <div class="icon-container folder" ondblclick="toggleFolder('inner-folder')" ondragstart="dragStart(event)">
+                    <!--<div class="icon-container folder" ondblclick="toggleFolder('inner-folder')" ondragstart="dragStart(event)">
                         <img src="/static/uploads/folder.png" alt="Folder Icon" class="desktop-icon">
                         <p>HOA</p>
                     </div>
 
-                  <!--  <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openGuestbook()">
+                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openGuestbook()">
                         <img src="/static/uploads/book.png" alt="Guestbook Icon" class="desktop-icon">
                         <p>Guestbook</p>
-                    </div> -->
+                    </div>-->
 
 
                     <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Public.txt')">
@@ -382,7 +336,7 @@
             </div>
 
 
-     <!---       <div id="guestbook" class="txt-window" style="display:none;">
+            <div id="guestbook" class="txt-window" style="display:none;">
                 <div class="txt-header">
                     <span>Guestbook</span>
                     <button class="close-button" onclick="closeGuestbook()">X</button>
@@ -394,34 +348,29 @@
                     <textarea id="guest-message" rows="5" placeholder="Write your message here..."></textarea><br><br>
                     <button onclick="submitGuestbook()">Submit</button>
                     <div id="guestbook-messages"></div>
+
                 </div>
-            </div> -->
+            </div>
             
-<!-- Inner Folder (As a separate entity) -->
-<div id="inner-folder" class="folder-content" style="display: none;" draggable="false">
-    <div class="folder-header">
-        <span>HOA</span>
-        <button class="close-button" onclick="toggleFolder('inner-folder')">X</button>
-    </div>
-    <div class="folder-body">
-        <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://doxbin.org/upload/AntiSocialewhore')">
-            <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
-            <p>AntiSocial.txt</p>
-        </div>
-        <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://doxbin.org/upload/RageQuillTheRetard')">
-            <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
-            <p>RageQuill.txt</p>
-        </div>
-        <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://doxbin.org/upload/XISSYXewhore')">
-            <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
-            <p>XISSYX.txt</p>
-        </div>
-    </div>
-    <div class="resizer right"></div>
-    <div class="resizer bottom"></div>
-    <div class="resizer bottom-right"></div>
-    <div class="resizable-arrow">↘</div>
-</div>
+            <!-- Inner Folder (As a separate entity) -->
+            <div id="inner-folder" class="folder-content" style="display: none;" draggable="false">
+                <div class="folder-header">
+                    <span>HOA</span>
+                    <button class="close-button" onclick="toggleFolder('inner-folder')">X</button>
+                </div>
+                <div class="folder-body">
+                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Potings.txt')">
+                        <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
+                        <p>Potings.txt</p>
+                    </div>
+                </div>
+            
+                <div class="resizer right"></div>
+                <div class="resizer bottom"></div>
+                <div class="resizer bottom-right"></div>
+            
+                <div class="resizable-arrow">↘</div>
+            </div>
 
 
             <div id="donate-folder" class="folder-content" style="display: none;" draggable="false">
@@ -497,7 +446,7 @@
         
         let currentSongIndex = 0;
         const songs = [
-            'lady.mp3'
+            'black.mp3'
         ];
         
         const backgroundAudio = document.getElementById('backgroundAudio');
@@ -505,11 +454,11 @@
         function adjustVolumeForCurrentSong() {
             const currentSong = songs[currentSongIndex];
             
-            if (currentSong.includes('ilovefreaks.mp3')) {
+            if (currentSong.includes('keepingsecrets.mp3')) {
                 backgroundAudio.volume = 0.25;
-            } else if (currentSong.includes('5unna.mp3')) {
+            } else if (currentSong.includes('asaprocky.mp3')) {
                 backgroundAudio.volume = 1.2;  
-            } else if (currentSong.includes('bluebills.mp3')) {
+            } else if (currentSong.includes('imnotgod.mp3')) {
                 backgroundAudio.volume = 1;
             } else if (currentSong.includes('incelboy.mp3')) {
                 backgroundAudio.volume = 0.1;    
@@ -650,5 +599,5 @@
         </script>
         
 
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8f6fe5866b5f66a6',t:'MTczNTAzNjAyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
