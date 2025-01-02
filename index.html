@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>obey</title>
+    <title>potion</title>
     <link rel="stylesheet" href="/static/potings.css">
     <link rel="stylesheet" href="/static/index.css">
 
@@ -231,11 +231,12 @@
         <img id="powerIcon" src="/static/uploads/power.svg" alt="Power Icon" onclick="reloadPage()">
     </div>
 
-        <div id="eyeIconContainer">
-        <img id="eyeIcon" src="/static/uploads/monopoly.gif" alt="Eye Icon">
-        <div id="visitCount"></div>
-    </div> 
+    <div id="eyeIconContainer">
+        <img id="eyeIcon" src="/static/uploads/eye.svg" alt="Eye Icon">
+        <div id="visitCount">0</div>
+    </div>
 
+    <!-- Earflaps -->
     <div id="chooseUserScreen">
         <div id="clock"></div>
 
@@ -244,16 +245,20 @@
         </div>
 
         <div class="userOption" onclick="chooseUser('user1')">
-            <img src="/static/uploads/frog.gif" alt="User 1" class="userAvatar">
-            <div class="userName">obey</div>
+            <img src="/static/uploads/earflaps.gif" alt="User 1" class="userAvatar">
+            <div class="userName">Potion</div>
         </div>
 
     </div>
+
+    <!-- Desktop -->
+    <div id="mainContent">
+
         
         <div class="desktop" id="desktop">
             <div id="clock"></div>
 
-            <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="twitter-icon" ondblclick="openSite('https://doxbin.org/user/obey')">
+           <div class="icon-container" draggable="true" ondragstart="dragStart(event)" id="twitter-icon" ondblclick="openSite('https://doxbin.org/user/obey')">
                 <img src="https://files.catbox.moe/qhu71v.png" alt="web" class="desktop-icon">
                 <p>Doxbin</p>
             </div>
@@ -296,6 +301,7 @@
                     <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Public.txt')">
                         <img src="/static/txt.png" alt="File Icon" class="desktop-icon">
                         <p>PGP Public.txt</p>
+
                     </div>
                 </div>
             
@@ -308,30 +314,70 @@
             
             </div>
 
-<div id="inner-folder" class="folder-content" style="display: none;" draggable="false">
-    <div class="folder-header">
-        <span>HOA</span>
-        <button class="close-button" onclick="toggleFolder('inner-folder')">X</button>
-    </div>
-    <div class="folder-body">
-        <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://doxbin.org/upload/AntiSocialewhore')">
-            <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
-            <p>AntiSocial.txt</p>
-        </div>
-        <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://doxbin.org/upload/RageQuillTheRetard')">
-            <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
-            <p>RageQuill.txt</p>
-        </div>
-        <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openSite('https://doxbin.org/upload/XISSYXewhore')">
-            <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
-            <p>XISSYX.txt</p>
-        </div>
-    </div>
-    <div class="resizer right"></div>
-    <div class="resizer bottom"></div>
-    <div class="resizer bottom-right"></div>
-    <div class="resizable-arrow">↘</div>
-</div>
+
+            <div id="guestbook" class="txt-window" style="display:none;">
+                <div class="txt-header">
+                    <span>Guestbook</span>
+                    <button class="close-button" onclick="closeGuestbook()">X</button>
+                </div>
+                <div class="txt-body">
+                    <label for="guest-name">Name:</label><br>
+                    <input type="text" id="guest-name" placeholder="Your name"><br><br>
+                    <label for="guest-message">Message:</label><br>
+                    <textarea id="guest-message" rows="5" placeholder="Write your message here..."></textarea><br><br>
+                    <button onclick="submitGuestbook()">Submit</button>
+                    <div id="guestbook-messages"></div>
+
+                </div>
+            </div>
+            
+            <!-- Inner Folder (As a separate entity) -->
+            <div id="inner-folder" class="folder-content" style="display: none;" draggable="false">
+                <div class="folder-header">
+                    <span>HOA</span>
+                    <button class="close-button" onclick="toggleFolder('inner-folder')">X</button>
+                </div>
+                <div class="folder-body">
+                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('Potings.txt')">
+                        <img src="/static/uploads/clown.png" alt="File Icon" class="desktop-icon">
+                        <p>Potings.txt</p>
+                    </div>
+                </div>
+            
+                <div class="resizer right"></div>
+                <div class="resizer bottom"></div>
+                <div class="resizer bottom-right"></div>
+            
+                <div class="resizable-arrow">↘</div>
+            </div>
+
+
+            <div id="donate-folder" class="folder-content" style="display: none;" draggable="false">
+                <div class="folder-header">
+                    <span>Donate</span>
+                    <button class="close-button" onclick="toggleFolder('donate-folder')">X</button>
+                </div>
+                <div class="folder-body">
+                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('XMR.txt')">
+                        <img src="/static/XMR.png" alt="File Icon" class="desktop-icon">
+                        <p>XMR.txt</p>
+                    </div>
+                    <!--<div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('BTC.txt')">
+                        <img src="/static/BTC.png" alt="File Icon" class="desktop-icon">
+                        <p>BTC.txt</p>
+                    </div>
+                    <div class="icon-container" draggable="true" ondragstart="dragStart(event)" ondblclick="openTxtFile('ETH.txt')">
+                        <img src="/static/ETH.png" alt="File Icon" class="desktop-icon">
+                        <p>ETH.txt</p>
+                    </div>-->
+                </div>
+            
+                <div class="resizer right"></div>
+                <div class="resizer bottom"></div>
+                <div class="resizer bottom-right"></div>
+            
+                <div class="resizable-arrow">↘</div>
+            </div>
             <script src="/static/folder.js"></script>
             <!-- Copy paste more ^ -->
         
