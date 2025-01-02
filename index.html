@@ -212,7 +212,122 @@
     display: inline-block; 
 }
 
+.glitch {
+    font-size: 1em;
+    color: #ffffff;
+    position: relative;
+    animation: glitch 0.05s infinite, flicker 2s infinite;
+}
 
+@keyframes glitch {
+    0%, 100% {
+        transform: translate(0);
+    }
+    10% {
+        transform: translate(-0.5px, 0.5px);
+    }
+    20% {
+        transform: translate(-0.5px, -0.5px);
+    }
+    30% {
+        transform: translate(0.5px, 0.5px);
+    }
+    40% {
+        transform: translate(0.5px, -0.5px);
+    }
+    50% {
+        transform: translate(-0.5px, 0.5px);
+    }
+    60% {
+        transform: translate(-0.5px, -0.5px);
+    }
+    70% {
+        transform: translate(0.5px, 0.5px);
+    }
+    80% {
+        transform: translate(0.5px, -0.5px);
+    }
+    90% {
+        transform: translate(-0.5px, 0.5px);
+    }
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0;
+    }
+}
+
+    To add the glitch effect to the <p id="enterButton">Boot</p> element, we can reuse the existing .glitch styles and ensure the #enterButton element is styled appropriately. Here's how you can do it:
+Updated Code
+HTML:
+
+<p id="enterButton" class="glitch">Boot</p>
+
+CSS:
+
+Ensure the .glitch class is already included in your CSS as shown in your original code:
+
+.glitch {
+    font-size: 1em;
+    color: #ffffff;
+    position: relative;
+    animation: glitch 0.05s infinite, flicker 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% {
+        transform: translate(0);
+    }
+    10% {
+        transform: translate(-0.5px, 0.5px);
+    }
+    20% {
+        transform: translate(-0.5px, -0.5px);
+    }
+    30% {
+        transform: translate(0.5px, 0.5px);
+    }
+    40% {
+        transform: translate(0.5px, -0.5px);
+    }
+    50% {
+        transform: translate(-0.5px, 0.5px);
+    }
+    60% {
+        transform: translate(-0.5px, -0.5px);
+    }
+    70% {
+        transform: translate(0.5px, 0.5px);
+    }
+    80% {
+        transform: translate(0.5px, -0.5px);
+    }
+    90% {
+        transform: translate(-0.5px, 0.5px);
+    }
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0;
+    }
+}
+
+Additional Adjustments
+
+If you want to customize the glitch effect specifically for the #enterButton, you can override the styles like this:
+
+#enterButton.glitch {
+    font-size: 2em; /* Larger size for visibility */
+    color: #ff0000; /* Custom color for the button */
+}
 
 </style>
         
@@ -221,7 +336,7 @@
 
     <!-- Boot -->
     <div id="enterScreen">
-        <p id="enterButton">Boot</p>
+        <p id="enterButton" class="glitch">Boot</p>
     </div>
 
     <div id="iconContainer" >
