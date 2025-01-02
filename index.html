@@ -214,6 +214,61 @@
 }
 
 
+        .glitch {
+            font-size: 1em;
+            color: #ffffff;
+            position: relative;
+            animation: glitch 0.05s infinite, flicker 2s infinite;
+        }
+
+        .flicker-text1 {
+            color: #c3c3c3;
+            animation: flicker1 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% {
+                transform: translate(0);
+            }
+            10% {
+                transform: translate(-0.5px, 0.5px);
+            }
+            20% {
+                transform: translate(-0.5px, -0.5px);
+            }
+            30% {
+                transform: translate(0.5px, 0.5px);
+            }
+            40% {
+                transform: translate(0.5px, -0.5px);
+            }
+            50% {
+                transform: translate(-0.5px, 0.5px);
+            }
+            60% {
+                transform: translate(-0.5px, -0.5px);
+            }
+            70% {
+                transform: translate(0.5px, 0.5px);
+            }
+            80% {
+                transform: translate(0.5px, -0.5px);
+            }
+            90% {
+                transform: translate(-0.5px, 0.5px);
+            }
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0;
+            }
+        }    
+
+
 
 </style>
         
@@ -222,7 +277,7 @@
 
     <!-- Boot -->
     <div id="enterScreen">
-        <p id="enterButton">Boot</p>
+        <p id="enterButton" class="glitch">Boot</p>
     </div>
 
     <div id="iconContainer" >
