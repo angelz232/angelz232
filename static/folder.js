@@ -193,11 +193,11 @@ function resizeFolder(folder, e) {
 // Do 'ID e.g Public.txt': ' Message here '
 const fileContents = {
     'Public.txt': `-----BEGIN PGP PUBLIC KEY BLOCK-----
-Comment: User-ID:    obey
-Comment: Valid from: 06/05/2024 23:46
+Comment: User-ID:     obey
+Comment: Valid from:  06/05/2024 23:46
 Comment: Valid until: 06/05/2027 12:00
-Comment: Type:       255-bit EdDSA (secret key available)
-Comment: Usage:      Signing, Encryption, Certifying User-IDs
+Comment: Type:        255-bit EdDSA (secret key available)
+Comment: Usage:       Signing, Encryption, Certifying User-IDs
 Comment: Fingerprint: 9CD0D6E8A799389160346B3B4B4C852E766CBAD0
 
 
